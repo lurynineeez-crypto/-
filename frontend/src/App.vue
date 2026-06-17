@@ -1,11 +1,11 @@
 ﻿<script setup lang="ts">
 import { computed, defineAsyncComponent, onMounted, onUnmounted, reactive, ref } from 'vue';
-import { Activity, Box, FileText, MapPinned, ShieldAlert, Wrench } from 'lucide-vue-next';
+import { Activity, Bell, Box, Clock3, FileText, Leaf, MapPinned, Radio, ShieldAlert, Target, Wrench } from 'lucide-vue-next';
 import { api, connectTelemetry } from './api';
-import AppPrimaryNav from './components/AppPrimaryNav.vue';
 import Home3DCommandCenter from './components/Home3DCommandCenter.vue';
 import OverviewWorkspace from './components/OverviewWorkspace.vue';
 import ProfessionalBatchPanels from './components/ProfessionalBatchPanels.vue';
+import SystemTwinShell from './components/SystemTwinShell.vue';
 import OpsWorkbenchPanels from './components/OpsWorkbenchPanels.vue';
 import { navGroups, navItems, roleViews, sceneModes, typeOptions } from './data/navigation';
 import type { NavGroup } from './data/navigation';
@@ -17,7 +17,7 @@ import { useEngineeringData } from './composables/useEngineeringData';
 import { useAdminData } from './composables/useAdminData';
 import {
   fallbackSummary, fallbackSensors, fallbackAlarms,
-  connectionLabel, connectionPillClass,
+  connectionLabel,
   type ConnectionState
 } from './data/demo-fallback';
 
@@ -124,18 +124,8 @@ const groupedNavItems = computed(() =>
 );
 const activeNavItem = computed(() => navItems.find(n => n.key === activeView.value));
 const activeRoleView = computed(() => roleViews.find(role => role.key === activeRole.value) ?? roleViews[0]);
-const shellTitle = computed(() => ({
-  grower: '种植员工作台',
-  operator: '运维处置工作台',
-  manager: '管理者驾驶舱',
-  visitor: '甲方演示看板'
-}[activeRole.value]));
-const shellEyebrow = computed(() => ({
-  grower: '今日方舱作业',
-  operator: '设备与点位运维',
-  manager: '生产管理总览',
-  visitor: '交付演示模式'
-}[activeRole.value]));
+const shellTitle = computed(() => '智能种植方舱数字孪生系统');
+const shellEyebrow = computed(() => `${activeSection.value} / ${activeNavItem.value?.label ?? activeRoleView.value.label}`);
 
 /* ── 子视图计算 ── */
 const overviewView = computed(() => activeView.value as 'overview' | 'cabin' | 'screen' | 'brain');
@@ -154,6 +144,13 @@ const reportCenterView = computed(() => activeView.value as 'reports' | 'accepta
 const isEngineeringDeliveryView = computed(() => ['engineering', 'integration'].includes(activeView.value));
 const isAdminDeliveryView = computed(() => ['trace', 'history', 'config', 'governance', 'security', 'settings', 'demo', 'search', 'explain', 'display'].includes(activeView.value));
 const isOverviewHome = computed(() => activeSection.value === '总览' && activeView.value === 'overview');
+const pageShellClass = computed(() => {
+  if (isOverviewHome.value) return 'twin-page shell-twin';
+  if (['今日作业', '运维处置'].includes(activeSection.value) || ['cabin', 'point'].includes(activeView.value)) {
+    return 'ops-page shell-ops';
+  }
+  return 'app-page shell-app';
+});
 
 /* ── 过滤与选项 ── */
 const layerOptions = computed(() => ['all', ...Array.from(new Set(displaySensors.value.map(s => s.layer))).sort()]);
@@ -253,6 +250,19 @@ const roleTopbarCards = computed(() => {
   ];
 });
 
+const twinHeaderLeftCards = computed(() => [
+  { icon: Leaf, label: '生产对象', value: unifiedMetrics.value.batch },
+  { icon: Box, label: '作物品种', value: '金耳' },
+  { icon: Target, label: '当前阶段', value: unifiedMetrics.value.stage }
+]);
+
+const twinHeaderRightCards = computed(() => [
+  { icon: Activity, label: '系统状态', value: '实时在线' },
+  { icon: Bell, label: '待处理报警', value: String(unifiedMetrics.value.pendingCount), tone: 'warn' },
+  { icon: Clock3, label: '时间', value: '2026-06-16 17:08' },
+  { icon: Radio, label: '班次', value: '晚班' }
+]);
+
 /* ── 演示路线 ── */
 const demoRouteSteps = [
   { step: 1, title: '看总览状态', talk: '当前批次运行正常，环境评分稳定，下一关注点在下层湿度', target: 'overview' as ViewKey },
@@ -285,7 +295,6 @@ async function loadInitialData() {
 function focusSensor(sensor: SensorPoint) { selectedSensor.value = sensor; activeView.value = 'overview'; }
 function selectPointArchive(sensor: SensorPoint) { selectedSensor.value = sensor; }
 function focusSensorById(id: string) { const s = displaySensors.value.find(item => item.id === id); if (s) focusSensor(s); }
-function switchRole(role: (typeof roleViews)[number]) { activeRole.value = role.key; activeView.value = role.defaultView; }
 function runDemoScenario(name: string) { demoScenario.value = name; const t: Record<string, ViewKey> = { normal: 'overview', 'humidity-low': 'brain', 'co2-slow': 'strategy', contamination: 'closure', harvest: 'harvest' }; activeView.value = t[name] ?? 'demo'; }
 function setTaskFilterValue(f: typeof taskFilter.value) { taskFilter.value = f; }
 function setSimplifiedModeValue(m: string) { simplifiedMode.value = m; }
@@ -316,72 +325,78 @@ onUnmounted(() => disconnect?.());
 </script>
 
 <template>
-  <main :class="['app-shell', { 'overview-mode': isOverviewHome }]">
+  <main :class="['app-shell', 'system-shell', pageShellClass, { 'overview-mode': isOverviewHome }]">
     <!-- Toast 容器 -->
     <div class="toast-container">
       <div v-for="t in toasts" :key="t.id" :class="['toast-item', `toast-${t.type}`]">{{ t.msg }}</div>
     </div>
 
-    <header v-if="!isOverviewHome" class="topbar">
-      <div class="topbar-left">
-        <p class="eyebrow">{{ shellEyebrow }}</p>
-        <h1>{{ shellTitle }}</h1>
-      </div>
-      <div class="topbar-status">
-        <span v-for="item in roleTopbarCards" :key="item.label" class="status-item">
-          <b>{{ item.label }}</b>
-          <strong v-if="item.label === '评分'" :class="unifiedMetrics.envLevel === '优秀' ? 'text-good' : unifiedMetrics.envLevel === '稳定' ? 'text-ok' : 'text-warn'">{{ item.value }}</strong>
-          <template v-else>{{ item.value }}</template>
-        </span>
-      </div>
-      <div class="topbar-actions">
-        <details class="role-menu">
-          <summary>
-            <span>当前角色</span>
-            <strong>{{ activeRoleView.label }}</strong>
-          </summary>
-          <div class="role-menu-popover">
-            <button
-              v-for="role in roleViews"
-              :key="role.key"
-              type="button"
-              :class="{ active: activeRole === role.key }"
-              @click="switchRole(role)"
-            >
-              <strong>{{ role.label }}</strong>
-              <span>{{ role.focus }}</span>
-            </button>
-          </div>
-        </details>
-        <span :class="['live-pill', connectionPillClass(connectionState)]">
-          <Activity :size="14" />
-          {{ connectionLabel(connectionState) }}
-        </span>
-      </div>
-    </header>
-
-    <AppPrimaryNav
-      v-if="!isOverviewHome"
-      :class="{ 'overview-nav-shell': isOverviewHome }"
-      :active-view="activeView"
-      :grouped-nav-items="groupedNavItems"
-      @select-view="activeView = $event"
-    />
-
-    <!-- 总览 -->
-    <section v-if="activeSection === '总览'" :class="['section-content', { 'overview-home-section': isOverviewHome }]">
+    <!-- 总览首页保留已通过的 3D 总控台；其他页面进入同源系统壳。 -->
+    <section v-if="isOverviewHome" class="section-content system-section overview-home-section">
       <Home3DCommandCenter
-        v-if="activeView === 'overview'"
         :active-role="activeRole" :active-layer="activeLayer" :active-type="activeType" :alarm-timeline="displayAlarms"
         :display-sensors="displaySensors" :filtered-sensors="filteredSensors" :layer-option-items="layerOptionItems"
         :scene-mode="sceneMode" :scene-modes="sceneModes" :selected-sensor="selectedSensor" :summary="displaySummary"
-        :type-options="typeOptions" :active-view="activeView" :grouped-nav-items="groupedNavItems" :unified-metrics="unifiedMetrics" @navigate="activeView = $event"
+        :type-options="typeOptions" :active-view="activeView" :grouped-nav-items="groupedNavItems"
+        :left-header-cards="twinHeaderLeftCards" :right-header-cards="twinHeaderRightCards"
+        :unified-metrics="unifiedMetrics" @navigate="activeView = $event"
         @select-view="activeView = $event"
         @select-sensor="selectedSensor = $event" @update-active-layer="activeLayer = $event"
         @update-active-type="activeType = $event" @update-scene-mode="sceneMode = $event"
       />
+    </section>
+
+    <SystemTwinShell
+      v-else
+      :title="shellTitle"
+      :eyebrow="shellEyebrow"
+      :active-view="activeView"
+      :grouped-nav-items="groupedNavItems"
+      :status-cards="roleTopbarCards"
+      :left-header-cards="twinHeaderLeftCards"
+      :right-header-cards="twinHeaderRightCards"
+      :mode="pageShellClass.includes('shell-app') ? 'app' : 'ops'"
+      @select-view="activeView = $event"
+    >
+      <template #footer>
+        <div class="system-twin-footer-status">
+          <span>SYSTEM</span>
+          <strong>NORMAL</strong>
+        </div>
+        <div class="system-twin-footer-modules">
+          <article>
+            <span>正常</span>
+            <strong>{{ statusCounts.normal }}</strong>
+          </article>
+          <article>
+            <span>预警</span>
+            <strong>{{ statusCounts.warning }}</strong>
+          </article>
+          <article>
+            <span>报警</span>
+            <strong>{{ statusCounts.alarm }}</strong>
+          </article>
+          <article>
+            <span>离线</span>
+            <strong>{{ statusCounts.offline }}</strong>
+          </article>
+          <article>
+            <span>在线点位</span>
+            <strong>{{ displaySensors.length }}</strong>
+          </article>
+        </div>
+        <div class="system-twin-footer-actions">
+          <button type="button" @click="activeView = 'cabin'">三维巡检</button>
+          <button type="button" @click="activeView = 'workflow'">今日作业</button>
+          <button type="button" @click="activeView = 'alarms'">报警处置</button>
+          <button type="button" @click="activeView = 'batch'">批次状态</button>
+          <button type="button" @click="activeView = 'reports'">报告查看</button>
+        </div>
+      </template>
+
+    <!-- 总览 -->
+    <section v-if="activeSection === '总览'" class="section-content system-section">
       <OverviewWorkspace
-        v-else
         :active-view="overviewView" :active-layer="activeLayer" :active-type="activeType" :alarm-timeline="displayAlarms"
         :approval-flow-simulation="cult.approvalFlowSimulation" :batch-profile="cult.batchProfile" :control-brain-summary="cult.controlBrainSummary"
         :environment-score="cult.environmentScore" :filtered-sensors="filteredSensors" :important-sensors="importantSensors"
@@ -393,7 +408,7 @@ onUnmounted(() => disconnect?.());
     </section>
 
     <!-- 今日作业 -->
-    <section v-else-if="activeSection === '今日作业'" class="section-content">
+    <section v-else-if="activeSection === '今日作业'" class="section-content system-section">
       <UserSystemPanels
         :active-view="userSystemView" :active-role="activeRole" :task-filter="taskFilter" :simplified-mode="simplifiedMode"
         :approval-records="userSys.approvalRecords" :login-roles="userSys.loginRoles" :setting-groups="userSys.settingGroups"
@@ -416,7 +431,7 @@ onUnmounted(() => disconnect?.());
     </section>
 
     <!-- 种植批次 -->
-    <section v-else-if="activeSection === '种植批次'" class="section-content">
+    <section v-else-if="activeSection === '种植批次'" class="section-content system-section">
       <CultivationAdvancedPanels
         :active-view="cultivationView" :batch-metrics="cult.batchMetrics" :batch-profile="cult.batchProfile"
         :stage-compliance="cult.stageCompliance" :yield-correlation="cult.yieldCorrelation" :growth-stages="cult.growthStages"
@@ -449,7 +464,7 @@ onUnmounted(() => disconnect?.());
     </section>
 
     <!-- 运维处置 -->
-    <section v-else-if="activeSection === '运维处置'" :class="['section-content', `ops-view-${activeView}`]">
+    <section v-else-if="activeSection === '运维处置'" :class="['section-content', 'system-section', `ops-view-${activeView}`]">
       <article class="ops-command-strip">
         <button type="button" :class="{ active: isEnvironmentOpsView }" @click="activeView = 'environment'">
           <Activity :size="18" />
@@ -624,7 +639,7 @@ onUnmounted(() => disconnect?.());
     </section>
 
     <!-- 报告交付：按二级导航渲染对应组件 -->
-    <section v-else-if="activeSection === '报告交付'" class="section-content">
+    <section v-else-if="activeSection === '报告交付'" class="section-content system-section">
       <article class="delivery-command-strip">
         <button type="button" :class="{ active: isReportCenterView }" @click="activeView = 'reports'">
           <FileText :size="18" />
@@ -692,6 +707,7 @@ onUnmounted(() => disconnect?.());
         @focus-sensor-by-id="focusSensorById"
       />
     </section>
+    </SystemTwinShell>
 
     <!-- 报警详情抽屉 -->
     <Teleport to="body">
@@ -848,8 +864,11 @@ onUnmounted(() => disconnect?.());
 }
 
 .app-shell.overview-mode {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
-  padding: 6px 18px 6px;
+  padding: 10px 18px;
   background:
     radial-gradient(circle at 50% 0%, rgba(68, 204, 150, 0.14), transparent 22%),
     radial-gradient(circle at 12% 12%, rgba(20, 109, 83, 0.22), transparent 26%),
@@ -1019,7 +1038,12 @@ onUnmounted(() => disconnect?.());
 }
 
 .overview-home-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: min(1680px, 100%);
+  height: 100%;
+  min-height: 0;
 }
 
 .overview-nav-shell {
@@ -1577,6 +1601,256 @@ onUnmounted(() => disconnect?.());
   .overview-quick-stats {
     justify-content: start;
   }
+}
+
+/* Global system shell: page-type wrappers without changing page behavior. */
+.app-shell.app-page,
+.app-shell.ops-page,
+.app-shell.twin-page {
+  display: block;
+  width: auto;
+  max-width: none;
+  margin: 0;
+}
+
+.app-shell.shell-app,
+.app-shell.shell-ops {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 8% 0%, rgba(37, 173, 124, 0.1), transparent 28%),
+    linear-gradient(180deg, #e8f2ee 0%, #eef5f2 42%, #e5efeb 100%);
+}
+
+.app-shell.shell-ops {
+  background:
+    radial-gradient(circle at 16% 0%, rgba(94, 255, 197, 0.14), transparent 28%),
+    radial-gradient(circle at 86% 8%, rgba(255, 187, 99, 0.08), transparent 24%),
+    linear-gradient(180deg, #06231d 0%, #092820 42%, #061914 100%);
+}
+
+.app-shell.shell-app .topbar,
+.app-shell.shell-ops .topbar {
+  border-color: rgba(110, 232, 186, 0.18);
+  background: linear-gradient(180deg, rgba(6, 39, 32, 0.9), rgba(4, 24, 20, 0.96));
+  box-shadow: inset 0 1px 0 rgba(164, 255, 221, 0.06), 0 14px 30px rgba(2, 12, 10, 0.16);
+}
+
+.app-shell.shell-app .topbar-left h1,
+.app-shell.shell-ops .topbar-left h1 {
+  color: #effff7;
+}
+
+.app-shell.shell-app .topbar-left .eyebrow,
+.app-shell.shell-ops .topbar-left .eyebrow {
+  color: #8ef6ca;
+}
+
+.app-shell.shell-app .status-item,
+.app-shell.shell-ops .status-item {
+  border: 1px solid rgba(110, 232, 186, 0.14);
+  background: rgba(2, 20, 17, 0.5);
+  color: rgba(239, 255, 247, 0.9);
+}
+
+.app-shell.shell-app .status-item b,
+.app-shell.shell-ops .status-item b {
+  color: rgba(190, 226, 210, 0.72);
+}
+
+.app-shell.shell-app .role-menu summary,
+.app-shell.shell-ops .role-menu summary,
+.app-shell.shell-app .live-pill,
+.app-shell.shell-ops .live-pill {
+  border-color: rgba(110, 232, 186, 0.24);
+  background: rgba(3, 28, 23, 0.74);
+  color: rgba(224, 255, 240, 0.78);
+}
+
+.app-shell.shell-app .role-menu summary strong,
+.app-shell.shell-ops .role-menu summary strong {
+  color: #8ef6ca;
+}
+
+.app-shell.shell-app .role-menu-popover,
+.app-shell.shell-ops .role-menu-popover {
+  border-color: rgba(110, 232, 186, 0.22);
+  background: rgba(4, 25, 21, 0.98);
+}
+
+.app-shell.shell-app .role-menu-popover button,
+.app-shell.shell-ops .role-menu-popover button {
+  color: #effff7;
+}
+
+.app-shell.shell-app .role-menu-popover button span,
+.app-shell.shell-ops .role-menu-popover button span {
+  color: rgba(190, 226, 210, 0.72);
+}
+
+.app-shell.shell-app .section-content,
+.app-shell.shell-ops .section-content {
+  width: min(1600px, 100%);
+}
+
+.app-shell.shell-app .section-content {
+  padding: 2px 0 18px;
+}
+
+.app-shell.shell-ops .section-content {
+  padding: 2px 0 18px;
+}
+
+/* Final system shell layer. Keep the approved 3D home untouched; unify every non-home page frame. */
+.system-shell:not(.overview-mode) {
+  min-height: 100vh;
+  padding: 18px 22px 30px;
+  color: var(--app-text);
+}
+
+.system-shell.shell-ops {
+  background:
+    radial-gradient(circle at 14% 0%, rgba(94, 255, 197, 0.16), transparent 28%),
+    radial-gradient(circle at 82% 8%, rgba(255, 187, 99, 0.08), transparent 24%),
+    linear-gradient(180deg, #061c16 0%, #08261f 44%, #041511 100%);
+}
+
+.system-shell.shell-app {
+  background:
+    radial-gradient(circle at 10% 0%, rgba(15, 118, 110, 0.14), transparent 28%),
+    linear-gradient(180deg, #dfece7 0%, #edf5f1 40%, #e3eee9 100%);
+}
+
+.system-topbar {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: minmax(420px, 1.15fr) minmax(420px, 0.95fr) minmax(220px, 0.75fr);
+  width: min(1600px, 100%);
+  margin: 0 auto 12px;
+  border-color: rgba(110, 232, 186, 0.2);
+  border-radius: 10px;
+  background:
+    linear-gradient(180deg, rgba(6, 39, 32, 0.94), rgba(4, 24, 20, 0.98));
+  box-shadow:
+    inset 0 1px 0 rgba(164, 255, 221, 0.07),
+    0 18px 34px rgba(2, 12, 10, 0.18);
+}
+
+.system-topbar::before {
+  content: "";
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(142, 246, 202, 0.72), transparent);
+}
+
+.system-topbar .topbar-left h1 {
+  margin: 0;
+  color: var(--twin-text);
+  font-size: 24px;
+  line-height: 1.08;
+  letter-spacing: 0.18em;
+  text-align: center;
+  text-shadow: 0 0 16px rgba(0, 245, 178, 0.5);
+}
+
+.system-topbar .topbar-left .eyebrow {
+  margin: 0 0 3px;
+  color: var(--twin-normal);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.system-topbar .topbar-left {
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: center;
+  text-align: center;
+}
+
+.system-topbar .topbar-status {
+  grid-column: 1;
+  grid-row: 1;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.system-topbar .status-item {
+  min-width: 0;
+  min-height: 40px;
+  padding: 0 12px;
+  border: 1px solid rgba(110, 232, 186, 0.14);
+  border-width: 0 1px 0 0;
+  border-radius: 0;
+  background: rgba(2, 20, 17, 0.54);
+  color: rgba(239, 255, 247, 0.9);
+}
+
+.system-topbar .status-item:last-child {
+  border-right: 0;
+}
+
+.system-topbar .status-item b {
+  color: rgba(190, 226, 210, 0.72);
+}
+
+.system-topbar .status-item strong {
+  color: var(--twin-normal);
+}
+
+.system-topbar .topbar-actions {
+  grid-column: 3;
+  grid-row: 1;
+  justify-self: end;
+}
+
+.system-topbar .role-menu summary,
+.system-topbar .live-pill {
+  border-color: rgba(110, 232, 186, 0.24);
+  background: rgba(3, 28, 23, 0.76);
+  color: rgba(224, 255, 240, 0.8);
+}
+
+.system-topbar .role-menu summary strong {
+  color: var(--twin-normal);
+}
+
+.system-section {
+  width: min(1600px, 100%);
+  margin: 0 auto;
+}
+
+.system-shell.shell-ops .system-section {
+  color: var(--twin-text);
+}
+
+.system-shell.shell-app .system-section {
+  color: var(--app-text);
+}
+
+.system-shell.shell-app .panel-block,
+.system-shell.shell-app .report-section,
+.system-shell.shell-app .summary-card,
+.system-shell.shell-app .delivery-card {
+  border-color: rgba(15, 118, 110, 0.16);
+  background: linear-gradient(180deg, rgba(251, 254, 253, 0.96), rgba(241, 248, 245, 0.96));
+}
+
+.system-shell.shell-ops .panel-block:not(.ops-workbench-shell .panel-block),
+.system-shell.shell-ops .scene-panel {
+  border-color: rgba(110, 232, 186, 0.16);
+  background: linear-gradient(180deg, rgba(7, 36, 30, 0.86), rgba(3, 20, 17, 0.94));
+  box-shadow:
+    inset 0 1px 0 rgba(164, 255, 221, 0.05),
+    0 14px 30px rgba(2, 12, 10, 0.16);
 }
 </style>
 

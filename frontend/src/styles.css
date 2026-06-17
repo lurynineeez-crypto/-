@@ -1,4 +1,106 @@
 :root {
+  --app-font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --app-font-size-xs: 11px;
+  --app-font-size-sm: 12px;
+  --app-font-size-md: 13px;
+  --app-font-size-lg: 15px;
+  --app-font-size-xl: 20px;
+  --app-font-size-page-title: 24px;
+  --app-bg: #eef5f2;
+  --app-bg: oklch(96.8% 0.012 174);
+  --app-bg-soft: #e7f1ed;
+  --app-bg-soft: oklch(94.7% 0.018 174);
+  --app-surface: #fbfefd;
+  --app-surface: oklch(99% 0.004 174);
+  --app-surface-alt: #f4f8f6;
+  --app-surface-alt: oklch(97.2% 0.008 174);
+  --app-border: #dbe7e2;
+  --app-border: oklch(89% 0.012 174);
+  --app-border-strong: #b9d1c9;
+  --app-border-strong: oklch(80% 0.03 174);
+  --app-text: #172033;
+  --app-text: oklch(23% 0.028 245);
+  --app-text-muted: #64748b;
+  --app-text-muted: oklch(51% 0.024 245);
+  --app-text-subtle: #94a3b8;
+  --app-primary: #0f766e;
+  --app-primary: oklch(46% 0.105 178);
+  --app-primary-strong: #0a5c55;
+  --app-primary-strong: oklch(38% 0.105 178);
+  --app-primary-soft: #dff7f0;
+  --app-primary-soft: oklch(94% 0.035 178);
+  --app-hover: #eaf7f3;
+  --app-state-normal: #10b981;
+  --app-state-focus: #2563eb;
+  --app-state-warning: #f59e0b;
+  --app-state-danger: #ef4444;
+  --app-state-offline: #94a3b8;
+  --app-state-online: #10b981;
+  --app-state-done: #16a34a;
+  --app-state-pending: #f59e0b;
+  --app-state-review: #2563eb;
+  --app-state-processing: #0f766e;
+  --app-button-primary-bg: var(--app-primary);
+  --app-button-primary-text: var(--app-surface);
+  --app-button-secondary-bg: var(--app-surface);
+  --app-button-secondary-text: var(--app-primary-strong);
+  --app-button-risk-bg: #f59e0b;
+  --app-button-risk-text: #1f1300;
+  --app-radius: 8px;
+  --app-radius-sm: 6px;
+  --app-radius-pill: 999px;
+  --app-shadow-card: 0 1px 0 rgba(15, 23, 42, 0.04), 0 12px 26px rgba(15, 23, 42, 0.06);
+  --app-shadow-hover: 0 8px 18px rgba(15, 23, 42, 0.08);
+  --twin-bg-top: #061c16;
+  --twin-bg-bottom: #03120f;
+  --twin-panel-bg: linear-gradient(180deg, rgba(8, 39, 31, 0.86), rgba(5, 23, 19, 0.92));
+  --twin-panel-soft-bg: linear-gradient(180deg, rgba(9, 43, 34, 0.78), rgba(7, 28, 23, 0.9));
+  --twin-border: rgba(110, 232, 186, 0.18);
+  --twin-border-strong: rgba(132, 255, 211, 0.28);
+  --twin-glow: 0 0 24px rgba(73, 209, 160, 0.18);
+  --twin-text: #effff7;
+  --twin-muted: rgba(170, 218, 195, 0.72);
+  --twin-normal: #8ef6ca;
+  --twin-warning: #ffbb63;
+  --twin-danger: #ff8375;
+  --twin-offline: rgba(166, 188, 180, 0.58);
+  --twin-online: #8ef6ca;
+  --fs-system-title: 25px;
+  --fs-system-subtitle: 9.5px;
+  --fs-panel-title: 16px;
+  --fs-card-title: 15.5px;
+  --fs-body: 12.5px;
+  --fs-meta: 12px;
+  --fs-chip-label: 11px;
+  --fs-chip-value: 13.5px;
+  --fs-risk-value: 38px;
+  --fs-status-value: 26px;
+  --fs-button: 13.5px;
+  --twin-font-title: var(--fs-system-title);
+  --twin-font-title-compact: 24px;
+  --twin-font-subtitle: var(--fs-system-subtitle);
+  --twin-font-subtitle-compact: 9px;
+  --twin-font-panel-title: 16px;
+  --twin-font-panel-title-compact: 15.5px;
+  --twin-font-risk-title: 18px;
+  --twin-font-risk-title-compact: 16px;
+  --twin-font-card-title: var(--fs-card-title);
+  --twin-font-body: var(--fs-body);
+  --twin-font-meta: var(--fs-meta);
+  --twin-font-caption: 11.5px;
+  --twin-font-micro: 11px;
+  --twin-font-micro-compact: 10px;
+  --twin-font-number-lg: var(--fs-risk-value);
+  --twin-font-number-lg-compact: 36px;
+  --twin-font-number-md: 26px;
+  --twin-font-number-md-compact: 24px;
+  --twin-font-number-sm: 19px;
+  --twin-font-number-sm-compact: 17px;
+  --twin-font-system-label: 17px;
+  --twin-font-system-label-compact: 15px;
+  --twin-line-tight: 1.16;
+  --twin-line-normal: 1.32;
+  --twin-line-readable: 1.48;
   --bg: oklch(96.8% 0.012 174);
   --bg-soft: oklch(94.7% 0.018 174);
   --surface: oklch(99% 0.004 174);
@@ -19,8 +121,7 @@
   --info: oklch(52% 0.14 252);
   --shadow-soft: 0 14px 32px rgba(15, 23, 42, 0.07);
   --shadow-card: 0 1px 0 rgba(15, 23, 42, 0.04), 0 12px 26px rgba(15, 23, 42, 0.06);
-  font-family:
-    Inter, "Microsoft YaHei", "PingFang SC", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: var(--app-font-family);
   color: var(--fg);
   background: var(--bg);
   font-synthesis: none;
@@ -2715,6 +2816,1765 @@ button.asset-row:hover,
   font-size: 28px;
 }
 
+/* Whole-site shell unification. Home keeps twin layout, ops pages inherit dark workbench, app pages stay lighter but on-brand. */
+.app-shell.twin-page {
+  --system-shell-mode: twin;
+}
+
+.app-shell.ops-page,
+.app-shell.shell-ops {
+  --system-shell-mode: ops;
+}
+
+.app-shell.app-page,
+.app-shell.shell-app {
+  --system-shell-mode: app;
+}
+
+.shell-app .panel-block,
+.shell-app .report-section,
+.shell-app .summary-card,
+.shell-app .delivery-card,
+.shell-app .metric,
+.shell-app .feature-card,
+.shell-app .stage-card,
+.shell-app .rule-card {
+  border-color: rgba(15, 118, 110, 0.16);
+  background: linear-gradient(180deg, rgba(251, 254, 253, 0.96), rgba(241, 248, 245, 0.96));
+  box-shadow: 0 1px 0 rgba(15, 23, 42, 0.04), 0 12px 26px rgba(15, 23, 42, 0.06);
+}
+
+.shell-app .section-title h2,
+.shell-app .report-section h2,
+.shell-app .panel-block h2 {
+  color: var(--app-text, #172033);
+  font-size: 16px;
+}
+
+.shell-app .section-title svg {
+  color: var(--app-primary, #0f766e);
+}
+
+.shell-app .asset-row,
+.shell-app .rtable-row,
+.shell-app .report-table .rtable-row,
+.shell-app .review-grid article,
+.shell-app .threshold-list article,
+.shell-app .suggestion-list article,
+.shell-app .summary-item,
+.shell-app .trace-node,
+.shell-app .recipe-grid article,
+.shell-app .plan-list article {
+  border: 1px solid rgba(15, 118, 110, 0.1);
+  background: rgba(244, 248, 246, 0.92);
+}
+
+.shell-app .asset-row.head,
+.shell-app .rtable-head {
+  background: rgba(15, 118, 110, 0.09);
+  color: var(--app-text-muted, #64748b);
+}
+
+.shell-app button:not(.drawer-close):not(.role-menu-popover button),
+.shell-app .btn-sm {
+  border-color: rgba(15, 118, 110, 0.18);
+}
+
+.shell-app .btn-sm:not(:disabled):hover,
+.shell-app button.asset-row:hover,
+.shell-app .rtable-row:hover {
+  border-color: rgba(15, 118, 110, 0.32);
+  background: rgba(223, 247, 240, 0.86);
+}
+
+.shell-ops .ops-command-strip,
+.shell-ops .delivery-command-strip {
+  border: 1px solid rgba(110, 232, 186, 0.16);
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgba(6, 39, 32, 0.82), rgba(3, 22, 18, 0.92));
+  box-shadow: inset 0 1px 0 rgba(164, 255, 221, 0.05), 0 14px 30px rgba(2, 12, 10, 0.14);
+}
+
+.shell-ops .ops-command-strip button,
+.shell-ops .delivery-command-strip button {
+  border-color: rgba(110, 232, 186, 0.16);
+  background: rgba(2, 20, 17, 0.52);
+  color: rgba(224, 255, 240, 0.78);
+}
+
+.shell-ops .ops-command-strip button svg,
+.shell-ops .delivery-command-strip button svg {
+  color: #8ef6ca;
+}
+
+.shell-ops .ops-command-strip button span,
+.shell-ops .delivery-command-strip button span {
+  color: rgba(190, 226, 210, 0.72);
+}
+
+.shell-ops .ops-command-strip button strong,
+.shell-ops .delivery-command-strip button strong {
+  color: #effff7;
+}
+
+.shell-ops .ops-command-strip button.active,
+.shell-ops .delivery-command-strip button.active {
+  border-color: rgba(112, 242, 192, 0.42);
+  background: linear-gradient(180deg, rgba(31, 136, 96, 0.42), rgba(8, 55, 42, 0.7));
+}
+
+.shell-ops .ops-command-strip button.active::after,
+.shell-ops .delivery-command-strip button.active::after {
+  content: "";
+  display: block;
+  grid-column: 1 / -1;
+  height: 2px;
+  margin-top: 4px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, #70f2c0, transparent);
+}
+
+.shell-ops .panel-block:not(.ops-workbench-shell .panel-block),
+.shell-ops .scene-panel {
+  border-color: rgba(110, 232, 186, 0.16);
+  background: linear-gradient(180deg, rgba(7, 36, 30, 0.84), rgba(3, 20, 17, 0.94));
+  box-shadow: inset 0 1px 0 rgba(164, 255, 221, 0.05), 0 14px 30px rgba(2, 12, 10, 0.16);
+}
+
+.shell-ops .panel-block:not(.ops-workbench-shell .panel-block) .section-title h2 {
+  color: #effff7;
+}
+
+.shell-ops .panel-block:not(.ops-workbench-shell .panel-block) .section-title p,
+.shell-ops .panel-block:not(.ops-workbench-shell .panel-block) p,
+.shell-ops .panel-block:not(.ops-workbench-shell .panel-block) small {
+  color: rgba(190, 226, 210, 0.72);
+}
+
+.shell-ops .asset-row,
+.shell-ops .sensor-list button,
+.shell-ops .mini-table button,
+.shell-ops .attention-point-row button,
+.shell-ops .ops-mini-card,
+.shell-ops .ops-rule-list article,
+.shell-ops .ops-maintenance-card,
+.shell-ops .maintenance-check-list article {
+  border-color: rgba(110, 232, 186, 0.12);
+  background: rgba(2, 20, 17, 0.56);
+  color: #effff7;
+}
+
+.shell-ops .asset-row strong,
+.shell-ops .sensor-list strong,
+.shell-ops .mini-table strong,
+.shell-ops .ops-mini-card strong,
+.shell-ops .ops-rule-list strong,
+.shell-ops .maintenance-check-list strong {
+  color: #effff7;
+}
+
+.shell-ops .asset-row span,
+.shell-ops .sensor-list span,
+.shell-ops .mini-table span,
+.shell-ops .ops-mini-card span,
+.shell-ops .ops-rule-list span,
+.shell-ops .ops-rule-list small,
+.shell-ops .maintenance-check-list span,
+.shell-ops .maintenance-check-list small {
+  color: rgba(190, 226, 210, 0.72);
+}
+
+.shell-app .app-status-chip,
+.shell-app .tag,
+.shell-app .rule-status,
+.shell-app .report-status,
+.shell-app .asset-row strong,
+.shell-app .rtable-row > strong:not(:first-child) {
+  border: 1px solid rgba(15, 118, 110, 0.12);
+  background: var(--app-primary-soft, #dff7f0);
+  color: var(--app-primary-strong, #0a5c55);
+}
+
+.shell-app .text-warn,
+.shell-app .app-tag-warning {
+  color: var(--app-state-warning, #f59e0b);
+}
+
+.shell-app .text-good,
+.shell-app .app-tag-done,
+.shell-app .app-tag-normal {
+  color: var(--app-state-done, #16a34a);
+}
+
+/* P0 dark operation layer final precedence. */
+.ops-workbench-shell.ops-page {
+  background:
+    radial-gradient(circle at 18% 0%, rgba(94, 255, 197, 0.12), transparent 28%),
+    radial-gradient(circle at 90% 8%, rgba(255, 187, 99, 0.08), transparent 24%),
+    linear-gradient(180deg, #06231d 0%, #031814 46%, #02110e 100%);
+}
+
+.ops-workbench-shell .ops-page-header,
+.ops-workbench-shell .panel-block,
+.ops-workbench-shell .ops-panel,
+.ops-workbench-shell .ops-table,
+.ops-workbench-shell .alarm-queue-panel {
+  border-color: rgba(110, 232, 186, 0.18);
+  background: linear-gradient(180deg, rgba(7, 36, 30, 0.88), rgba(3, 20, 17, 0.96));
+  box-shadow: inset 0 1px 0 rgba(164, 255, 221, 0.06), 0 14px 30px rgba(2, 12, 10, 0.18);
+}
+
+.ops-workbench-shell .ops-page-header h2,
+.ops-workbench-shell .panel-section-title h2,
+.ops-workbench-shell .app-panel-title h3,
+.ops-workbench-shell .grower-task-card header strong,
+.ops-workbench-shell .app-table-row strong,
+.ops-workbench-shell .inspection-list article strong,
+.ops-workbench-shell .log-list article strong {
+  color: #effff7;
+}
+
+.ops-workbench-shell .ops-page-header p,
+.ops-workbench-shell .panel-section-title p,
+.ops-workbench-shell .app-panel-title p,
+.ops-workbench-shell .grower-task-card header small,
+.ops-workbench-shell .task-decision-grid p,
+.ops-workbench-shell .task-meta-grid b,
+.ops-workbench-shell .compact-grower-list span,
+.ops-workbench-shell .compact-grower-list small,
+.ops-workbench-shell .compact-log-list span,
+.ops-workbench-shell .compact-log-list p,
+.ops-workbench-shell .app-table-row span {
+  color: rgba(190, 226, 210, 0.74);
+}
+
+.ops-workbench-shell .ops-task-card,
+.ops-workbench-shell .grower-task-card {
+  border-color: rgba(110, 232, 186, 0.18);
+  background: linear-gradient(180deg, rgba(8, 43, 35, 0.82), rgba(4, 24, 20, 0.94));
+}
+
+.ops-workbench-shell .grower-task-card.priority-p1 {
+  border-color: rgba(255, 187, 99, 0.45);
+  background:
+    linear-gradient(90deg, rgba(255, 187, 99, 0.12), transparent 34%),
+    linear-gradient(180deg, rgba(8, 43, 35, 0.86), rgba(4, 24, 20, 0.96));
+}
+
+.ops-workbench-shell .task-meta-grid span,
+.ops-workbench-shell .task-decision-grid section,
+.ops-workbench-shell .compact-grower-list article,
+.ops-workbench-shell .compact-log-list article,
+.ops-workbench-shell .app-table-head,
+.ops-workbench-shell .app-table-row {
+  border-color: rgba(110, 232, 186, 0.12);
+  background: rgba(2, 20, 17, 0.56);
+}
+
+.ops-workbench-shell .ops-risk-card,
+.ops-workbench-shell .grower-risk-card,
+.ops-workbench-shell .alarm-priority-card {
+  border-color: rgba(255, 187, 99, 0.5);
+  background:
+    radial-gradient(circle at 18% 8%, rgba(255, 187, 99, 0.18), transparent 28%),
+    linear-gradient(180deg, rgba(67, 42, 14, 0.74), rgba(13, 18, 15, 0.96));
+  box-shadow: 0 0 22px rgba(255, 187, 99, 0.08), inset 0 0 28px rgba(255, 187, 99, 0.08);
+}
+
+.ops-workbench-shell .ops-risk-card > strong,
+.ops-workbench-shell .grower-risk-card > strong,
+.ops-workbench-shell .alarm-card-head strong {
+  color: #fff4dc;
+}
+
+.ops-workbench-shell .risk-value-line b,
+.ops-workbench-shell .alarm-primary-value b {
+  color: #ffbb63;
+}
+
+.ops-workbench-shell .app-button-primary,
+.ops-workbench-shell button.app-button-primary {
+  border-color: rgba(142, 246, 202, 0.5);
+  background: linear-gradient(180deg, #20e6aa, #0c9f78);
+  color: #021610;
+}
+
+.ops-workbench-shell .app-button-secondary,
+.ops-workbench-shell button.app-button-secondary {
+  border-color: rgba(142, 246, 202, 0.24);
+  background: rgba(4, 31, 25, 0.82);
+  color: #c9ffea;
+}
+
+.ops-workbench-shell .app-button-warning,
+.ops-workbench-shell button.app-button-warning {
+  border-color: rgba(255, 187, 99, 0.58);
+  background: linear-gradient(180deg, #ffc56d, #e89524);
+  color: #1d1003;
+}
+
+/* Final deep-green system skin.
+   This intentionally lives last: legacy page CSS and async component scoped CSS still
+   contain many white `var(--surface)` cards, so the system shell must win globally. */
+.system-shell:not(.overview-mode) {
+  min-height: 100vh;
+  color: var(--twin-text, #effff7);
+}
+
+.system-shell.shell-app,
+.system-shell.shell-ops {
+  background:
+    radial-gradient(circle at 14% 0%, rgba(94, 255, 197, 0.16), transparent 28%),
+    radial-gradient(circle at 86% 8%, rgba(255, 187, 99, 0.08), transparent 24%),
+    linear-gradient(180deg, #061c16 0%, #08261f 42%, #041511 100%) !important;
+}
+
+.system-shell.shell-app .system-section,
+.system-shell.shell-ops .system-section,
+.system-shell.shell-app .section-content,
+.system-shell.shell-ops .section-content {
+  color: var(--twin-text, #effff7);
+}
+
+.system-shell.shell-app .topbar,
+.system-shell.shell-ops .topbar,
+.system-shell.shell-app .system-topbar,
+.system-shell.shell-ops .system-topbar {
+  border-color: rgba(110, 232, 186, 0.2) !important;
+  background:
+    linear-gradient(180deg, rgba(6, 39, 32, 0.94), rgba(4, 24, 20, 0.98)) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(164, 255, 221, 0.07),
+    0 18px 34px rgba(2, 12, 10, 0.18) !important;
+}
+
+.system-shell.shell-app .primary-nav-bar,
+.system-shell.shell-ops .primary-nav-bar,
+.system-shell.shell-app .system-nav,
+.system-shell.shell-ops .system-nav {
+  border-color: rgba(110, 232, 186, 0.2) !important;
+  background:
+    radial-gradient(circle at 12% 0%, rgba(0, 245, 178, 0.1), transparent 28%),
+    linear-gradient(180deg, rgba(5, 35, 29, 0.94), rgba(2, 17, 14, 0.98)) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(156, 255, 213, 0.06),
+    0 16px 32px rgba(2, 12, 10, 0.16) !important;
+}
+
+.system-shell.shell-app .topbar h1,
+.system-shell.shell-ops .topbar h1,
+.system-shell.shell-app .section-title h2,
+.system-shell.shell-ops .section-title h2,
+.system-shell.shell-app .section-title h3,
+.system-shell.shell-ops .section-title h3,
+.system-shell.shell-app .panel-block h2,
+.system-shell.shell-ops .panel-block h2,
+.system-shell.shell-app .panel-block h3,
+.system-shell.shell-ops .panel-block h3,
+.system-shell.shell-app .report-section h2,
+.system-shell.shell-ops .report-section h2,
+.system-shell.shell-app .report-section h3,
+.system-shell.shell-ops .report-section h3 {
+  color: var(--twin-text, #effff7) !important;
+}
+
+.system-shell.shell-app .topbar .eyebrow,
+.system-shell.shell-ops .topbar .eyebrow,
+.system-shell.shell-app .section-title svg,
+.system-shell.shell-ops .section-title svg,
+.system-shell.shell-app .panel-section-title svg,
+.system-shell.shell-ops .panel-section-title svg {
+  color: var(--twin-normal, #8ef6ca) !important;
+}
+
+.system-shell.shell-app .section-title p,
+.system-shell.shell-ops .section-title p,
+.system-shell.shell-app .panel-block p,
+.system-shell.shell-ops .panel-block p,
+.system-shell.shell-app .report-section p,
+.system-shell.shell-ops .report-section p,
+.system-shell.shell-app .panel-block small,
+.system-shell.shell-ops .panel-block small,
+.system-shell.shell-app .report-section small,
+.system-shell.shell-ops .report-section small,
+.system-shell.shell-app .muted,
+.system-shell.shell-ops .muted {
+  color: rgba(190, 226, 210, 0.74) !important;
+}
+
+.system-shell.shell-app .panel-block,
+.system-shell.shell-ops .panel-block,
+.system-shell.shell-app .scene-panel,
+.system-shell.shell-ops .scene-panel,
+.system-shell.shell-app .metric,
+.system-shell.shell-ops .metric,
+.system-shell.shell-app .report-delivery-center,
+.system-shell.shell-ops .report-delivery-center,
+.system-shell.shell-app .report-section,
+.system-shell.shell-ops .report-section,
+.system-shell.shell-app .summary-card,
+.system-shell.shell-ops .summary-card,
+.system-shell.shell-app .delivery-card,
+.system-shell.shell-ops .delivery-card,
+.system-shell.shell-app .feature-card,
+.system-shell.shell-ops .feature-card,
+.system-shell.shell-app .stage-card,
+.system-shell.shell-ops .stage-card,
+.system-shell.shell-app .rule-card,
+.system-shell.shell-ops .rule-card,
+.system-shell.shell-app .overview-state-panel,
+.system-shell.shell-ops .overview-state-panel,
+.system-shell.shell-app .overview-quick-panel,
+.system-shell.shell-ops .overview-quick-panel,
+.system-shell.shell-app .overview-demo-panel,
+.system-shell.shell-ops .overview-demo-panel,
+.system-shell.shell-app .batch-production-board,
+.system-shell.shell-ops .batch-production-board,
+.system-shell.shell-app .delivery-package-board,
+.system-shell.shell-ops .delivery-package-board,
+.system-shell.shell-app .alarm-inline-workbench,
+.system-shell.shell-ops .alarm-inline-workbench,
+.system-shell.shell-app .environment-monitor-table,
+.system-shell.shell-ops .environment-monitor-table {
+  border-color: rgba(110, 232, 186, 0.18) !important;
+  background:
+    linear-gradient(180deg, rgba(7, 36, 30, 0.86), rgba(3, 20, 17, 0.94)) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(164, 255, 221, 0.05),
+    0 14px 30px rgba(2, 12, 10, 0.16) !important;
+}
+
+.system-shell.shell-app .panel-block.lifecycle-wide,
+.system-shell.shell-app .batch-command-hero,
+.system-shell.shell-app .stage-release-card,
+.system-shell.shell-app .quality-wide,
+.system-shell.shell-app .director-wide,
+.system-shell.shell-app .economics-wide,
+.system-shell.shell-app .collaboration-wide,
+.system-shell.shell-app .strategy-wide {
+  background:
+    radial-gradient(circle at 10% 0%, rgba(142, 246, 202, 0.1), transparent 24%),
+    linear-gradient(180deg, rgba(8, 43, 35, 0.9), rgba(4, 24, 20, 0.96)) !important;
+}
+
+.system-shell.shell-app .metric,
+.system-shell.shell-ops .metric,
+.system-shell.shell-app .stage-status-grid > div,
+.system-shell.shell-ops .stage-status-grid > div,
+.system-shell.shell-app .production-summary-grid article,
+.system-shell.shell-ops .production-summary-grid article,
+.system-shell.shell-app .handover-grid article,
+.system-shell.shell-ops .handover-grid article,
+.system-shell.shell-app .review-grid article,
+.system-shell.shell-ops .review-grid article,
+.system-shell.shell-app .threshold-list article,
+.system-shell.shell-ops .threshold-list article,
+.system-shell.shell-app .api-list article,
+.system-shell.shell-ops .api-list article,
+.system-shell.shell-app .history-list article,
+.system-shell.shell-ops .history-list article,
+.system-shell.shell-app .plan-list article,
+.system-shell.shell-ops .plan-list article,
+.system-shell.shell-app .chain-list article,
+.system-shell.shell-ops .chain-list article,
+.system-shell.shell-app .response-grid article,
+.system-shell.shell-ops .response-grid article,
+.system-shell.shell-app .help-grid article,
+.system-shell.shell-ops .help-grid article,
+.system-shell.shell-app .drill-grid article,
+.system-shell.shell-ops .drill-grid article,
+.system-shell.shell-app .search-results article,
+.system-shell.shell-ops .search-results article,
+.system-shell.shell-app .point-profile article,
+.system-shell.shell-ops .point-profile article,
+.system-shell.shell-app .delivery-grid article,
+.system-shell.shell-ops .delivery-grid article,
+.system-shell.shell-app .recipe-grid article,
+.system-shell.shell-ops .recipe-grid article,
+.system-shell.shell-app .demo-card,
+.system-shell.shell-ops .demo-card,
+.system-shell.shell-app .asset-row,
+.system-shell.shell-ops .asset-row,
+.system-shell.shell-app .device-row,
+.system-shell.shell-ops .device-row,
+.system-shell.shell-app .sensor-list button,
+.system-shell.shell-ops .sensor-list button,
+.system-shell.shell-app .action-list span,
+.system-shell.shell-ops .action-list span,
+.system-shell.shell-app .process-list span,
+.system-shell.shell-ops .process-list span,
+.system-shell.shell-app .growth-state span,
+.system-shell.shell-ops .growth-state span,
+.system-shell.shell-app .summary-item,
+.system-shell.shell-ops .summary-item,
+.system-shell.shell-app .trace-node,
+.system-shell.shell-ops .trace-node,
+.system-shell.shell-app .batch-metrics article,
+.system-shell.shell-ops .batch-metrics article,
+.system-shell.shell-app .correlation-grid article,
+.system-shell.shell-ops .correlation-grid article,
+.system-shell.shell-app .lifecycle-step,
+.system-shell.shell-ops .lifecycle-step,
+.system-shell.shell-app .stage-line,
+.system-shell.shell-ops .stage-line,
+.system-shell.shell-app .feature-value,
+.system-shell.shell-ops .feature-value,
+.system-shell.shell-app .batch-health-metrics,
+.system-shell.shell-ops .batch-health-metrics,
+.system-shell.shell-app .batch-health-metrics div,
+.system-shell.shell-ops .batch-health-metrics div,
+.system-shell.shell-app .duty-focus,
+.system-shell.shell-ops .duty-focus,
+.system-shell.shell-app .handover-note,
+.system-shell.shell-ops .handover-note,
+.system-shell.shell-app .growth-state strong,
+.system-shell.shell-ops .growth-state strong,
+.system-shell.shell-app .trace-chain span,
+.system-shell.shell-ops .trace-chain span,
+.system-shell.shell-app .demo-state,
+.system-shell.shell-ops .demo-state,
+.system-shell.shell-app .rtable-row,
+.system-shell.shell-ops .rtable-row,
+.system-shell.shell-app .rtable-head,
+.system-shell.shell-ops .rtable-head,
+.system-shell.shell-app .app-table-row,
+.system-shell.shell-ops .app-table-row,
+.system-shell.shell-app .app-table-head,
+.system-shell.shell-ops .app-table-head {
+  border-color: rgba(110, 232, 186, 0.12) !important;
+  background: rgba(2, 20, 17, 0.56) !important;
+  color: rgba(239, 255, 247, 0.9) !important;
+}
+
+.system-shell.shell-app .lifecycle-step.current,
+.system-shell.shell-ops .lifecycle-step.current,
+.system-shell.shell-app .stage-card.current,
+.system-shell.shell-ops .stage-card.current,
+.system-shell.shell-app .app-status-chip,
+.system-shell.shell-ops .app-status-chip,
+.system-shell.shell-app .tag,
+.system-shell.shell-ops .tag,
+.system-shell.shell-app .rule-status,
+.system-shell.shell-ops .rule-status,
+.system-shell.shell-app .report-status,
+.system-shell.shell-ops .report-status {
+  border-color: rgba(142, 246, 202, 0.28) !important;
+  background: rgba(142, 246, 202, 0.12) !important;
+  color: var(--twin-normal, #8ef6ca) !important;
+}
+
+.system-shell.shell-app .alarm-item,
+.system-shell.shell-ops .alarm-item,
+.system-shell.shell-app .timeline-item,
+.system-shell.shell-ops .timeline-item,
+.system-shell.shell-app .warning,
+.system-shell.shell-ops .warning {
+  border-color: rgba(255, 187, 99, 0.34) !important;
+  background: rgba(255, 187, 99, 0.1) !important;
+}
+
+.system-shell.shell-app .reading-value,
+.system-shell.shell-ops .reading-value,
+.system-shell.shell-app .metric svg,
+.system-shell.shell-ops .metric svg,
+.system-shell.shell-app .stage-status-grid strong,
+.system-shell.shell-ops .stage-status-grid strong,
+.system-shell.shell-app .production-summary-grid strong,
+.system-shell.shell-ops .production-summary-grid strong,
+.system-shell.shell-app .feature-value strong,
+.system-shell.shell-ops .feature-value strong,
+.system-shell.shell-app .mini-table strong,
+.system-shell.shell-ops .mini-table strong,
+.system-shell.shell-app .rule-card dt,
+.system-shell.shell-ops .rule-card dt,
+.system-shell.shell-app .handover-note strong,
+.system-shell.shell-ops .handover-note strong,
+.system-shell.shell-app .setting-tags span,
+.system-shell.shell-ops .setting-tags span,
+.system-shell.shell-app .demo-grid strong,
+.system-shell.shell-ops .demo-grid strong,
+.system-shell.shell-app .delivery-grid strong,
+.system-shell.shell-ops .delivery-grid strong,
+.system-shell.shell-app .recipe-grid strong,
+.system-shell.shell-ops .recipe-grid strong,
+.system-shell.shell-app .plan-list span,
+.system-shell.shell-ops .plan-list span,
+.system-shell.shell-app .asset-row strong,
+.system-shell.shell-ops .asset-row strong,
+.system-shell.shell-app .demo-card span,
+.system-shell.shell-ops .demo-card span,
+.system-shell.shell-app .director-summary strong,
+.system-shell.shell-ops .director-summary strong,
+.system-shell.shell-app .point-profile strong,
+.system-shell.shell-ops .point-profile strong,
+.system-shell.shell-app .batch-metrics strong,
+.system-shell.shell-ops .batch-metrics strong,
+.system-shell.shell-app .summary-item strong,
+.system-shell.shell-ops .summary-item strong,
+.system-shell.shell-app .rtable-row strong,
+.system-shell.shell-ops .rtable-row strong {
+  color: var(--twin-text, #effff7) !important;
+}
+
+.system-shell.shell-app .metric span,
+.system-shell.shell-ops .metric span,
+.system-shell.shell-app .metric small,
+.system-shell.shell-ops .metric small,
+.system-shell.shell-app .batch-metrics span,
+.system-shell.shell-ops .batch-metrics span,
+.system-shell.shell-app .batch-metrics small,
+.system-shell.shell-ops .batch-metrics small,
+.system-shell.shell-app .correlation-grid span,
+.system-shell.shell-ops .correlation-grid span,
+.system-shell.shell-app .summary-item span,
+.system-shell.shell-ops .summary-item span,
+.system-shell.shell-app .asset-row span,
+.system-shell.shell-ops .asset-row span,
+.system-shell.shell-app .rtable-row span,
+.system-shell.shell-ops .rtable-row span,
+.system-shell.shell-app .rtable-head,
+.system-shell.shell-ops .rtable-head,
+.system-shell.shell-app dt,
+.system-shell.shell-ops dt {
+  color: rgba(190, 226, 210, 0.74) !important;
+}
+
+.system-shell.shell-app button:not(.drawer-close),
+.system-shell.shell-ops button:not(.drawer-close),
+.system-shell.shell-app .btn-sm,
+.system-shell.shell-ops .btn-sm {
+  border-color: rgba(110, 232, 186, 0.24) !important;
+  background: rgba(4, 31, 25, 0.82) !important;
+  color: #c9ffea !important;
+}
+
+.system-shell.shell-app button:not(.drawer-close):hover,
+.system-shell.shell-ops button:not(.drawer-close):hover,
+.system-shell.shell-app .btn-sm:not(:disabled):hover,
+.system-shell.shell-ops .btn-sm:not(:disabled):hover {
+  border-color: rgba(142, 246, 202, 0.48) !important;
+  background: rgba(20, 110, 82, 0.72) !important;
+  color: #effff7 !important;
+}
+
+.system-shell.shell-app .segmented button.active,
+.system-shell.shell-ops .segmented button.active,
+.system-shell.shell-app .work-mode-buttons button.active,
+.system-shell.shell-ops .work-mode-buttons button.active,
+.system-shell.shell-app .query-controls button.active,
+.system-shell.shell-ops .query-controls button.active,
+.system-shell.shell-app .report-card button,
+.system-shell.shell-ops .report-card button,
+.system-shell.shell-app .login-box button,
+.system-shell.shell-ops .login-box button,
+.system-shell.shell-app .batch-stage-actions button:nth-child(2),
+.system-shell.shell-ops .batch-stage-actions button:nth-child(2),
+.system-shell.shell-app .stage-action-strip button:nth-child(2),
+.system-shell.shell-ops .stage-action-strip button:nth-child(2) {
+  border-color: rgba(142, 246, 202, 0.5) !important;
+  background: linear-gradient(180deg, #20e6aa, #0c9f78) !important;
+  color: #021610 !important;
+}
+
+.system-shell.shell-app input,
+.system-shell.shell-ops input,
+.system-shell.shell-app select,
+.system-shell.shell-ops select,
+.system-shell.shell-app textarea,
+.system-shell.shell-ops textarea {
+  border-color: rgba(110, 232, 186, 0.18) !important;
+  background: rgba(2, 20, 17, 0.72) !important;
+  color: var(--twin-text, #effff7) !important;
+}
+
+/* Whole-site shell final precedence. */
+.shell-app .panel-block,
+.shell-app .report-section,
+.shell-app .summary-card,
+.shell-app .delivery-card,
+.shell-app .metric,
+.shell-app .feature-card,
+.shell-app .stage-card,
+.shell-app .rule-card {
+  border-color: rgba(15, 118, 110, 0.16);
+  background: linear-gradient(180deg, rgba(251, 254, 253, 0.96), rgba(241, 248, 245, 0.96));
+  box-shadow: 0 1px 0 rgba(15, 23, 42, 0.04), 0 12px 26px rgba(15, 23, 42, 0.06);
+}
+
+.shell-app .section-title h2,
+.shell-app .report-section h2,
+.shell-app .panel-block h2 {
+  color: var(--app-text, #172033);
+  font-size: 16px;
+}
+
+.shell-app .section-title svg {
+  color: var(--app-primary, #0f766e);
+}
+
+.shell-app .asset-row,
+.shell-app .rtable-row,
+.shell-app .review-grid article,
+.shell-app .threshold-list article,
+.shell-app .suggestion-list article,
+.shell-app .summary-item,
+.shell-app .trace-node,
+.shell-app .recipe-grid article,
+.shell-app .plan-list article {
+  border: 1px solid rgba(15, 118, 110, 0.1);
+  background: rgba(244, 248, 246, 0.92);
+}
+
+.shell-app .asset-row.head,
+.shell-app .rtable-head {
+  background: rgba(15, 118, 110, 0.09);
+  color: var(--app-text-muted, #64748b);
+}
+
+.shell-app .btn-sm,
+.shell-app .batch-stage-actions button,
+.shell-app .stage-action-strip button {
+  border-color: rgba(15, 118, 110, 0.18);
+}
+
+.shell-ops .ops-command-strip,
+.shell-ops .delivery-command-strip {
+  border: 1px solid rgba(110, 232, 186, 0.16);
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgba(6, 39, 32, 0.82), rgba(3, 22, 18, 0.92));
+  box-shadow: inset 0 1px 0 rgba(164, 255, 221, 0.05), 0 14px 30px rgba(2, 12, 10, 0.14);
+}
+
+.shell-ops .ops-command-strip button,
+.shell-ops .delivery-command-strip button {
+  border-color: rgba(110, 232, 186, 0.16);
+  background: rgba(2, 20, 17, 0.52);
+  color: rgba(224, 255, 240, 0.78);
+}
+
+.shell-ops .ops-command-strip button svg,
+.shell-ops .delivery-command-strip button svg {
+  color: #8ef6ca;
+}
+
+.shell-ops .ops-command-strip button span,
+.shell-ops .delivery-command-strip button span {
+  color: rgba(190, 226, 210, 0.72);
+}
+
+.shell-ops .ops-command-strip button strong,
+.shell-ops .delivery-command-strip button strong {
+  color: #effff7;
+}
+
+.shell-ops .ops-command-strip button.active,
+.shell-ops .delivery-command-strip button.active {
+  border-color: rgba(112, 242, 192, 0.42);
+  background: linear-gradient(180deg, rgba(31, 136, 96, 0.42), rgba(8, 55, 42, 0.7));
+}
+
+.shell-ops .panel-block:not(.ops-workbench-shell .panel-block),
+.shell-ops .scene-panel {
+  border-color: rgba(110, 232, 186, 0.16);
+  background: linear-gradient(180deg, rgba(7, 36, 30, 0.84), rgba(3, 20, 17, 0.94));
+  box-shadow: inset 0 1px 0 rgba(164, 255, 221, 0.05), 0 14px 30px rgba(2, 12, 10, 0.16);
+}
+
+.shell-ops .panel-block:not(.ops-workbench-shell .panel-block) .section-title h2 {
+  color: #effff7;
+}
+
+.shell-ops .panel-block:not(.ops-workbench-shell .panel-block) .section-title p,
+.shell-ops .panel-block:not(.ops-workbench-shell .panel-block) p,
+.shell-ops .panel-block:not(.ops-workbench-shell .panel-block) small {
+  color: rgba(190, 226, 210, 0.72);
+}
+
+.shell-ops .asset-row,
+.shell-ops .sensor-list button,
+.shell-ops .mini-table button,
+.shell-ops .attention-point-row button,
+.shell-ops .ops-mini-card,
+.shell-ops .ops-rule-list article,
+.shell-ops .ops-maintenance-card,
+.shell-ops .maintenance-check-list article {
+  border-color: rgba(110, 232, 186, 0.12);
+  background: rgba(2, 20, 17, 0.56);
+  color: #effff7;
+}
+
+/* P0 dark operation layer: daily work and alarm handling only. */
+.ops-workbench-shell {
+  --ops-bg: #031814;
+  --ops-bg-soft: #06251e;
+  --ops-panel: rgba(6, 35, 29, 0.86);
+  --ops-panel-strong: rgba(5, 27, 23, 0.94);
+  --ops-panel-soft: rgba(9, 48, 39, 0.7);
+  --ops-border: rgba(110, 232, 186, 0.18);
+  --ops-border-strong: rgba(132, 255, 211, 0.34);
+  --ops-text: #effff7;
+  --ops-muted: rgba(190, 226, 210, 0.74);
+  --ops-subtle: rgba(151, 190, 172, 0.6);
+  --ops-green: #8ef6ca;
+  --ops-green-strong: #28d69d;
+  --ops-amber: #ffbb63;
+  --ops-red: #ff8375;
+  --ops-blue: #7db7ff;
+  position: relative;
+  isolation: isolate;
+  gap: 14px;
+  margin-top: 12px;
+  padding: 14px;
+  border: 1px solid rgba(110, 232, 186, 0.14);
+  border-radius: 14px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 18% 0%, rgba(94, 255, 197, 0.12), transparent 28%),
+    radial-gradient(circle at 90% 8%, rgba(255, 187, 99, 0.08), transparent 24%),
+    linear-gradient(180deg, #06231d 0%, #031814 46%, #02110e 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(148, 255, 217, 0.05),
+    0 22px 46px rgba(3, 16, 13, 0.18);
+}
+
+.ops-workbench-shell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(rgba(130, 255, 210, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(130, 255, 210, 0.026) 1px, transparent 1px);
+  background-size: 36px 36px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, .72), transparent 78%);
+}
+
+.ops-workbench-shell .eyebrow {
+  color: var(--ops-green);
+  font-size: 12px;
+  letter-spacing: .08em;
+}
+
+.ops-page-header {
+  border-color: var(--ops-border);
+  background:
+    linear-gradient(180deg, rgba(8, 42, 34, 0.88), rgba(4, 24, 20, 0.96));
+  box-shadow:
+    inset 0 1px 0 rgba(164, 255, 221, 0.08),
+    0 14px 32px rgba(2, 12, 10, 0.22);
+}
+
+.ops-page-header h2 {
+  color: var(--ops-text);
+  font-size: 25px;
+}
+
+.ops-page-header p {
+  color: var(--ops-muted);
+}
+
+.ops-workbench-shell .daily-header-stats {
+  max-width: 680px;
+}
+
+.ops-workbench-shell .app-status-chip {
+  border-color: rgba(142, 246, 202, 0.18);
+  background: rgba(8, 42, 34, 0.74);
+  color: var(--ops-green);
+  box-shadow: inset 0 0 0 1px rgba(142, 246, 202, 0.04);
+}
+
+.ops-workbench-shell .app-tag-warning {
+  border-color: rgba(255, 187, 99, 0.28);
+  background: rgba(255, 187, 99, 0.12);
+  color: var(--ops-amber);
+}
+
+.ops-workbench-shell .app-tag-danger {
+  border-color: rgba(255, 131, 117, 0.28);
+  background: rgba(255, 131, 117, 0.12);
+  color: var(--ops-red);
+}
+
+.ops-workbench-shell .app-tag-review {
+  border-color: rgba(125, 183, 255, 0.24);
+  background: rgba(125, 183, 255, 0.1);
+  color: var(--ops-blue);
+}
+
+.ops-workbench-shell .app-tag-processing {
+  border-color: rgba(142, 246, 202, 0.28);
+  background: rgba(142, 246, 202, 0.12);
+  color: var(--ops-green);
+}
+
+.ops-workbench-shell .panel-block,
+.ops-panel,
+.ops-table {
+  border-color: var(--ops-border);
+  background:
+    linear-gradient(180deg, rgba(7, 36, 30, 0.84), rgba(3, 20, 17, 0.94));
+  box-shadow:
+    inset 0 1px 0 rgba(164, 255, 221, 0.06),
+    0 14px 30px rgba(2, 12, 10, 0.18);
+}
+
+.ops-workbench-shell .section-title h2,
+.ops-workbench-shell .app-panel-title h3 {
+  color: var(--ops-text);
+}
+
+.ops-workbench-shell .section-title svg,
+.ops-workbench-shell .app-panel-title svg {
+  color: var(--ops-green);
+}
+
+.ops-workbench-shell .section-title p,
+.ops-workbench-shell .app-panel-title p {
+  color: var(--ops-muted);
+}
+
+.ops-workflow {
+  position: relative;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  padding: 10px;
+  border: 1px solid var(--ops-border);
+  border-radius: 10px;
+  background: rgba(2, 18, 15, 0.58);
+  box-shadow: inset 0 1px 0 rgba(164, 255, 221, 0.05);
+}
+
+.ops-workflow-step {
+  position: relative;
+  min-height: 70px;
+  border-color: rgba(110, 232, 186, 0.14);
+  background: rgba(7, 39, 32, 0.72);
+  box-shadow: inset 0 0 0 1px rgba(142, 246, 202, 0.025);
+}
+
+.ops-workflow-step:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 22px;
+  left: calc(100% - 4px);
+  z-index: 2;
+  width: 16px;
+  height: 1px;
+  background: rgba(142, 246, 202, 0.28);
+}
+
+.ops-workflow-step strong {
+  background: rgba(142, 246, 202, 0.12);
+  color: var(--ops-green);
+}
+
+.ops-workflow-step span {
+  color: var(--ops-text);
+}
+
+.ops-workflow-step small {
+  color: var(--ops-muted);
+}
+
+.ops-workflow-step.done {
+  border-color: rgba(142, 246, 202, 0.32);
+  background: rgba(21, 104, 76, 0.34);
+}
+
+.ops-workflow-step.done strong {
+  background: var(--ops-green-strong);
+  color: #021610;
+}
+
+.ops-workflow-step.active {
+  border-color: rgba(255, 187, 99, 0.46);
+  background: rgba(87, 55, 16, 0.42);
+  box-shadow: 0 0 18px rgba(255, 187, 99, 0.08), inset 0 0 0 1px rgba(255, 187, 99, 0.08);
+}
+
+.ops-workflow-step.active strong {
+  background: var(--ops-amber);
+  color: #1d1003;
+}
+
+.ops-task-card,
+.ops-workbench-shell .grower-task-card {
+  border-color: rgba(110, 232, 186, 0.18);
+  background:
+    linear-gradient(180deg, rgba(8, 43, 35, 0.82), rgba(4, 24, 20, 0.94));
+  box-shadow: inset 0 1px 0 rgba(164, 255, 221, 0.05);
+}
+
+.ops-workbench-shell .grower-task-card.priority-p1 {
+  border-color: rgba(255, 187, 99, 0.45);
+  background:
+    linear-gradient(90deg, rgba(255, 187, 99, 0.12), transparent 34%),
+    linear-gradient(180deg, rgba(8, 43, 35, 0.86), rgba(4, 24, 20, 0.96));
+}
+
+.ops-workbench-shell .grower-task-card.priority-p2 {
+  border-color: rgba(142, 246, 202, 0.28);
+}
+
+.ops-workbench-shell .grower-task-card.priority-p3 {
+  border-color: rgba(142, 246, 202, 0.18);
+}
+
+.ops-workbench-shell .grower-task-card header strong,
+.ops-workbench-shell .ops-task-card header strong {
+  color: var(--ops-text);
+}
+
+.ops-workbench-shell .grower-task-card header small,
+.ops-workbench-shell .task-decision-grid p,
+.ops-workbench-shell .grower-risk-card p,
+.ops-workbench-shell .grower-risk-card span {
+  color: var(--ops-muted);
+}
+
+.ops-workbench-shell .task-priority {
+  min-height: 32px;
+  border: 1px solid rgba(142, 246, 202, 0.22);
+  background: rgba(142, 246, 202, 0.12);
+  color: var(--ops-green);
+}
+
+.ops-workbench-shell .priority-p1 .task-priority {
+  border-color: rgba(255, 187, 99, 0.58);
+  background: var(--ops-amber);
+  color: #1d1003;
+}
+
+.ops-workbench-shell .task-meta-grid span,
+.ops-workbench-shell .task-decision-grid section,
+.ops-workbench-shell .compact-grower-list article,
+.ops-workbench-shell .compact-log-list article {
+  border: 1px solid rgba(110, 232, 186, 0.12);
+  background: rgba(2, 20, 17, 0.54);
+  color: var(--ops-text);
+}
+
+.ops-workbench-shell .task-meta-grid b,
+.ops-workbench-shell .task-decision-grid span,
+.ops-workbench-shell .compact-grower-list span,
+.ops-workbench-shell .compact-grower-list small,
+.ops-workbench-shell .compact-log-list span,
+.ops-workbench-shell .compact-log-list p {
+  color: var(--ops-muted);
+}
+
+.ops-workbench-shell .task-decision-grid svg {
+  color: var(--ops-green);
+}
+
+.ops-risk-card,
+.ops-workbench-shell .grower-risk-card,
+.ops-workbench-shell .alarm-priority-card {
+  border-color: rgba(255, 187, 99, 0.5);
+  background:
+    radial-gradient(circle at 18% 8%, rgba(255, 187, 99, 0.18), transparent 28%),
+    linear-gradient(180deg, rgba(67, 42, 14, 0.74), rgba(13, 18, 15, 0.96));
+  box-shadow:
+    0 0 22px rgba(255, 187, 99, 0.08),
+    inset 0 0 28px rgba(255, 187, 99, 0.08);
+}
+
+.ops-risk-card > strong,
+.ops-workbench-shell .grower-risk-card > strong,
+.ops-workbench-shell .alarm-card-head strong {
+  color: #fff4dc;
+}
+
+.ops-workbench-shell .risk-value-line b,
+.ops-workbench-shell .alarm-primary-value b {
+  color: var(--ops-amber);
+  text-shadow: 0 0 14px rgba(255, 187, 99, 0.22);
+}
+
+.ops-workbench-shell .risk-value-line small,
+.ops-workbench-shell .alarm-primary-value span {
+  color: rgba(255, 231, 190, 0.78);
+}
+
+.ops-workbench-shell .alarm-detail-grid div {
+  border: 1px solid rgba(255, 187, 99, 0.14);
+  background: rgba(20, 18, 12, 0.48);
+}
+
+.ops-workbench-shell .alarm-detail-grid dt {
+  color: rgba(255, 231, 190, 0.65);
+}
+
+.ops-workbench-shell .alarm-detail-grid dd {
+  color: #fff7e8;
+}
+
+.ops-workbench-shell .app-button-primary,
+.ops-workbench-shell button.app-button-primary {
+  border-color: rgba(142, 246, 202, 0.5);
+  background: linear-gradient(180deg, #20e6aa, #0c9f78);
+  color: #021610;
+}
+
+.ops-workbench-shell .app-button-secondary,
+.ops-workbench-shell button.app-button-secondary {
+  border-color: rgba(142, 246, 202, 0.24);
+  background: rgba(4, 31, 25, 0.82);
+  color: #c9ffea;
+}
+
+.ops-workbench-shell .app-button-warning,
+.ops-workbench-shell button.app-button-warning {
+  border-color: rgba(255, 187, 99, 0.58);
+  background: linear-gradient(180deg, #ffc56d, #e89524);
+  color: #1d1003;
+}
+
+.ops-workbench-shell .app-button-primary:hover,
+.ops-workbench-shell .app-button-secondary:hover,
+.ops-workbench-shell .app-button-warning:hover {
+  box-shadow: 0 0 18px rgba(142, 246, 202, 0.12);
+}
+
+.alarm-ops-page .alarm-command-grid {
+  align-items: stretch;
+}
+
+.alarm-ops-page .alarm-workflow-panel {
+  align-content: start;
+}
+
+.alarm-ops-page .alarm-workflow {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  min-height: 146px;
+}
+
+.alarm-ops-page .alarm-queue-panel {
+  overflow: hidden;
+}
+
+.alarm-ops-page .app-table-head,
+.alarm-ops-page .app-table-row {
+  background: rgba(2, 20, 17, 0.56);
+}
+
+.alarm-ops-page .app-table-head {
+  color: var(--ops-muted);
+}
+
+.alarm-ops-page .app-table-row {
+  border-color: rgba(110, 232, 186, 0.1);
+  color: var(--ops-text);
+}
+
+.alarm-ops-page .app-table-row:hover {
+  border-color: var(--ops-border-strong);
+  background: rgba(10, 55, 44, 0.72);
+}
+
+.alarm-ops-page .app-table-row strong {
+  color: var(--ops-text);
+}
+
+.alarm-ops-page .app-table-row span,
+.alarm-ops-page .app-table-row em {
+  color: var(--ops-muted);
+}
+
+.alarm-ops-page .app-table-row em {
+  color: var(--ops-green);
+}
+
+.ops-workbench-shell .inspection-list article strong,
+.ops-workbench-shell .log-list article strong {
+  color: var(--ops-text);
+}
+
+@media (max-width: 1100px) {
+  .ops-workflow,
+  .alarm-ops-page .alarm-workflow {
+    grid-template-columns: 1fr;
+  }
+
+  .ops-workflow-step:not(:last-child)::after {
+    display: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .ops-workbench-shell {
+    padding: 10px;
+    border-radius: 10px;
+  }
+}
+
+/* P0 final overrides: keep high-frequency pages on the product UI vocabulary. */
+.daily-workbench .app-page-header,
+.ops-workbench-layout .app-page-header,
+.alarm-command-grid .app-panel,
+.alarm-queue-panel {
+  border-color: var(--app-border);
+  background: var(--app-surface);
+  box-shadow: var(--app-shadow-card);
+}
+
+.daily-workbench .app-task-card {
+  border-color: var(--app-border);
+  background: var(--app-surface-alt);
+}
+
+.daily-workbench .app-task-card.priority-p1 {
+  border-color: rgba(245, 158, 11, 0.42);
+  background: linear-gradient(180deg, rgba(245, 158, 11, 0.07), var(--app-surface-alt));
+}
+
+.daily-workbench .task-action-row button.app-button-primary,
+.daily-workbench .task-action-row button.app-button-secondary,
+.grower-risk-card button.app-button-warning,
+.alarm-action-buttons button.app-button-primary,
+.alarm-action-buttons button.app-button-secondary,
+.alarm-action-buttons button.app-button-warning {
+  width: fit-content;
+  min-height: 34px;
+  padding: 0 13px;
+  border-radius: var(--app-radius);
+  font-size: var(--app-font-size-sm);
+  font-weight: 800;
+}
+
+.daily-workbench .task-action-row button.app-button-primary,
+.alarm-action-buttons button.app-button-primary {
+  border-color: var(--app-primary);
+  background: var(--app-primary);
+  color: var(--app-surface);
+}
+
+.daily-workbench .task-action-row button.app-button-secondary,
+.alarm-action-buttons button.app-button-secondary {
+  border-color: var(--app-border);
+  background: var(--app-surface);
+  color: var(--app-primary-strong);
+}
+
+.grower-risk-card button.app-button-warning,
+.alarm-action-buttons button.app-button-warning {
+  border-color: rgba(245, 158, 11, 0.5);
+  background: var(--app-state-warning);
+  color: var(--app-button-risk-text);
+}
+
+.daily-workbench .app-status-chip,
+.ops-workbench-layout .app-status-chip {
+  min-height: 26px;
+  line-height: 1;
+}
+
+/* Design token landing: reusable product UI vocabulary for non-home work pages. */
+.app-page {
+  display: grid;
+  gap: 14px;
+  width: min(1600px, 100%);
+  margin: 0 auto;
+  color: var(--app-text);
+  font-family: var(--app-font-family);
+}
+
+.app-page-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius);
+  background: var(--app-surface);
+  box-shadow: var(--app-shadow-card);
+}
+
+.app-page-header h2 {
+  margin: 0;
+  color: var(--app-text);
+  font-size: var(--app-font-size-page-title);
+  line-height: 1.15;
+}
+
+.app-page-header p {
+  margin: 5px 0 0;
+  color: var(--app-text-muted);
+  font-size: var(--app-font-size-md);
+  line-height: 1.5;
+}
+
+.app-panel,
+.app-data-panel {
+  display: grid;
+  gap: 12px;
+  padding: 14px;
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius);
+  background: var(--app-surface);
+  box-shadow: var(--app-shadow-card);
+}
+
+.app-panel-title {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.app-panel-title svg {
+  color: var(--app-primary);
+  flex: 0 0 auto;
+  margin-top: 2px;
+}
+
+.app-panel-title h3 {
+  margin: 0;
+  color: var(--app-text);
+  font-size: var(--app-font-size-lg);
+  line-height: 1.25;
+}
+
+.app-panel-title p {
+  margin: 3px 0 0;
+  color: var(--app-text-muted);
+  font-size: var(--app-font-size-sm);
+  line-height: 1.45;
+}
+
+.app-status-chip,
+.app-tag-normal,
+.app-tag-warning,
+.app-tag-danger,
+.app-tag-review,
+.app-tag-processing,
+.app-tag-done {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  min-height: 26px;
+  padding: 0 10px;
+  border: 1px solid transparent;
+  border-radius: var(--app-radius-pill);
+  background: var(--app-primary-soft);
+  color: var(--app-primary-strong);
+  font-size: var(--app-font-size-sm);
+  font-weight: 800;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.app-status-chip b {
+  margin-right: 6px;
+  color: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  opacity: .72;
+}
+
+.app-tag-normal {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--app-state-normal);
+}
+
+.app-tag-warning {
+  background: rgba(245, 158, 11, 0.12);
+  color: var(--app-state-warning);
+}
+
+.app-tag-danger {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--app-state-danger);
+}
+
+.app-tag-review {
+  background: rgba(37, 99, 235, 0.1);
+  color: var(--app-state-review);
+}
+
+.app-tag-processing {
+  background: rgba(15, 118, 110, 0.11);
+  color: var(--app-state-processing);
+}
+
+.app-tag-done {
+  background: rgba(22, 163, 74, 0.1);
+  color: var(--app-state-done);
+}
+
+.app-task-card,
+.app-risk-card {
+  display: grid;
+  gap: 12px;
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius);
+  background: var(--app-surface-alt);
+  box-shadow: none;
+}
+
+.app-task-card {
+  padding: 14px;
+}
+
+.app-risk-card {
+  padding: 14px;
+  border-color: rgba(245, 158, 11, 0.28);
+  background: linear-gradient(180deg, rgba(245, 158, 11, 0.08), var(--app-surface));
+}
+
+.app-workflow {
+  display: grid;
+  gap: 8px;
+}
+
+.app-workflow-step {
+  display: grid;
+  gap: 4px;
+  min-height: 64px;
+  padding: 10px;
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius);
+  background: var(--app-surface-alt);
+}
+
+.app-workflow-step strong {
+  display: inline-grid;
+  place-items: center;
+  width: 28px;
+  height: 26px;
+  border-radius: var(--app-radius-sm);
+  background: var(--app-primary-soft);
+  color: var(--app-primary-strong);
+  font-size: var(--app-font-size-sm);
+}
+
+.app-workflow-step span {
+  color: var(--app-text);
+  font-size: var(--app-font-size-md);
+  font-weight: 800;
+}
+
+.app-workflow-step small {
+  color: var(--app-text-muted);
+  font-size: var(--app-font-size-sm);
+  line-height: 1.35;
+}
+
+.app-workflow-step.done {
+  border-color: rgba(16, 185, 129, 0.25);
+  background: rgba(16, 185, 129, 0.06);
+}
+
+.app-workflow-step.done strong {
+  background: var(--app-state-done);
+  color: var(--app-surface);
+}
+
+.app-workflow-step.active {
+  border-color: rgba(245, 158, 11, 0.34);
+  background: rgba(245, 158, 11, 0.08);
+}
+
+.app-workflow-step.active strong {
+  background: var(--app-state-warning);
+  color: var(--app-button-risk-text);
+}
+
+.app-button-primary,
+.app-button-secondary,
+.app-button-warning {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  padding: 0 13px;
+  border: 1px solid transparent;
+  border-radius: var(--app-radius);
+  font-size: var(--app-font-size-sm);
+  font-weight: 800;
+  transition: background .15s ease, border-color .15s ease, color .15s ease, transform .15s ease;
+}
+
+.app-button-primary {
+  border-color: var(--app-button-primary-bg);
+  background: var(--app-button-primary-bg);
+  color: var(--app-button-primary-text);
+}
+
+.app-button-secondary {
+  border-color: var(--app-border);
+  background: var(--app-button-secondary-bg);
+  color: var(--app-button-secondary-text);
+}
+
+.app-button-warning {
+  border-color: rgba(245, 158, 11, 0.5);
+  background: var(--app-button-risk-bg);
+  color: var(--app-button-risk-text);
+}
+
+.app-button-primary:hover,
+.app-button-secondary:hover,
+.app-button-warning:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--app-shadow-hover);
+}
+
+.app-table {
+  display: grid;
+  gap: 6px;
+  overflow-x: auto;
+}
+
+.app-table-head,
+.app-table-row {
+  display: grid;
+  grid-template-columns: minmax(150px, 1.25fr) minmax(90px, .7fr) minmax(90px, .7fr) minmax(100px, .8fr) minmax(90px, .7fr) minmax(110px, .8fr) minmax(160px, 1fr) minmax(92px, .7fr);
+  gap: 8px;
+  align-items: center;
+  min-width: 980px;
+  padding: 9px 12px;
+  border-radius: var(--app-radius);
+}
+
+.app-table-head {
+  background: rgba(15, 23, 42, 0.06);
+  color: var(--app-text-muted);
+  font-size: var(--app-font-size-sm);
+  font-weight: 800;
+}
+
+.app-table-row {
+  border: 1px solid transparent;
+  background: var(--app-surface-alt);
+  color: var(--app-text);
+  text-align: left;
+}
+
+.app-table-row:hover {
+  border-color: var(--app-border-strong);
+  background: var(--app-hover);
+}
+
+.app-table-row span,
+.app-table-row em {
+  color: var(--app-text-muted);
+  font-size: var(--app-font-size-sm);
+  font-style: normal;
+  line-height: 1.4;
+}
+
+.app-table-row em {
+  color: var(--app-primary-strong);
+  font-weight: 800;
+}
+
+.daily-header-stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.daily-flow-strip {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.daily-workbench-grid {
+  align-items: start;
+}
+
+.daily-workbench .panel-section-wide:first-child {
+  grid-column: 1;
+}
+
+.task-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.task-meta-grid span {
+  display: grid;
+  gap: 3px;
+  min-height: 48px;
+  padding: 8px 10px;
+  border-radius: var(--app-radius);
+  background: var(--app-surface);
+  color: var(--app-text);
+  font-size: var(--app-font-size-sm);
+}
+
+.task-meta-grid b {
+  color: var(--app-text-muted);
+  font-size: 11px;
+}
+
+.grower-task-card.priority-p1 {
+  border-color: rgba(245, 158, 11, 0.42);
+}
+
+.grower-task-card.priority-p1 .task-priority {
+  background: var(--app-state-warning);
+  color: var(--app-button-risk-text);
+}
+
+.grower-task-card.priority-p2 .task-priority {
+  background: var(--app-primary);
+  color: var(--app-surface);
+}
+
+.grower-task-card.priority-p3 .task-priority {
+  background: var(--app-primary-soft);
+  color: var(--app-primary-strong);
+}
+
+.risk-value-line {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.risk-value-line b,
+.alarm-primary-value b {
+  color: var(--app-state-warning);
+  font-size: 32px;
+  line-height: 1;
+}
+
+.risk-value-line small,
+.alarm-primary-value span {
+  color: var(--app-text-muted);
+  font-size: var(--app-font-size-sm);
+}
+
+.alarm-command-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(360px, .85fr);
+  gap: 14px;
+  align-items: stretch;
+}
+
+.alarm-priority-card {
+  align-content: start;
+}
+
+.alarm-card-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.alarm-card-head strong {
+  color: var(--app-text);
+  font-size: 20px;
+}
+
+.alarm-primary-value {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.alarm-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+}
+
+.alarm-detail-grid div {
+  display: grid;
+  gap: 3px;
+  min-height: 54px;
+  padding: 9px 10px;
+  border-radius: var(--app-radius);
+  background: var(--app-surface);
+}
+
+.alarm-detail-grid dt,
+.alarm-detail-grid dd {
+  margin: 0;
+}
+
+.alarm-detail-grid dt {
+  color: var(--app-text-muted);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.alarm-detail-grid dd {
+  color: var(--app-text);
+  font-size: var(--app-font-size-md);
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.alarm-action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.alarm-workflow {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.alarm-workflow .app-workflow-step {
+  min-height: 98px;
+}
+
+.alarm-queue-row {
+  width: 100%;
+}
+
+@media (max-width: 1100px) {
+  .app-page-header,
+  .alarm-command-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .daily-header-stats {
+    justify-content: flex-start;
+  }
+
+  .daily-flow-strip,
+  .alarm-workflow,
+  .task-meta-grid,
+  .alarm-detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .daily-workbench .panel-section-wide:first-child {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 720px) {
+  .app-page-header,
+  .app-panel,
+  .app-data-panel,
+  .app-task-card,
+  .app-risk-card {
+    padding: 12px;
+  }
+
+  .app-table {
+    overflow: visible;
+  }
+
+  .app-table-head {
+    display: none;
+  }
+
+  .app-table-row {
+    grid-template-columns: 1fr;
+    min-width: 0;
+  }
+}
+
 .grower-workbench {
   width: min(1600px, 100%);
   margin: 14px auto 0;
@@ -5162,4 +7022,518 @@ button.asset-row:hover,
 
 .ops-view-environment .feature-value strong {
   font-size: 28px;
+}
+
+/* P0 dark operation layer final precedence. */
+.ops-workbench-shell.ops-page {
+  background:
+    radial-gradient(circle at 18% 0%, rgba(94, 255, 197, 0.12), transparent 28%),
+    radial-gradient(circle at 90% 8%, rgba(255, 187, 99, 0.08), transparent 24%),
+    linear-gradient(180deg, #06231d 0%, #031814 46%, #02110e 100%);
+}
+
+.ops-workbench-shell .ops-page-header,
+.ops-workbench-shell .panel-block,
+.ops-workbench-shell .ops-panel,
+.ops-workbench-shell .ops-table,
+.ops-workbench-shell .alarm-queue-panel {
+  border-color: rgba(110, 232, 186, 0.18);
+  background: linear-gradient(180deg, rgba(7, 36, 30, 0.88), rgba(3, 20, 17, 0.96));
+  box-shadow: inset 0 1px 0 rgba(164, 255, 221, 0.06), 0 14px 30px rgba(2, 12, 10, 0.18);
+}
+
+.ops-workbench-shell .ops-page-header h2,
+.ops-workbench-shell .panel-section-title h2,
+.ops-workbench-shell .app-panel-title h3,
+.ops-workbench-shell .grower-task-card header strong,
+.ops-workbench-shell .app-table-row strong,
+.ops-workbench-shell .inspection-list article strong,
+.ops-workbench-shell .log-list article strong {
+  color: #effff7;
+}
+
+.ops-workbench-shell .ops-page-header p,
+.ops-workbench-shell .panel-section-title p,
+.ops-workbench-shell .app-panel-title p,
+.ops-workbench-shell .grower-task-card header small,
+.ops-workbench-shell .task-decision-grid p,
+.ops-workbench-shell .task-meta-grid b,
+.ops-workbench-shell .compact-grower-list span,
+.ops-workbench-shell .compact-grower-list small,
+.ops-workbench-shell .compact-log-list span,
+.ops-workbench-shell .compact-log-list p,
+.ops-workbench-shell .app-table-row span {
+  color: rgba(190, 226, 210, 0.74);
+}
+
+.ops-workbench-shell .ops-task-card,
+.ops-workbench-shell .grower-task-card {
+  border-color: rgba(110, 232, 186, 0.18);
+  background: linear-gradient(180deg, rgba(8, 43, 35, 0.82), rgba(4, 24, 20, 0.94));
+}
+
+.ops-workbench-shell .grower-task-card.priority-p1 {
+  border-color: rgba(255, 187, 99, 0.45);
+  background:
+    linear-gradient(90deg, rgba(255, 187, 99, 0.12), transparent 34%),
+    linear-gradient(180deg, rgba(8, 43, 35, 0.86), rgba(4, 24, 20, 0.96));
+}
+
+.ops-workbench-shell .task-meta-grid span,
+.ops-workbench-shell .task-decision-grid section,
+.ops-workbench-shell .compact-grower-list article,
+.ops-workbench-shell .compact-log-list article,
+.ops-workbench-shell .app-table-head,
+.ops-workbench-shell .app-table-row {
+  border-color: rgba(110, 232, 186, 0.12);
+  background: rgba(2, 20, 17, 0.56);
+}
+
+.ops-workbench-shell .ops-risk-card,
+.ops-workbench-shell .grower-risk-card,
+.ops-workbench-shell .alarm-priority-card {
+  border-color: rgba(255, 187, 99, 0.5);
+  background:
+    radial-gradient(circle at 18% 8%, rgba(255, 187, 99, 0.18), transparent 28%),
+    linear-gradient(180deg, rgba(67, 42, 14, 0.74), rgba(13, 18, 15, 0.96));
+  box-shadow: 0 0 22px rgba(255, 187, 99, 0.08), inset 0 0 28px rgba(255, 187, 99, 0.08);
+}
+
+.ops-workbench-shell .ops-risk-card > strong,
+.ops-workbench-shell .grower-risk-card > strong,
+.ops-workbench-shell .alarm-card-head strong {
+  color: #fff4dc;
+}
+
+.ops-workbench-shell .risk-value-line b,
+.ops-workbench-shell .alarm-primary-value b {
+  color: #ffbb63;
+}
+
+.ops-workbench-shell .app-button-primary,
+.ops-workbench-shell button.app-button-primary {
+  border-color: rgba(142, 246, 202, 0.5);
+  background: linear-gradient(180deg, #20e6aa, #0c9f78);
+  color: #021610;
+}
+
+.ops-workbench-shell .app-button-secondary,
+.ops-workbench-shell button.app-button-secondary {
+  border-color: rgba(142, 246, 202, 0.24);
+  background: rgba(4, 31, 25, 0.82);
+  color: #c9ffea;
+}
+
+.ops-workbench-shell .app-button-warning,
+.ops-workbench-shell button.app-button-warning {
+  border-color: rgba(255, 187, 99, 0.58);
+  background: linear-gradient(180deg, #ffc56d, #e89524);
+  color: #1d1003;
+}
+
+/* FINAL OVERRIDE: deep-green skin for every non-home page.
+   Must remain at EOF because earlier legacy blocks repeatedly reset cards to white. */
+.system-shell:not(.overview-mode).shell-app,
+.system-shell:not(.overview-mode).shell-ops {
+  background:
+    radial-gradient(circle at 14% 0%, rgba(94, 255, 197, 0.16), transparent 28%),
+    radial-gradient(circle at 86% 8%, rgba(255, 187, 99, 0.08), transparent 24%),
+    linear-gradient(180deg, #061c16 0%, #08261f 42%, #041511 100%) !important;
+  color: var(--twin-text, #effff7) !important;
+}
+
+.system-shell:not(.overview-mode).shell-app .section-content,
+.system-shell:not(.overview-mode).shell-ops .section-content,
+.system-shell:not(.overview-mode).shell-app .system-section,
+.system-shell:not(.overview-mode).shell-ops .system-section,
+.system-shell:not(.overview-mode).shell-app .module-grid,
+.system-shell:not(.overview-mode).shell-ops .module-grid {
+  color: var(--twin-text, #effff7) !important;
+}
+
+.system-shell:not(.overview-mode).shell-app .panel-block,
+.system-shell:not(.overview-mode).shell-ops .panel-block,
+.system-shell:not(.overview-mode).shell-app .scene-panel,
+.system-shell:not(.overview-mode).shell-ops .scene-panel,
+.system-shell:not(.overview-mode).shell-app .metric,
+.system-shell:not(.overview-mode).shell-ops .metric,
+.system-shell:not(.overview-mode).shell-app .report-delivery-center,
+.system-shell:not(.overview-mode).shell-ops .report-delivery-center,
+.system-shell:not(.overview-mode).shell-app .report-section,
+.system-shell:not(.overview-mode).shell-ops .report-section,
+.system-shell:not(.overview-mode).shell-app .summary-card,
+.system-shell:not(.overview-mode).shell-ops .summary-card,
+.system-shell:not(.overview-mode).shell-app .delivery-card,
+.system-shell:not(.overview-mode).shell-ops .delivery-card,
+.system-shell:not(.overview-mode).shell-app .feature-card,
+.system-shell:not(.overview-mode).shell-ops .feature-card,
+.system-shell:not(.overview-mode).shell-app .stage-card,
+.system-shell:not(.overview-mode).shell-ops .stage-card,
+.system-shell:not(.overview-mode).shell-app .rule-card,
+.system-shell:not(.overview-mode).shell-ops .rule-card,
+.system-shell:not(.overview-mode).shell-app .overview-state-panel,
+.system-shell:not(.overview-mode).shell-ops .overview-state-panel,
+.system-shell:not(.overview-mode).shell-app .overview-quick-panel,
+.system-shell:not(.overview-mode).shell-ops .overview-quick-panel,
+.system-shell:not(.overview-mode).shell-app .overview-demo-panel,
+.system-shell:not(.overview-mode).shell-ops .overview-demo-panel,
+.system-shell:not(.overview-mode).shell-app .batch-production-board,
+.system-shell:not(.overview-mode).shell-ops .batch-production-board,
+.system-shell:not(.overview-mode).shell-app .delivery-package-board,
+.system-shell:not(.overview-mode).shell-ops .delivery-package-board,
+.system-shell:not(.overview-mode).shell-app .alarm-inline-workbench,
+.system-shell:not(.overview-mode).shell-ops .alarm-inline-workbench,
+.system-shell:not(.overview-mode).shell-app .environment-monitor-table,
+.system-shell:not(.overview-mode).shell-ops .environment-monitor-table {
+  border-color: rgba(110, 232, 186, 0.18) !important;
+  background:
+    linear-gradient(180deg, rgba(7, 36, 30, 0.86), rgba(3, 20, 17, 0.94)) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(164, 255, 221, 0.05),
+    0 14px 30px rgba(2, 12, 10, 0.16) !important;
+}
+
+.system-shell:not(.overview-mode).shell-app .metric,
+.system-shell:not(.overview-mode).shell-ops .metric,
+.system-shell:not(.overview-mode).shell-app .stage-status-grid > div,
+.system-shell:not(.overview-mode).shell-ops .stage-status-grid > div,
+.system-shell:not(.overview-mode).shell-app .production-summary-grid article,
+.system-shell:not(.overview-mode).shell-ops .production-summary-grid article,
+.system-shell:not(.overview-mode).shell-app .handover-grid article,
+.system-shell:not(.overview-mode).shell-ops .handover-grid article,
+.system-shell:not(.overview-mode).shell-app .review-grid article,
+.system-shell:not(.overview-mode).shell-ops .review-grid article,
+.system-shell:not(.overview-mode).shell-app .threshold-list article,
+.system-shell:not(.overview-mode).shell-ops .threshold-list article,
+.system-shell:not(.overview-mode).shell-app .api-list article,
+.system-shell:not(.overview-mode).shell-ops .api-list article,
+.system-shell:not(.overview-mode).shell-app .history-list article,
+.system-shell:not(.overview-mode).shell-ops .history-list article,
+.system-shell:not(.overview-mode).shell-app .plan-list article,
+.system-shell:not(.overview-mode).shell-ops .plan-list article,
+.system-shell:not(.overview-mode).shell-app .chain-list article,
+.system-shell:not(.overview-mode).shell-ops .chain-list article,
+.system-shell:not(.overview-mode).shell-app .response-grid article,
+.system-shell:not(.overview-mode).shell-ops .response-grid article,
+.system-shell:not(.overview-mode).shell-app .help-grid article,
+.system-shell:not(.overview-mode).shell-ops .help-grid article,
+.system-shell:not(.overview-mode).shell-app .drill-grid article,
+.system-shell:not(.overview-mode).shell-ops .drill-grid article,
+.system-shell:not(.overview-mode).shell-app .search-results article,
+.system-shell:not(.overview-mode).shell-ops .search-results article,
+.system-shell:not(.overview-mode).shell-app .point-profile article,
+.system-shell:not(.overview-mode).shell-ops .point-profile article,
+.system-shell:not(.overview-mode).shell-app .delivery-grid article,
+.system-shell:not(.overview-mode).shell-ops .delivery-grid article,
+.system-shell:not(.overview-mode).shell-app .recipe-grid article,
+.system-shell:not(.overview-mode).shell-ops .recipe-grid article,
+.system-shell:not(.overview-mode).shell-app .demo-card,
+.system-shell:not(.overview-mode).shell-ops .demo-card,
+.system-shell:not(.overview-mode).shell-app .asset-row,
+.system-shell:not(.overview-mode).shell-ops .asset-row,
+.system-shell:not(.overview-mode).shell-app .device-row,
+.system-shell:not(.overview-mode).shell-ops .device-row,
+.system-shell:not(.overview-mode).shell-app .sensor-list button,
+.system-shell:not(.overview-mode).shell-ops .sensor-list button,
+.system-shell:not(.overview-mode).shell-app .action-list span,
+.system-shell:not(.overview-mode).shell-ops .action-list span,
+.system-shell:not(.overview-mode).shell-app .process-list span,
+.system-shell:not(.overview-mode).shell-ops .process-list span,
+.system-shell:not(.overview-mode).shell-app .growth-state span,
+.system-shell:not(.overview-mode).shell-ops .growth-state span,
+.system-shell:not(.overview-mode).shell-app .summary-item,
+.system-shell:not(.overview-mode).shell-ops .summary-item,
+.system-shell:not(.overview-mode).shell-app .trace-node,
+.system-shell:not(.overview-mode).shell-ops .trace-node,
+.system-shell:not(.overview-mode).shell-app .batch-metrics article,
+.system-shell:not(.overview-mode).shell-ops .batch-metrics article,
+.system-shell:not(.overview-mode).shell-app .correlation-grid article,
+.system-shell:not(.overview-mode).shell-ops .correlation-grid article,
+.system-shell:not(.overview-mode).shell-app .lifecycle-step,
+.system-shell:not(.overview-mode).shell-ops .lifecycle-step,
+.system-shell:not(.overview-mode).shell-app .stage-line,
+.system-shell:not(.overview-mode).shell-ops .stage-line,
+.system-shell:not(.overview-mode).shell-app .feature-value,
+.system-shell:not(.overview-mode).shell-ops .feature-value,
+.system-shell:not(.overview-mode).shell-app .batch-health-metrics,
+.system-shell:not(.overview-mode).shell-ops .batch-health-metrics,
+.system-shell:not(.overview-mode).shell-app .batch-health-metrics div,
+.system-shell:not(.overview-mode).shell-ops .batch-health-metrics div,
+.system-shell:not(.overview-mode).shell-app .duty-focus,
+.system-shell:not(.overview-mode).shell-ops .duty-focus,
+.system-shell:not(.overview-mode).shell-app .handover-note,
+.system-shell:not(.overview-mode).shell-ops .handover-note,
+.system-shell:not(.overview-mode).shell-app .growth-state strong,
+.system-shell:not(.overview-mode).shell-ops .growth-state strong,
+.system-shell:not(.overview-mode).shell-app .trace-chain span,
+.system-shell:not(.overview-mode).shell-ops .trace-chain span,
+.system-shell:not(.overview-mode).shell-app .demo-state,
+.system-shell:not(.overview-mode).shell-ops .demo-state,
+.system-shell:not(.overview-mode).shell-app .rtable-row,
+.system-shell:not(.overview-mode).shell-ops .rtable-row,
+.system-shell:not(.overview-mode).shell-app .rtable-head,
+.system-shell:not(.overview-mode).shell-ops .rtable-head,
+.system-shell:not(.overview-mode).shell-app .app-table-row,
+.system-shell:not(.overview-mode).shell-ops .app-table-row,
+.system-shell:not(.overview-mode).shell-app .app-table-head,
+.system-shell:not(.overview-mode).shell-ops .app-table-head {
+  border-color: rgba(110, 232, 186, 0.12) !important;
+  background: rgba(2, 20, 17, 0.56) !important;
+  color: rgba(239, 255, 247, 0.9) !important;
+}
+
+.system-shell:not(.overview-mode).shell-app h1,
+.system-shell:not(.overview-mode).shell-ops h1,
+.system-shell:not(.overview-mode).shell-app h2,
+.system-shell:not(.overview-mode).shell-ops h2,
+.system-shell:not(.overview-mode).shell-app h3,
+.system-shell:not(.overview-mode).shell-ops h3,
+.system-shell:not(.overview-mode).shell-app strong,
+.system-shell:not(.overview-mode).shell-ops strong,
+.system-shell:not(.overview-mode).shell-app dd,
+.system-shell:not(.overview-mode).shell-ops dd {
+  color: var(--twin-text, #effff7) !important;
+}
+
+.system-shell:not(.overview-mode).shell-app p,
+.system-shell:not(.overview-mode).shell-ops p,
+.system-shell:not(.overview-mode).shell-app small,
+.system-shell:not(.overview-mode).shell-ops small,
+.system-shell:not(.overview-mode).shell-app span,
+.system-shell:not(.overview-mode).shell-ops span,
+.system-shell:not(.overview-mode).shell-app dt,
+.system-shell:not(.overview-mode).shell-ops dt,
+.system-shell:not(.overview-mode).shell-app .muted,
+.system-shell:not(.overview-mode).shell-ops .muted {
+  color: rgba(190, 226, 210, 0.74) !important;
+}
+
+.system-shell:not(.overview-mode).shell-app .section-title svg,
+.system-shell:not(.overview-mode).shell-ops .section-title svg,
+.system-shell:not(.overview-mode).shell-app .metric svg,
+.system-shell:not(.overview-mode).shell-ops .metric svg,
+.system-shell:not(.overview-mode).shell-app .text-good,
+.system-shell:not(.overview-mode).shell-ops .text-good,
+.system-shell:not(.overview-mode).shell-app .text-ok,
+.system-shell:not(.overview-mode).shell-ops .text-ok {
+  color: var(--twin-normal, #8ef6ca) !important;
+}
+
+.system-shell:not(.overview-mode).shell-app .text-warn,
+.system-shell:not(.overview-mode).shell-ops .text-warn,
+.system-shell:not(.overview-mode).shell-app .warning,
+.system-shell:not(.overview-mode).shell-ops .warning {
+  color: var(--twin-warning, #ffbb63) !important;
+}
+
+.system-shell:not(.overview-mode).shell-app button:not(.drawer-close),
+.system-shell:not(.overview-mode).shell-ops button:not(.drawer-close),
+.system-shell:not(.overview-mode).shell-app .btn-sm,
+.system-shell:not(.overview-mode).shell-ops .btn-sm {
+  border-color: rgba(110, 232, 186, 0.24) !important;
+  background: rgba(4, 31, 25, 0.82) !important;
+  color: #c9ffea !important;
+}
+
+.system-shell:not(.overview-mode).shell-app button:not(.drawer-close):hover,
+.system-shell:not(.overview-mode).shell-ops button:not(.drawer-close):hover,
+.system-shell:not(.overview-mode).shell-app .btn-sm:not(:disabled):hover,
+.system-shell:not(.overview-mode).shell-ops .btn-sm:not(:disabled):hover {
+  border-color: rgba(142, 246, 202, 0.48) !important;
+  background: rgba(20, 110, 82, 0.72) !important;
+  color: #effff7 !important;
+}
+
+.system-shell:not(.overview-mode).shell-app .segmented button.active,
+.system-shell:not(.overview-mode).shell-ops .segmented button.active,
+.system-shell:not(.overview-mode).shell-app .work-mode-buttons button.active,
+.system-shell:not(.overview-mode).shell-ops .work-mode-buttons button.active,
+.system-shell:not(.overview-mode).shell-app .query-controls button.active,
+.system-shell:not(.overview-mode).shell-ops .query-controls button.active,
+.system-shell:not(.overview-mode).shell-app .report-card button,
+.system-shell:not(.overview-mode).shell-ops .report-card button,
+.system-shell:not(.overview-mode).shell-app .login-box button,
+.system-shell:not(.overview-mode).shell-ops .login-box button,
+.system-shell:not(.overview-mode).shell-app .batch-stage-actions button:nth-child(2),
+.system-shell:not(.overview-mode).shell-ops .batch-stage-actions button:nth-child(2),
+.system-shell:not(.overview-mode).shell-app .stage-action-strip button:nth-child(2),
+.system-shell:not(.overview-mode).shell-ops .stage-action-strip button:nth-child(2) {
+  border-color: rgba(142, 246, 202, 0.5) !important;
+  background: linear-gradient(180deg, #20e6aa, #0c9f78) !important;
+  color: #021610 !important;
+}
+
+/* FINAL PATCH: operation-page local cards that are not covered by shared panel classes. */
+.system-shell:not(.overview-mode).shell-ops .environment-action-card article,
+.system-shell:not(.overview-mode).shell-app .environment-action-card article,
+.system-shell:not(.overview-mode).shell-ops .environment-next-action,
+.system-shell:not(.overview-mode).shell-app .environment-next-action,
+.system-shell:not(.overview-mode).shell-ops .ops-alert-summary article,
+.system-shell:not(.overview-mode).shell-app .ops-alert-summary article,
+.system-shell:not(.overview-mode).shell-ops .ops-mini-card,
+.system-shell:not(.overview-mode).shell-app .ops-mini-card,
+.system-shell:not(.overview-mode).shell-ops .ops-rule-list article,
+.system-shell:not(.overview-mode).shell-app .ops-rule-list article,
+.system-shell:not(.overview-mode).shell-ops .ops-maintenance-card,
+.system-shell:not(.overview-mode).shell-app .ops-maintenance-card,
+.system-shell:not(.overview-mode).shell-ops .maintenance-check-list article,
+.system-shell:not(.overview-mode).shell-app .maintenance-check-list article,
+.system-shell:not(.overview-mode).shell-ops .attention-point-row button,
+.system-shell:not(.overview-mode).shell-app .attention-point-row button,
+.system-shell:not(.overview-mode).shell-ops .mini-table button,
+.system-shell:not(.overview-mode).shell-app .mini-table button,
+.system-shell:not(.overview-mode).shell-ops .point-type-strip button,
+.system-shell:not(.overview-mode).shell-app .point-type-strip button,
+.system-shell:not(.overview-mode).shell-ops .point-filter-bar,
+.system-shell:not(.overview-mode).shell-app .point-filter-bar {
+  border-color: rgba(110, 232, 186, 0.14) !important;
+  background: rgba(2, 20, 17, 0.58) !important;
+  color: rgba(239, 255, 247, 0.9) !important;
+  box-shadow: inset 0 1px 0 rgba(164, 255, 221, 0.04) !important;
+}
+
+.system-shell:not(.overview-mode).shell-ops .environment-action-card article span,
+.system-shell:not(.overview-mode).shell-app .environment-action-card article span,
+.system-shell:not(.overview-mode).shell-ops .ops-alert-summary span,
+.system-shell:not(.overview-mode).shell-app .ops-alert-summary span,
+.system-shell:not(.overview-mode).shell-ops .ops-mini-card span,
+.system-shell:not(.overview-mode).shell-app .ops-mini-card span,
+.system-shell:not(.overview-mode).shell-ops .attention-point-row span,
+.system-shell:not(.overview-mode).shell-app .attention-point-row span,
+.system-shell:not(.overview-mode).shell-ops .mini-table span,
+.system-shell:not(.overview-mode).shell-app .mini-table span,
+.system-shell:not(.overview-mode).shell-ops .point-type-strip span,
+.system-shell:not(.overview-mode).shell-app .point-type-strip span,
+.system-shell:not(.overview-mode).shell-ops .point-type-strip small,
+.system-shell:not(.overview-mode).shell-app .point-type-strip small {
+  color: rgba(190, 226, 210, 0.74) !important;
+}
+
+.system-shell:not(.overview-mode).shell-ops .environment-action-card article strong,
+.system-shell:not(.overview-mode).shell-app .environment-action-card article strong,
+.system-shell:not(.overview-mode).shell-ops .ops-alert-summary strong,
+.system-shell:not(.overview-mode).shell-app .ops-alert-summary strong,
+.system-shell:not(.overview-mode).shell-ops .ops-mini-card strong,
+.system-shell:not(.overview-mode).shell-app .ops-mini-card strong,
+.system-shell:not(.overview-mode).shell-ops .attention-point-row strong,
+.system-shell:not(.overview-mode).shell-app .attention-point-row strong,
+.system-shell:not(.overview-mode).shell-ops .mini-table strong,
+.system-shell:not(.overview-mode).shell-app .mini-table strong,
+.system-shell:not(.overview-mode).shell-ops .point-type-strip strong,
+.system-shell:not(.overview-mode).shell-app .point-type-strip strong {
+  color: var(--twin-text, #effff7) !important;
+}
+
+/* SYSTEM SKIN FINAL LOCK: non-home pages must share the approved twin-green visual language. */
+.system-shell:not(.overview-mode) .system-twin-content {
+  color: var(--twin-text, #effff7);
+}
+
+.system-shell:not(.overview-mode) .app-workflow,
+.system-shell:not(.overview-mode) .ops-workflow {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(110, 232, 186, 0.14);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgba(2, 24, 20, 0.5), rgba(2, 15, 13, 0.66)),
+    repeating-linear-gradient(90deg, rgba(110, 232, 186, 0.035) 0 1px, transparent 1px 72px);
+}
+
+.system-shell:not(.overview-mode) .app-workflow-step,
+.system-shell:not(.overview-mode) .ops-workflow-step,
+.system-shell:not(.overview-mode) .app-workflow-step.pending,
+.system-shell:not(.overview-mode) .ops-workflow-step.pending {
+  border-color: rgba(110, 232, 186, 0.14) !important;
+  background:
+    linear-gradient(180deg, rgba(7, 36, 30, 0.72), rgba(3, 20, 17, 0.88)) !important;
+  color: var(--twin-text, #effff7) !important;
+  box-shadow: inset 0 1px 0 rgba(164, 255, 221, 0.04) !important;
+}
+
+.system-shell:not(.overview-mode) .app-workflow-step.done,
+.system-shell:not(.overview-mode) .ops-workflow-step.done {
+  border-color: rgba(142, 246, 202, 0.28) !important;
+  background:
+    linear-gradient(180deg, rgba(15, 88, 65, 0.66), rgba(3, 24, 19, 0.88)) !important;
+}
+
+.system-shell:not(.overview-mode) .app-workflow-step.active,
+.system-shell:not(.overview-mode) .ops-workflow-step.active {
+  border-color: rgba(255, 187, 99, 0.48) !important;
+  background:
+    radial-gradient(circle at 18% 8%, rgba(255, 187, 99, 0.16), transparent 30%),
+    linear-gradient(180deg, rgba(78, 50, 15, 0.72), rgba(3, 24, 19, 0.9)) !important;
+}
+
+.system-shell:not(.overview-mode) .app-workflow-step strong,
+.system-shell:not(.overview-mode) .ops-workflow-step strong {
+  border: 1px solid rgba(142, 246, 202, 0.2) !important;
+  background: rgba(0, 245, 178, 0.12) !important;
+  color: var(--twin-normal, #8ef6ca) !important;
+}
+
+.system-shell:not(.overview-mode) .app-workflow-step.done strong,
+.system-shell:not(.overview-mode) .ops-workflow-step.done strong {
+  border-color: rgba(142, 246, 202, 0.5) !important;
+  background: linear-gradient(180deg, #20e6aa, #0c9f78) !important;
+  color: #021610 !important;
+}
+
+.system-shell:not(.overview-mode) .app-workflow-step.active strong,
+.system-shell:not(.overview-mode) .ops-workflow-step.active strong {
+  border-color: rgba(255, 187, 99, 0.58) !important;
+  background: linear-gradient(180deg, #ffc56d, #e89524) !important;
+  color: #1d1003 !important;
+}
+
+.system-shell:not(.overview-mode) .app-workflow-step span,
+.system-shell:not(.overview-mode) .ops-workflow-step span {
+  color: var(--twin-text, #effff7) !important;
+}
+
+.system-shell:not(.overview-mode) .app-workflow-step small,
+.system-shell:not(.overview-mode) .ops-workflow-step small {
+  color: rgba(190, 226, 210, 0.74) !important;
+}
+
+.system-shell:not(.overview-mode) .batch-command-hero {
+  border-color: rgba(110, 232, 186, 0.18) !important;
+  background:
+    radial-gradient(circle at 18% 0%, rgba(0, 245, 178, 0.08), transparent 30%),
+    linear-gradient(180deg, rgba(7, 36, 30, 0.86), rgba(3, 20, 17, 0.94)) !important;
+}
+
+.system-shell:not(.overview-mode) .batch-command-hero > div,
+.system-shell:not(.overview-mode) .batch-stage-actions,
+.system-shell:not(.overview-mode) .stage-action-strip,
+.system-shell:not(.overview-mode) .overview-focus-panel,
+.system-shell:not(.overview-mode) .overview-focus-panel > div,
+.system-shell:not(.overview-mode) .focus-kpi-grid div,
+.system-shell:not(.overview-mode) .compact-action-stack span,
+.system-shell:not(.overview-mode) .compact-alarm-stack article {
+  border-color: rgba(110, 232, 186, 0.13) !important;
+  background: rgba(2, 20, 17, 0.58) !important;
+  color: rgba(239, 255, 247, 0.9) !important;
+  box-shadow: inset 0 1px 0 rgba(164, 255, 221, 0.04) !important;
+}
+
+.system-shell:not(.overview-mode) .batch-command-hero > div span,
+.system-shell:not(.overview-mode) .batch-command-hero > div small,
+.system-shell:not(.overview-mode) .overview-focus-panel span,
+.system-shell:not(.overview-mode) .overview-focus-panel small {
+  color: rgba(190, 226, 210, 0.74) !important;
+}
+
+.system-shell:not(.overview-mode) .batch-command-hero > div strong,
+.system-shell:not(.overview-mode) .overview-focus-panel strong {
+  color: var(--twin-text, #effff7) !important;
+}
+
+.system-shell:not(.overview-mode) .system-twin-content [style*="background: var(--surface)"],
+.system-shell:not(.overview-mode) .system-twin-content [style*="background:var(--surface)"],
+.system-shell:not(.overview-mode) .system-twin-content [style*="background: #fff"],
+.system-shell:not(.overview-mode) .system-twin-content [style*="background:#fff"] {
+  background: rgba(2, 20, 17, 0.58) !important;
+  color: var(--twin-text, #effff7) !important;
 }
