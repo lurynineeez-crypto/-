@@ -1,0 +1,164 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-panel: var(--panel);
+  --color-panel-border: var(--panel-border);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-accent-green: var(--accent-green);
+  --color-accent-amber: var(--accent-amber);
+  --color-accent-red: var(--accent-red);
+  --color-accent-cyan: var(--accent-cyan);
+  --color-border: var(--panel-border);
+  --color-ring: var(--accent-green);
+  --font-display: "Orbitron", "Noto Sans SC", sans-serif;
+}
+
+:root {
+  --radius: 0.5rem;
+  --background: oklch(0.18 0.04 175);
+  --bg-deep: oklch(0.13 0.035 180);
+  --bg-mid: oklch(0.20 0.045 175);
+  --foreground: oklch(0.96 0.02 160);
+  --muted: oklch(0.28 0.035 180);
+  --muted-foreground: oklch(0.72 0.04 170);
+  --panel: oklch(0.22 0.04 180 / 0.65);
+  --panel-strong: oklch(0.20 0.045 178 / 0.85);
+  --panel-border: oklch(0.62 0.16 160 / 0.45);
+  --panel-border-strong: oklch(0.72 0.18 160 / 0.7);
+  --primary: oklch(0.78 0.18 160);
+  --primary-foreground: oklch(0.12 0.03 175);
+  --accent-green: oklch(0.80 0.20 158);
+  --accent-green-soft: oklch(0.62 0.15 160);
+  --accent-amber: oklch(0.80 0.17 70);
+  --accent-amber-soft: oklch(0.65 0.15 65);
+  --accent-red: oklch(0.68 0.22 25);
+  --accent-cyan: oklch(0.82 0.13 200);
+  --grid-line: oklch(0.55 0.14 165 / 0.08);
+
+  --gradient-panel: linear-gradient(
+    180deg,
+    oklch(0.25 0.05 178 / 0.75) 0%,
+    oklch(0.16 0.04 180 / 0.78) 100%
+  );
+  --gradient-panel-amber: linear-gradient(
+    180deg,
+    oklch(0.40 0.12 70 / 0.45) 0%,
+    oklch(0.22 0.07 70 / 0.55) 100%
+  );
+  --gradient-header: linear-gradient(
+    180deg,
+    oklch(0.22 0.045 178 / 0.92) 0%,
+    oklch(0.14 0.035 180 / 0.92) 100%
+  );
+
+  --glow-green: 0 0 24px oklch(0.78 0.2 160 / 0.35),
+    inset 0 0 0 1px oklch(0.78 0.2 160 / 0.25);
+  --glow-amber: 0 0 28px oklch(0.78 0.18 70 / 0.45),
+    inset 0 0 0 1px oklch(0.78 0.18 70 / 0.4);
+  --shadow-panel: 0 8px 30px oklch(0 0 0 / 0.35),
+    inset 0 1px 0 oklch(0.85 0.15 160 / 0.08);
+}
+
+@layer base {
+  * {
+    border-color: var(--panel-border);
+  }
+  html,
+  body {
+    background: var(--bg-deep);
+    color: var(--foreground);
+    font-family:
+      "Inter",
+      "Noto Sans SC",
+      ui-sans-serif,
+      system-ui,
+      -apple-system,
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    background:
+      radial-gradient(
+        ellipse 80% 60% at 50% 0%,
+        oklch(0.28 0.07 165 / 0.35),
+        transparent 60%
+      ),
+      radial-gradient(
+        ellipse 60% 50% at 50% 100%,
+        oklch(0.24 0.06 170 / 0.3),
+        transparent 60%
+      ),
+      linear-gradient(180deg, oklch(0.12 0.03 180), oklch(0.10 0.025 185));
+    background-attachment: fixed;
+  }
+}
+
+@utility panel {
+  position: relative;
+  background: var(--gradient-panel);
+  border: 1px solid var(--panel-border);
+  border-radius: 12px;
+  box-shadow:
+    0 12px 40px oklch(0 0 0 / 0.5),
+    inset 0 1px 0 oklch(0.88 0.18 160 / 0.14),
+    inset 0 -1px 0 oklch(0 0 0 / 0.3),
+    inset 0 0 36px oklch(0.13 0.04 180 / 0.6),
+    0 0 28px oklch(0.55 0.16 160 / 0.12);
+  backdrop-filter: blur(10px);
+}
+@utility panel-amber {
+  background: var(--gradient-panel-amber);
+  border-color: oklch(0.72 0.16 70 / 0.65);
+  box-shadow:
+    0 12px 38px oklch(0.35 0.1 60 / 0.45),
+    inset 0 1px 0 oklch(0.88 0.18 70 / 0.26),
+    inset 0 -1px 0 oklch(0 0 0 / 0.28),
+    inset 0 0 44px oklch(0.55 0.16 65 / 0.2),
+    0 0 30px oklch(0.7 0.16 70 / 0.24);
+}
+@utility corner-frame {
+  position: relative;
+}
+@utility grid-bg {
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+@utility stage-bg {
+  background:
+    radial-gradient(ellipse 60% 45% at 50% 55%, oklch(0.30 0.10 165 / 0.50), transparent 70%),
+    radial-gradient(ellipse 95% 80% at 50% 100%, oklch(0.18 0.055 170 / 0.55), transparent 70%),
+    radial-gradient(ellipse 120% 100% at 50% 0%, oklch(0.16 0.045 178 / 0.4), transparent 60%),
+    linear-gradient(180deg, oklch(0.09 0.025 185) 0%, oklch(0.06 0.018 190) 100%);
+}
+@utility title-rule {
+  background: linear-gradient(90deg, oklch(0.78 0.18 160 / 0.55), oklch(0.6 0.14 160 / 0.12) 60%, transparent);
+  height: 1px;
+}
+@utility text-glow-green {
+  text-shadow: 0 0 12px oklch(0.78 0.2 160 / 0.55);
+}
+@utility text-glow-amber {
+  text-shadow: 0 0 14px oklch(0.8 0.18 70 / 0.6);
+}
+@utility text-glow-red {
+  text-shadow: 0 0 14px oklch(0.7 0.22 25 / 0.65);
+}
+@utility chip-divider {
+  background: linear-gradient(180deg, transparent, oklch(0.6 0.14 160 / 0.45), transparent);
+  width: 1px;
+}

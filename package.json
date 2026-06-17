@@ -1,0 +1,18 @@
+{
+  "name": "plant-cabin-visualization-prototype",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Smart planting cabin visualization prototype with Vue 3, Three.js, ECharts, NestJS and WebSocket mock telemetry.",
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "install:all": "npm install",
+    "dev": "npm run dev --workspace backend",
+    "dev:backend": "npm run dev --workspace backend",
+    "dev:frontend": "npm run dev --workspace frontend",
+    "build": "npm run build --workspace backend && npm run build --workspace frontend",
+    "typecheck": "npm run typecheck --workspace frontend && npm run typecheck --workspace backend"
+  }
+}
