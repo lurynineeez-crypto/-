@@ -46,8 +46,7 @@ export type ViewKey =
   | 'strategy'
   | 'acceptance'
   | 'presentation'
-  | 'alarms'
-  | 'maintenance';
+  | 'alarms';
 
 export type RoleKey = 'manager' | 'grower' | 'operator' | 'visitor';
 

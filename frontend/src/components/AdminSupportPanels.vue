@@ -1,5 +1,5 @@
-<script setup lang="ts">
-import { Activity, BarChart3, Bell, CalendarClock, CheckCircle2, ClipboardList, Database, FileText, Gauge, HeartPulse, Layers, Search, SlidersHorizontal, TrendingUp } from 'lucide-vue-next';
+﻿<script setup lang="ts">
+import { Activity, BarChart3, Bell, CalendarClock, ClipboardList, Database, FileText, Gauge, HeartPulse, Layers, Search, SlidersHorizontal, TrendingUp } from 'lucide-vue-next';
 import PageSummaryBar from './PageSummaryBar.vue';
 
 type ReviewReportItem = {
@@ -69,32 +69,17 @@ type HistoryQuery = {
   status: string;
 };
 
-type ReportCard = {
-  title: string;
-  content: string;
-};
-
-type OperationReport = {
-  title: string;
-  value: string;
-  note: string;
-};
-
 const props = defineProps<{
-  activeView: 'governance' | 'display' | 'config' | 'history' | 'reports' | 'audit' | 'trace';
+  activeView: 'governance' | 'display' | 'config' | 'history' | 'trace';
   anomalyCaseLibrary: any[];
   apiContracts: ApiContract[];
-  complianceAudit: any[];
   dataQualityMetrics: DataQualityMetric[];
   dataTrustRows: DataTrustRow[];
   exportItems: string[];
   historyQueries: HistoryQuery[];
-  managementBoard: any[];
   notificationItems: NotificationItem[];
-  operationReports: OperationReport[];
   pointConfigRows: PointConfigRow[];
   productionTraceChain: string[];
-  reportCards: ReportCard[];
   reviewReport: ReviewReportItem[];
   roleMatrix: RoleMatrixItem[];
   thresholdChangeRecords: ThresholdChangeRecord[];
@@ -131,14 +116,14 @@ const supportSummaryCards = [
 
 <template>
   <PageSummaryBar
-    v-if="['governance', 'display', 'config', 'history', 'reports', 'audit', 'trace'].includes(activeView)"
+    v-if="['governance', 'display', 'config', 'history', 'trace'].includes(activeView)"
     title="数据交付总览"
     :cards="supportSummaryCards"
   />
 
-  <section v-if="activeView === 'trace'" class="module-grid trace-layout">
-    <article class="panel-block">
-      <div class="section-title">
+  <section v-if="activeView === 'trace'" class="system-content-grid trace-layout">
+    <article class="system-panel">
+      <div class="system-panel-header">
         <FileText :size="18" />
         <h2>异常复盘库</h2>
       </div>
@@ -151,8 +136,8 @@ const supportSummaryCards = [
       </div>
     </article>
 
-    <article class="panel-block">
-      <div class="section-title">
+    <article class="system-panel">
+      <div class="system-panel-header">
         <Layers :size="18" />
         <h2>生产质量追溯链</h2>
       </div>
@@ -160,58 +145,17 @@ const supportSummaryCards = [
     </article>
   </section>
 
-  <section v-else-if="activeView === 'audit'" class="module-grid audit-layout">
-    <article class="panel-block audit-wide">
-      <div class="section-title">
-        <CheckCircle2 :size="18" />
-        <h2>合规审计</h2>
-      </div>
-      <div class="asset-table">
-        <div class="asset-row head">
-          <span>审计项</span>
-          <span>结果</span>
-          <span>详情</span>
-          <span>状态</span>
-          <span>责任人</span>
-          <span>复核人</span>
-        </div>
-        <div v-for="item in complianceAudit" :key="item.item" class="asset-row">
-          <strong>{{ item.item }}</strong>
-          <span>{{ item.result }}</span>
-          <span>{{ item.detail }}</span>
-          <strong>{{ item.status }}</strong>
-          <span>{{ item.owner }}</span>
-          <small>{{ item.reviewer }}</small>
-        </div>
-      </div>
-    </article>
-
-    <article class="panel-block audit-wide">
-      <div class="section-title">
-        <BarChart3 :size="18" />
-        <h2>管理者决策看板</h2>
-      </div>
-      <div class="review-grid">
-        <article v-for="item in managementBoard" :key="item.label">
-          <span>{{ item.label }}</span>
-          <strong>{{ item.value }}</strong>
-          <small>{{ item.note }}</small>
-        </article>
-      </div>
-    </article>
-  </section>
-
-  <section v-else-if="activeView === 'governance'" class="module-grid governance-layout">
-    <article class="panel-block">
-      <div class="section-title">
+  <section v-else-if="activeView === 'governance'" class="system-content-grid governance-layout">
+    <article class="system-panel">
+      <div class="system-panel-header">
         <BarChart3 :size="18" />
         <h2>批次复盘</h2>
       </div>
       <p class="decision-note">复盘报告已合一至工程交付视图验收模块，点击导航切换</p>
     </article>
 
-    <article class="panel-block">
-      <div class="section-title">
+    <article class="system-panel">
+      <div class="system-panel-header">
         <Layers :size="18" />
         <h2>用户角色权限</h2>
       </div>
@@ -223,8 +167,8 @@ const supportSummaryCards = [
       </div>
     </article>
 
-    <article class="panel-block export-panel">
-      <div class="section-title">
+    <article class="system-panel export-panel">
+      <div class="system-panel-header">
         <ClipboardList :size="18" />
         <h2>数据导出</h2>
       </div>
@@ -234,9 +178,9 @@ const supportSummaryCards = [
     </article>
   </section>
 
-  <section v-else-if="activeView === 'display'" class="module-grid display-layout">
-    <article class="panel-block bigscreen-card">
-      <div class="section-title">
+  <section v-else-if="activeView === 'display'" class="system-content-grid display-layout">
+    <article class="system-panel bigscreen-card">
+      <div class="system-panel-header">
         <Gauge :size="18" />
         <h2>大屏模式</h2>
       </div>
@@ -246,8 +190,8 @@ const supportSummaryCards = [
       </div>
     </article>
 
-    <article class="panel-block">
-      <div class="section-title">
+    <article class="system-panel">
+      <div class="system-panel-header">
         <Bell :size="18" />
         <h2>消息通知中心</h2>
       </div>
@@ -259,8 +203,8 @@ const supportSummaryCards = [
       </div>
     </article>
 
-    <article class="panel-block trust-panel">
-      <div class="section-title">
+    <article class="system-panel trust-panel">
+      <div class="system-panel-header">
         <HeartPulse :size="18" />
         <h2>数据可信度标识</h2>
       </div>
@@ -280,8 +224,8 @@ const supportSummaryCards = [
       </div>
     </article>
 
-    <article class="panel-block trust-panel">
-      <div class="section-title">
+    <article class="system-panel trust-panel">
+      <div class="system-panel-header">
         <Database :size="18" />
         <h2>数据质量监控</h2>
       </div>
@@ -295,9 +239,9 @@ const supportSummaryCards = [
     </article>
   </section>
 
-  <section v-else-if="activeView === 'config'" class="module-grid config-layout">
-    <article class="panel-block config-wide">
-      <div class="section-title">
+  <section v-else-if="activeView === 'config'" class="system-content-grid config-layout">
+    <article class="system-panel config-wide">
+      <div class="system-panel-header">
         <Database :size="18" />
         <h2>点位配置中心</h2>
       </div>
@@ -317,8 +261,8 @@ const supportSummaryCards = [
       </div>
     </article>
 
-    <article class="panel-block">
-      <div class="section-title">
+    <article class="system-panel">
+      <div class="system-panel-header">
         <SlidersHorizontal :size="18" />
         <h2>阈值配置中心</h2>
       </div>
@@ -332,8 +276,8 @@ const supportSummaryCards = [
       </div>
     </article>
 
-    <article class="panel-block">
-      <div class="section-title">
+    <article class="system-panel">
+      <div class="system-panel-header">
         <Database :size="18" />
         <h2>真实接口适配层</h2>
       </div>
@@ -345,8 +289,8 @@ const supportSummaryCards = [
       </div>
     </article>
 
-    <article class="panel-block config-wide">
-      <div class="section-title">
+    <article class="system-panel config-wide">
+      <div class="system-panel-header">
         <CalendarClock :size="18" />
         <h2>阈值变更记录</h2>
       </div>
@@ -367,9 +311,9 @@ const supportSummaryCards = [
     </article>
   </section>
 
-  <section v-else-if="activeView === 'history'" class="module-grid history-layout">
-    <article class="panel-block">
-      <div class="section-title">
+  <section v-else-if="activeView === 'history'" class="system-content-grid history-layout">
+    <article class="system-panel">
+      <div class="system-panel-header">
         <Search :size="18" />
         <h2>历史数据查询</h2>
       </div>
@@ -380,8 +324,8 @@ const supportSummaryCards = [
         <button type="button">导出查询结果</button>
       </div>
     </article>
-    <article class="panel-block history-wide">
-      <div class="section-title">
+    <article class="system-panel history-wide">
+      <div class="system-panel-header">
         <TrendingUp :size="18" />
         <h2>查询模板</h2>
       </div>
@@ -395,13 +339,4 @@ const supportSummaryCards = [
     </article>
   </section>
 
-  <section v-else class="module-grid reports-layout">
-    <article class="panel-block reports-wide">
-      <div class="section-title">
-        <BarChart3 :size="18" />
-        <h2>运营报告</h2>
-      </div>
-      <p class="decision-note">运营报告已合一至工程交付视图交付状态总览，点击导航切换</p>
-    </article>
-  </section>
 </template>

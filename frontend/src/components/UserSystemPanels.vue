@@ -67,9 +67,9 @@ defineProps<{
     :navigate-to-view="navigateToView"
   />
 
-  <section v-else-if="activeView === 'sop'" class="module-grid sop-layout focused-workbench">
-    <article class="panel-block sop-panel wide">
-      <div class="section-title">
+  <section v-else-if="activeView === 'sop'" class="system-content-grid sop-layout focused-workbench">
+    <article class="system-panel sop-panel system-content-grid-wide">
+      <div class="system-panel-header">
         <ClipboardList :size="18" />
         <div>
           <h2>SOP 工单</h2>
@@ -87,8 +87,8 @@ defineProps<{
       </div>
     </article>
 
-    <article class="panel-block">
-      <div class="section-title">
+    <article class="system-panel">
+      <div class="system-panel-header">
         <ListChecks :size="18" />
         <h2>阶段检查</h2>
       </div>
@@ -104,8 +104,8 @@ defineProps<{
       </div>
     </article>
 
-    <article class="panel-block">
-      <div class="section-title">
+    <article class="system-panel">
+      <div class="system-panel-header">
         <SlidersHorizontal :size="18" />
         <h2>审批记录</h2>
       </div>
@@ -119,9 +119,9 @@ defineProps<{
     </article>
   </section>
 
-  <section v-else-if="activeView === 'security'" class="module-grid security-layout focused-workbench">
-    <article class="panel-block login-card">
-      <div class="section-title">
+  <section v-else-if="activeView === 'security'" class="system-content-grid security-layout focused-workbench">
+    <article class="system-panel login-card system-content-grid-wide">
+      <div class="system-panel-header">
         <ShieldAlert :size="18" />
         <h2>登录权限</h2>
       </div>
@@ -135,9 +135,9 @@ defineProps<{
     </article>
   </section>
 
-  <section v-else class="module-grid user-layout focused-workbench">
-    <article class="panel-block user-wide">
-      <div class="section-title">
+  <section v-else class="system-content-grid user-layout focused-workbench">
+    <article class="system-panel user-wide system-content-grid-wide">
+      <div class="system-panel-header">
         <CheckCircle2 :size="18" />
         <div>
           <h2>个人工作台</h2>
@@ -153,8 +153,8 @@ defineProps<{
       </div>
     </article>
 
-    <article class="panel-block">
-      <div class="section-title">
+    <article class="system-panel">
+      <div class="system-panel-header">
         <Bell :size="18" />
         <h2>通知</h2>
       </div>
@@ -166,8 +166,8 @@ defineProps<{
       </div>
     </article>
 
-    <article class="panel-block">
-      <div class="section-title">
+    <article class="system-panel">
+      <div class="system-panel-header">
         <Settings2 :size="18" />
         <h2>偏好设置</h2>
       </div>
@@ -176,8 +176,8 @@ defineProps<{
       </div>
     </article>
 
-    <article class="panel-block user-wide">
-      <div class="section-title">
+    <article class="system-panel user-wide system-content-grid-wide">
+      <div class="system-panel-header">
         <FileText :size="18" />
         <h2>最近记录</h2>
       </div>

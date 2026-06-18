@@ -405,7 +405,7 @@ const highlightedSensors = computed(() => {
     0 28px 56px rgba(4, 18, 14, 0.34);
 }
 
-/* Lovable command-screen migration layer, scoped to the overview home only. */
+/* Overview command-screen surface, scoped to the approved home page only. */
 .digital-twin-home {
   --twin-bg-deep: #020f0c;
   --twin-bg-panel: rgba(4, 29, 23, 0.9);

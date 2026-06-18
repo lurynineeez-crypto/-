@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue';
-import { Activity, CheckCircle2, MapPinned, ShieldAlert, SlidersHorizontal, Wrench } from 'lucide-vue-next';
+import { Activity, MapPinned, ShieldAlert, SlidersHorizontal } from 'lucide-vue-next';
 import PageSummaryBar from './PageSummaryBar.vue';
 import PanelSection from './PanelSection.vue';
 import type { AlarmEvent, SensorPoint } from '../types';
@@ -31,28 +31,12 @@ type PointConfigRow = {
   enabled: boolean;
 };
 
-type CalibrationRow = {
-  sensor: string;
-  before: string;
-  after: string;
-  result: string;
-};
-
-type StageReleaseCheck = {
-  item: string;
-  passed: boolean;
-  standard: string;
-  result: string;
-};
-
 const props = defineProps<{
-  activeView: 'environment' | 'control' | 'alarms' | 'maintenance';
+  activeView: 'environment' | 'control' | 'alarms';
   environmentCards: EnvironmentCard[];
   controlRules: ControlRule[];
   alarmTimeline: AlarmEvent[];
   pointConfigRows: PointConfigRow[];
-  calibrationComparisons: CalibrationRow[];
-  stageReleaseChecks: StageReleaseCheck[];
   displaySensors: SensorPoint[];
   openAlarm: (alarm: AlarmEvent) => void;
   selectSensor: (sensor: SensorPoint) => void;
@@ -64,8 +48,7 @@ const props = defineProps<{
 const pageTitle = computed(() => ({
   environment: '环境监测',
   control: '联动控制',
-  alarms: '报警处置',
-  maintenance: '维护校准'
+  alarms: '报警处置'
 }[props.activeView]));
 
 const alarmRows = computed(() => props.alarmTimeline.map((alarm, index) => ({
@@ -128,11 +111,7 @@ const summaryCards = computed(() => {
       { label: '复核点', value: '10 分钟', note: 'CO2 与湿度变化复查' }
     ];
   }
-  return [
-    { label: '校准对比', value: `${props.calibrationComparisons.length} 项`, note: '校准前后差异' },
-    { label: '阶段检查', value: `${props.stageReleaseChecks.length} 项`, note: '用于放行和验收' },
-    { label: '维护对象', value: '传感器 / 设备', note: '不新增硬件点位' }
-  ];
+  return [];
 });
 
 const abnormalSensors = computed(() => props.displaySensors.filter((sensor) => sensor.reading.status !== 'normal'));
@@ -356,44 +335,6 @@ const orderedEnvironmentCards = computed(() => [...props.environmentCards].sort(
         </PanelSection>
       </div>
 
-      <div v-else class="ops-workbench-grid maintenance-focus">
-        <PanelSection
-          :icon="Wrench"
-          title="维护校准"
-          description="维护页只看巡检、校准前后对比、阶段放行检查。"
-          wide
-        >
-          <div class="ops-maintenance-grid">
-            <article class="ops-maintenance-card">
-              <div class="section-title">
-                <CheckCircle2 :size="16" />
-                <h2>阶段放行检查</h2>
-              </div>
-              <div class="maintenance-check-list">
-                <article v-for="check in stageReleaseChecks" :key="check.item">
-                  <strong>{{ check.item }}</strong>
-                  <span>{{ check.standard }}</span>
-                  <small>{{ check.result }}</small>
-                </article>
-              </div>
-            </article>
-
-            <article class="ops-maintenance-card">
-              <div class="section-title">
-                <Wrench :size="16" />
-                <h2>校准前后对比</h2>
-              </div>
-              <div class="maintenance-check-list">
-                <article v-for="row in calibrationComparisons" :key="row.sensor">
-                  <strong>{{ row.sensor }}</strong>
-                  <span>{{ row.before }} → {{ row.after }}</span>
-                  <small>{{ row.result }}</small>
-                </article>
-              </div>
-            </article>
-          </div>
-        </PanelSection>
-      </div>
     </template>
   </section>
 </template>

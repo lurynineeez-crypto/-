@@ -6,30 +6,19 @@
   --app-font-size-lg: 15px;
   --app-font-size-xl: 20px;
   --app-font-size-page-title: 24px;
-  --app-bg: #eef5f2;
-  --app-bg: oklch(96.8% 0.012 174);
-  --app-bg-soft: #e7f1ed;
-  --app-bg-soft: oklch(94.7% 0.018 174);
-  --app-surface: #fbfefd;
-  --app-surface: oklch(99% 0.004 174);
-  --app-surface-alt: #f4f8f6;
-  --app-surface-alt: oklch(97.2% 0.008 174);
-  --app-border: #dbe7e2;
-  --app-border: oklch(89% 0.012 174);
-  --app-border-strong: #b9d1c9;
-  --app-border-strong: oklch(80% 0.03 174);
-  --app-text: #172033;
-  --app-text: oklch(23% 0.028 245);
-  --app-text-muted: #64748b;
-  --app-text-muted: oklch(51% 0.024 245);
-  --app-text-subtle: #94a3b8;
-  --app-primary: #0f766e;
-  --app-primary: oklch(46% 0.105 178);
-  --app-primary-strong: #0a5c55;
-  --app-primary-strong: oklch(38% 0.105 178);
-  --app-primary-soft: #dff7f0;
-  --app-primary-soft: oklch(94% 0.035 178);
-  --app-hover: #eaf7f3;
+  --app-bg: #03120f;
+  --app-bg-soft: #061c16;
+  --app-surface: rgba(4, 28, 23, 0.88);
+  --app-surface-alt: rgba(2, 20, 17, 0.72);
+  --app-border: rgba(110, 232, 186, 0.18);
+  --app-border-strong: rgba(132, 255, 211, 0.34);
+  --app-text: #effff7;
+  --app-text-muted: rgba(190, 226, 210, 0.74);
+  --app-text-subtle: rgba(170, 218, 195, 0.56);
+  --app-primary: #00f5b2;
+  --app-primary-strong: #8ef6ca;
+  --app-primary-soft: rgba(0, 245, 178, 0.12);
+  --app-hover: rgba(20, 110, 82, 0.42);
   --app-state-normal: #10b981;
   --app-state-focus: #2563eb;
   --app-state-warning: #f59e0b;
@@ -39,7 +28,7 @@
   --app-state-done: #16a34a;
   --app-state-pending: #f59e0b;
   --app-state-review: #2563eb;
-  --app-state-processing: #0f766e;
+  --app-state-processing: #00f5b2;
   --app-button-primary-bg: var(--app-primary);
   --app-button-primary-text: var(--app-surface);
   --app-button-secondary-bg: var(--app-surface);
@@ -101,20 +90,20 @@
   --twin-line-tight: 1.16;
   --twin-line-normal: 1.32;
   --twin-line-readable: 1.48;
-  --bg: oklch(96.8% 0.012 174);
-  --bg-soft: oklch(94.7% 0.018 174);
-  --surface: oklch(99% 0.004 174);
-  --surface-alt: oklch(97.2% 0.008 174);
-  --surface-strong: oklch(100% 0.002 174);
-  --fg: oklch(23% 0.028 245);
-  --muted: oklch(51% 0.024 245);
-  --subtle: oklch(67% 0.02 245);
-  --border: oklch(89% 0.012 174);
-  --border-strong: oklch(80% 0.03 174);
-  --primary: oklch(46% 0.105 178);
-  --primary-strong: oklch(38% 0.105 178);
-  --primary-soft: oklch(94% 0.035 178);
-  --hover: oklch(95.5% 0.025 178);
+  --bg: #03120f;
+  --bg-soft: #061c16;
+  --surface: rgba(4, 28, 23, 0.88);
+  --surface-alt: rgba(2, 20, 17, 0.72);
+  --surface-strong: rgba(7, 36, 30, 0.92);
+  --fg: #effff7;
+  --muted: rgba(190, 226, 210, 0.74);
+  --subtle: rgba(170, 218, 195, 0.56);
+  --border: rgba(110, 232, 186, 0.18);
+  --border-strong: rgba(132, 255, 211, 0.34);
+  --primary: #00f5b2;
+  --primary-strong: #8ef6ca;
+  --primary-soft: rgba(0, 245, 178, 0.12);
+  --hover: rgba(20, 110, 82, 0.42);
   --success: oklch(54% 0.13 150);
   --warning: oklch(62% 0.15 62);
   --danger: oklch(55% 0.17 28);
@@ -143,9 +132,9 @@ button {
   font: inherit;
 }
 
-/* System shell foundation. New pages should use these classes instead of legacy
-   panel-block/module-grid overrides. Keep this layer low-specificity so migrated
-   pages can opt in without fighting the historical CSS. */
+/* System shell foundation. New pages should use these shared classes directly.
+   Keep this layer low-specificity so page modules can opt in without fighting
+   historical CSS. */
 .system-shell-frame {
   --system-shell-gap: 8px;
   --system-shell-padding: 10px;
@@ -188,6 +177,24 @@ button {
   display: grid;
   gap: 12px;
   width: 100%;
+}
+
+.system-content-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+}
+
+.system-content-grid-wide {
+  grid-column: 1 / -1;
+}
+
+.system-content-grid > .system-panel[class*="-wide"],
+.system-content-grid > .system-panel[class*="wide"] {
+  grid-column: 1 / -1;
 }
 
 .system-page-header,
@@ -258,6 +265,10 @@ button {
   margin-bottom: 12px;
   padding-bottom: 10px;
   border-bottom: 1px solid rgba(110, 232, 186, 0.12);
+}
+
+.system-panel-header > div {
+  min-width: 0;
 }
 
 .system-panel-header svg {
@@ -379,7 +390,7 @@ button {
   min-height: 100vh;
   padding: 20px;
   background:
-    linear-gradient(140deg, rgba(255, 255, 255, 0.72), rgba(240, 253, 250, 0.58)),
+    linear-gradient(140deg, rgba(8, 39, 31, 0.72), rgba(2, 20, 17, 0.78)),
     #eef5f2;
 }
 
@@ -391,31 +402,9 @@ button {
     radial-gradient(circle at 50% 0%, rgba(0, 245, 178, 0.14), transparent 30%),
     radial-gradient(circle at 12% 16%, rgba(47, 178, 130, 0.16), transparent 24%),
     linear-gradient(180deg, #061f18 0%, #03120f 100%);
-}
-
-.topbar,
-.command-bar,
-.utility-bar,
-.anchor-strip,
-.metric-strip,
-.module-nav,
-.module-grid,
-.workspace {
-  width: min(1680px, 100%);
-  margin: 0 auto;
-}
-
-.topbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  min-height: 72px;
-}
-
-.eyebrow {
+}.eyebrow {
   margin: 0 0 4px;
-  color: #0f766e;
+  color: #00f5b2;
   font-size: 13px;
   font-weight: 700;
 }
@@ -433,101 +422,11 @@ h1 {
 
 h2 {
   font-size: 15px;
-}
-
-.topbar-actions {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.command-bar,
-.utility-bar,
-.anchor-strip {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 12px;
-}
-
-.command-bar,
-.utility-bar {
-  min-height: 48px;
-  padding: 8px;
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.72);
-}
-
-.command-bar {
-  display: grid;
-  grid-template-columns: minmax(150px, auto) minmax(280px, 1fr) auto auto;
-}
-
-.breadcrumb {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  color: #64748b;
-  font-size: 13px;
-  font-weight: 700;
-}
-
-.breadcrumb span::after {
-  content: "/";
-  padding-left: 6px;
-  color: #94a3b8;
-}
-
-.breadcrumb span:last-child::after {
-  content: "";
-  padding-left: 0;
-}
-
-.global-top-search,
-.batch-switcher,
-.anchor-strip button {
-  min-height: 34px;
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  border-radius: 8px;
-  background: #f8fafc;
-  color: #334155;
-  cursor: pointer;
-}
-
-.global-top-search {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex: 1;
-  justify-content: flex-start;
-  padding: 0 12px;
-  color: #0f766e;
-  font-weight: 800;
-}
-
-.batch-switcher {
-  padding: 0 12px;
-  font-weight: 800;
-}
-
-.anchor-strip {
-  flex-wrap: wrap;
-}
-
-.anchor-strip button {
-  padding: 0 10px;
-  color: #64748b;
-  font-size: 12px;
-}
-
-.live-pill,
+}.live-pill,
 .icon-button,
-.metric,
-.panel-block,
-.scene-panel {
+.metric {
   border: 1px solid rgba(15, 23, 42, 0.08);
-  background: rgba(255, 255, 255, 0.86);
+  background: rgba(8, 39, 31, 0.86);
   box-shadow: 0 16px 36px rgba(15, 23, 42, 0.08);
 }
 
@@ -538,7 +437,7 @@ h2 {
   min-height: 38px;
   padding: 0 13px;
   border-radius: 8px;
-  color: #0f766e;
+  color: #00f5b2;
   font-weight: 700;
 }
 
@@ -548,18 +447,9 @@ h2 {
   width: 38px;
   height: 38px;
   border-radius: 8px;
-  color: #334155;
+  color: rgba(190, 226, 210, 0.78);
   cursor: pointer;
-}
-
-.metric-strip {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 12px;
-  margin-bottom: 14px;
-}
-
-.metric {
+}.metric {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -575,7 +465,7 @@ h2 {
 .metric svg {
   flex: 0 0 auto;
   margin-top: 5px;
-  color: #0f766e;
+  color: #00f5b2;
 }
 
 .metric-copy {
@@ -589,137 +479,9 @@ h2 {
 .sensor-head small,
 .alarm-item small,
 .plan-list small {
-  color: #64748b;
+  color: rgba(190, 226, 210, 0.74);
   font-size: 12px;
-}
-
-.module-nav {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 14px;
-  overflow-x: auto;
-  padding-bottom: 2px;
-}
-
-.module-nav button {
-  flex: 0 0 auto;
-  min-height: 38px;
-  padding: 0 14px;
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.78);
-  color: #475569;
-  cursor: pointer;
-  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.05);
-}
-
-.role-switcher {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 10px;
-  width: min(1680px, 100%);
-  margin: 0 auto 12px;
-}
-
-.role-switcher button {
-  display: grid;
-  gap: 4px;
-  min-height: 66px;
-  padding: 11px 12px;
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.8);
-  color: #334155;
-  text-align: left;
-  cursor: pointer;
-}
-
-.role-switcher button.active {
-  border-color: rgba(15, 118, 110, 0.28);
-  background: #f0fdfa;
-}
-
-.role-switcher span {
-  color: #64748b;
-  font-size: 12px;
-  line-height: 1.45;
-}
-
-.work-mode-strip {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  width: min(1680px, 100%);
-  min-height: 48px;
-  margin: 0 auto 10px;
-  padding: 8px 10px;
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.72);
-}
-
-.work-mode-strip > div:first-child {
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-  white-space: nowrap;
-}
-
-.work-mode-strip span {
-  color: #64748b;
-  font-size: 12px;
-  font-weight: 700;
-}
-
-.work-mode-strip strong {
-  color: #0f172a;
-  font-size: 15px;
-}
-
-.work-mode-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: 6px;
-}
-
-.work-mode-buttons button {
-  min-height: 30px;
-  padding: 0 11px;
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  border-radius: 8px;
-  background: #f8fafc;
-  color: #475569;
-  cursor: pointer;
-}
-
-.work-mode-buttons button.active {
-  border-color: rgba(15, 118, 110, 0.28);
-  background: #0f766e;
-  color: #fff;
-  font-weight: 800;
-}
-
-.module-nav.grouped {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 10px;
-  overflow: visible;
-}
-
-.module-nav.process-nav {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 8px;
-  margin-bottom: 14px;
-  padding: 10px;
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.7);
-}
-
-.process-steps {
+}.process-steps {
   display: grid;
   grid-template-columns: repeat(7, minmax(0, 1fr));
   gap: 8px;
@@ -734,8 +496,8 @@ h2 {
   padding: 9px;
   border: 1px solid rgba(15, 23, 42, 0.08);
   border-radius: 8px;
-  background: #f8fafc;
-  color: #334155;
+  background: rgba(2, 20, 17, 0.72);
+  color: rgba(190, 226, 210, 0.78);
   text-align: left;
   cursor: pointer;
   box-shadow: none;
@@ -743,7 +505,7 @@ h2 {
 
 .process-steps button.active {
   border-color: rgba(15, 118, 110, 0.28);
-  background: #0f766e;
+  background: #00f5b2;
   color: #fff;
 }
 
@@ -754,13 +516,13 @@ h2 {
   height: 24px;
   border-radius: 6px;
   background: #e0f2f1;
-  color: #0f766e;
+  color: #00f5b2;
   font-size: 11px;
   font-weight: 900;
 }
 
 .process-steps button.active span {
-  background: rgba(255, 255, 255, 0.18);
+  background: rgba(8, 39, 31, 0.32);
   color: #fff;
 }
 
@@ -777,182 +539,24 @@ h2 {
 
 .process-steps button.active small {
   color: rgba(255, 255, 255, 0.76);
-}
-
-.nav-group {
-  display: grid;
-  align-content: start;
-  gap: 7px;
-  padding: 8px;
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.62);
-}
-
-.process-nav .nav-group {
-  min-height: 0;
-}
-
-.process-nav .nav-group.active {
-  border-color: rgba(15, 118, 110, 0.28);
-  background: linear-gradient(180deg, #f0fdfa, rgba(255, 255, 255, 0.82));
-}
-
-.active-module-drawer {
-  grid-template-columns: 150px 1fr;
-  align-items: start;
-  padding: 10px;
-}
-
-.active-module-drawer > div:first-child {
-  display: grid;
-  gap: 4px;
-}
-
-.active-module-drawer > div:first-child span {
-  color: #64748b;
-  font-size: 12px;
-  font-weight: 700;
-}
-
-.active-module-drawer > div:first-child strong {
-  color: #0f766e;
-  font-size: 14px;
-}
-
-.nav-group > strong {
-  color: #0f766e;
-  font-size: 12px;
-}
-
-.nav-group-head {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  gap: 7px;
-  min-height: 30px;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  color: #0f172a;
-  text-align: left;
-  cursor: pointer;
-  box-shadow: none;
-}
-
-.nav-group-head span {
-  display: grid;
-  place-items: center;
-  width: 27px;
-  height: 24px;
-  border-radius: 6px;
-  background: #e0f2f1;
-  color: #0f766e;
-  font-size: 11px;
-  font-weight: 900;
-}
-
-.nav-group-head strong {
-  font-size: 13px;
-}
-
-.nav-group-head small {
-  color: #94a3b8;
-  font-size: 11px;
-}
-
-.nav-group > div,
-.nav-more > div {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-
-.nav-more {
-  margin-top: 2px;
-}
-
-.nav-more summary {
-  display: inline-flex;
-  align-items: center;
-  min-height: 28px;
-  padding: 0 9px;
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  border-radius: 8px;
-  background: rgba(248, 250, 252, 0.88);
-  color: #64748b;
-  font-size: 12px;
-  cursor: pointer;
-  user-select: none;
-}
-
-.nav-more[open] summary {
-  margin-bottom: 7px;
-  border-color: rgba(15, 118, 110, 0.18);
-  color: #0f766e;
-}
-
-.module-nav button.active {
-  background: #0f766e;
-  color: #fff;
-  font-weight: 800;
-}
-
-.process-nav .nav-primary-items button,
-.process-nav .nav-more button {
-  min-height: 32px;
-  padding: 0 10px;
-  box-shadow: none;
-}
-
-.metric strong {
+}.metric strong {
   display: block;
   font-size: 24px;
 }
 
 .metric small {
-  color: #64748b;
+  color: rgba(190, 226, 210, 0.74);
   font-size: 12px;
   line-height: 1.35;
 }
 
-.workspace {
-  display: grid;
-  grid-template-columns: minmax(260px, 300px) minmax(0, 1fr) minmax(300px, 360px);
-  align-items: start;
-  gap: 14px;
-  min-height: calc(100vh - 144px);
-}
-
 .left-panel,
-.right-panel,
-.scene-panel {
+.right-panel {
   min-width: 0;
   display: grid;
   align-content: start;
   gap: 14px;
   align-self: start;
-}
-
-.panel-block,
-.scene-panel {
-  border-radius: 8px;
-}
-
-.panel-block {
-  padding: 16px;
-}
-
-.section-title {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 14px;
-  color: #0f172a;
-}
-
-.section-title svg {
-  color: #0f766e;
 }
 
 .stage-line {
@@ -961,12 +565,12 @@ h2 {
   gap: 12px;
   padding: 12px;
   border-radius: 8px;
-  background: #f0fdfa;
+  background: rgba(0, 245, 178, 0.1);
 }
 
 .stage-line span,
 .progress-group label {
-  color: #64748b;
+  color: rgba(190, 226, 210, 0.74);
   font-size: 13px;
 }
 
@@ -985,14 +589,14 @@ h2 {
   height: 8px;
   overflow: hidden;
   border-radius: 999px;
-  background: #e2e8f0;
+  background: rgba(110, 232, 186, 0.14);
 }
 
 .progress span {
   display: block;
   height: 100%;
   border-radius: inherit;
-  background: #0f766e;
+  background: #00f5b2;
 }
 
 .progress.teal span {
@@ -1011,13 +615,13 @@ h2 {
   place-items: center;
   min-height: 58px;
   border-radius: 8px;
-  background: #f8fafc;
-  color: #64748b;
+  background: rgba(2, 20, 17, 0.72);
+  color: rgba(190, 226, 210, 0.74);
   font-size: 12px;
 }
 
 .status-grid b {
-  color: #111827;
+  color: #effff7;
   font-size: 18px;
 }
 
@@ -1036,7 +640,7 @@ h2 {
   gap: 10px;
   padding: 14px;
   border-radius: 8px;
-  background: linear-gradient(180deg, #f0fdfa, #f8fafc);
+  background: linear-gradient(180deg, rgba(8, 39, 31, 0.82), rgba(2, 20, 17, 0.9));
 }
 
 .batch-health-metrics div {
@@ -1045,13 +649,13 @@ h2 {
 }
 
 .batch-health-metrics span {
-  color: #64748b;
+  color: rgba(190, 226, 210, 0.74);
   font-size: 12px;
   font-weight: 700;
 }
 
 .batch-health-metrics strong {
-  color: #0f172a;
+  color: #effff7;
   font-size: 20px;
 }
 
@@ -1094,15 +698,15 @@ h2 {
   padding: 9px 10px;
   border: 0;
   border-radius: 8px;
-  background: #f8fafc;
-  color: #334155;
+  background: rgba(2, 20, 17, 0.72);
+  color: rgba(190, 226, 210, 0.78);
   text-align: left;
   cursor: pointer;
 }
 
 .device-row strong,
 .sensor-list strong {
-  color: #0f172a;
+  color: #effff7;
   font-size: 12px;
 }
 
@@ -1130,14 +734,6 @@ h2 {
   background: #94a3b8;
 }
 
-.scene-panel {
-  display: grid;
-  grid-template-rows: auto auto minmax(0, 1fr);
-  height: min(760px, calc(100vh - 156px));
-  min-height: 610px;
-  overflow: hidden;
-}
-
 .scene-context-bar {
   display: flex;
   align-items: center;
@@ -1155,13 +751,13 @@ h2 {
 }
 
 .scene-context-bar span {
-  color: #64748b;
+  color: rgba(190, 226, 210, 0.74);
   font-size: 12px;
   font-weight: 700;
 }
 
 .scene-context-bar strong {
-  color: #0f172a;
+  color: #effff7;
   font-size: 16px;
 }
 
@@ -1200,8 +796,8 @@ h2 {
   min-width: 126px;
   border: 1px solid rgba(15, 23, 42, 0.08);
   border-radius: 8px;
-  background: #f8fafc;
-  color: #334155;
+  background: rgba(2, 20, 17, 0.72);
+  color: rgba(190, 226, 210, 0.78);
   padding: 0 10px;
 }
 
@@ -1210,15 +806,15 @@ h2 {
   padding: 0 11px;
   border: 1px solid transparent;
   border-radius: 8px;
-  background: #f1f5f9;
-  color: #475569;
+  background: rgba(4, 28, 23, 0.72);
+  color: rgba(190, 226, 210, 0.74);
   cursor: pointer;
 }
 
 .segmented button.active {
   border-color: rgba(15, 118, 110, 0.22);
-  background: #ccfbf1;
-  color: #0f766e;
+  background: rgba(0, 245, 178, 0.16);
+  color: #8ef6ca;
   font-weight: 700;
 }
 
@@ -1269,11 +865,11 @@ h2 {
   margin: 16px 0 8px;
   font-size: 32px;
   font-weight: 800;
-  color: #0f766e;
+  color: #00f5b2;
 }
 
 .reading-value small {
-  color: #64748b;
+  color: rgba(190, 226, 210, 0.74);
   font-size: 15px;
 }
 
@@ -1299,7 +895,7 @@ h2 {
 .duty-title span,
 .duty-section-head span,
 .duty-empty span {
-  color: #64748b;
+  color: rgba(190, 226, 210, 0.74);
   font-size: 12px;
 }
 
@@ -1309,7 +905,7 @@ h2 {
   min-height: 210px;
   padding: 14px;
   border-radius: 8px;
-  background: linear-gradient(180deg, #f0fdfa, #f8fafc);
+  background: linear-gradient(180deg, rgba(8, 39, 31, 0.82), rgba(2, 20, 17, 0.9));
 }
 
 .duty-empty {
@@ -1318,11 +914,11 @@ h2 {
   justify-items: start;
   gap: 8px;
   min-height: 180px;
-  color: #0f172a;
+  color: #effff7;
 }
 
 .duty-empty svg {
-  color: #0f766e;
+  color: #00f5b2;
 }
 
 .duty-section {
@@ -1340,7 +936,7 @@ h2 {
 }
 
 .duty-section-head svg {
-  color: #0f766e;
+  color: #00f5b2;
 }
 
 .alarm-list.compact,
@@ -1365,21 +961,21 @@ h2 {
   padding: 10px 11px;
   border-left: 4px solid #f59e0b;
   border-radius: 8px;
-  background: #fffbeb;
+  background: rgba(255, 187, 99, 0.12);
 }
 
 .alarm-item.critical {
   border-left-color: #ef4444;
-  background: #fef2f2;
+  background: rgba(255, 131, 117, 0.12);
 }
 
 .alarm-item.info {
   border-left-color: #2563eb;
-  background: #eff6ff;
+  background: rgba(125, 183, 255, 0.12);
 }
 
 .alarm-item span {
-  color: #475569;
+  color: rgba(190, 226, 210, 0.74);
   font-size: 13px;
 }
 
@@ -1397,24 +993,13 @@ h2 {
   min-height: 34px;
   padding: 8px 10px;
   border-radius: 8px;
-  background: #f8fafc;
-  color: #334155;
+  background: rgba(2, 20, 17, 0.72);
+  color: rgba(190, 226, 210, 0.78);
   font-size: 13px;
 }
 
 .process-list svg {
-  color: #0f766e;
-}
-
-.module-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
-  align-items: start;
-}
-
-.module-grid.wide {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  color: #00f5b2;
 }
 
 .growth-layout {
@@ -1437,22 +1022,22 @@ h2 {
   min-height: 128px;
   padding: 16px;
   border-radius: 8px;
-  background: #f0fdfa;
+  background: rgba(0, 245, 178, 0.1);
 }
 
 .stage-status-grid span {
-  color: #64748b;
+  color: rgba(190, 226, 210, 0.74);
   font-size: 12px;
   font-weight: 700;
 }
 
 .stage-status-grid strong {
-  color: #0f766e;
+  color: #00f5b2;
   font-size: 24px;
 }
 
 .stage-status-grid small {
-  color: #334155;
+  color: rgba(190, 226, 210, 0.78);
   line-height: 1.5;
 }
 
@@ -1473,22 +1058,22 @@ h2 {
   min-height: 116px;
   padding: 14px;
   border-radius: 8px;
-  background: #f8fafc;
+  background: rgba(2, 20, 17, 0.72);
 }
 
 .production-summary-grid span {
-  color: #64748b;
+  color: rgba(190, 226, 210, 0.74);
   font-size: 12px;
   font-weight: 700;
 }
 
 .production-summary-grid strong {
-  color: #0f766e;
+  color: #00f5b2;
   font-size: 24px;
 }
 
 .production-summary-grid small {
-  color: #475569;
+  color: rgba(190, 226, 210, 0.74);
   line-height: 1.45;
 }
 
@@ -1515,17 +1100,17 @@ h2 {
   margin: 8px 0 12px;
   padding: 12px;
   border-radius: 8px;
-  background: #f0fdfa;
+  background: rgba(0, 245, 178, 0.1);
 }
 
 .feature-value strong {
-  color: #0f766e;
+  color: #00f5b2;
   font-size: 30px;
 }
 
 .feature-card p,
 .stage-card p {
-  color: #475569;
+  color: rgba(190, 226, 210, 0.74);
   line-height: 1.7;
 }
 
@@ -1543,15 +1128,15 @@ h2 {
   min-height: 38px;
   border: 0;
   border-radius: 8px;
-  background: #f8fafc;
-  color: #334155;
+  background: rgba(2, 20, 17, 0.72);
+  color: rgba(190, 226, 210, 0.78);
   padding: 0 11px;
   cursor: pointer;
   text-align: left;
 }
 
 .mini-table strong {
-  color: #0f766e;
+  color: #00f5b2;
 }
 
 .stage-card.current {
@@ -1570,12 +1155,12 @@ h2 {
   gap: 12px;
   padding: 10px;
   border-radius: 8px;
-  background: #f8fafc;
-  color: #64748b;
+  background: rgba(2, 20, 17, 0.72);
+  color: rgba(190, 226, 210, 0.74);
 }
 
 .stage-specs strong {
-  color: #111827;
+  color: #effff7;
 }
 
 .rule-card dl {
@@ -1585,14 +1170,14 @@ h2 {
 }
 
 .rule-card dt {
-  color: #0f766e;
+  color: #00f5b2;
   font-size: 12px;
   font-weight: 800;
 }
 
 .rule-card dd {
   margin: 0 0 8px;
-  color: #334155;
+  color: rgba(190, 226, 210, 0.78);
   line-height: 1.6;
 }
 
@@ -1603,8 +1188,8 @@ h2 {
   margin-top: 8px;
   padding: 0 10px;
   border-radius: 8px;
-  background: #eff6ff;
-  color: #2563eb;
+  background: rgba(125, 183, 255, 0.12);
+  color: #7db7ff;
   font-size: 12px;
   font-weight: 800;
 }
@@ -1624,22 +1209,22 @@ h2 {
   padding: 13px;
   border-left: 4px solid #2563eb;
   border-radius: 8px;
-  background: #f8fafc;
+  background: rgba(2, 20, 17, 0.72);
 }
 
 .timeline-item.warning {
   border-left-color: #f59e0b;
-  background: #fffbeb;
+  background: rgba(255, 187, 99, 0.12);
 }
 
 .timeline-item.critical {
   border-left-color: #ef4444;
-  background: #fef2f2;
+  background: rgba(255, 131, 117, 0.12);
 }
 
 .timeline-item span,
 .timeline-item small {
-  color: #64748b;
+  color: rgba(190, 226, 210, 0.74);
 }
 
 .maintenance-layout {
@@ -1672,18 +1257,18 @@ h2 {
   margin: 0 auto;
   border-radius: 50%;
   background:
-    radial-gradient(circle at center, #fff 54%, transparent 56%),
-    conic-gradient(#0f766e 0 var(--score, 0%), #e2e8f0 var(--score, 0%) 100%);
+    radial-gradient(circle at center, rgba(3, 18, 15, 0.98) 54%, transparent 56%),
+    conic-gradient(#00f5b2 0 var(--score, 0%), rgba(110, 232, 186, 0.14) var(--score, 0%) 100%);
 }
 
 .score-ring strong {
-  color: #0f766e;
+  color: #00f5b2;
   font-size: 42px;
   line-height: 1;
 }
 
 .score-ring span {
-  color: #475569;
+  color: rgba(190, 226, 210, 0.74);
   font-weight: 800;
 }
 
@@ -1697,7 +1282,7 @@ h2 {
   grid-template-columns: 44px 36px 1fr;
   align-items: center;
   gap: 8px;
-  color: #64748b;
+  color: rgba(190, 226, 210, 0.74);
   font-size: 13px;
 }
 
@@ -1705,14 +1290,14 @@ h2 {
   height: 8px;
   overflow: hidden;
   border-radius: 999px;
-  background: #e2e8f0;
+  background: rgba(110, 232, 186, 0.14);
 }
 
 .score-parts b {
   display: block;
   height: 100%;
   border-radius: inherit;
-  background: #0f766e;
+  background: #00f5b2;
 }
 
 .deduction-list {
@@ -1724,8 +1309,8 @@ h2 {
 .deduction-list span {
   padding: 7px 9px;
   border-radius: 8px;
-  background: #f0fdfa;
-  color: #0f766e;
+  background: rgba(0, 245, 178, 0.1);
+  color: #00f5b2;
   font-size: 12px;
   font-weight: 800;
 }
@@ -1744,25 +1329,25 @@ h2 {
   min-height: 98px;
   padding: 13px;
   border-radius: 8px;
-  background: #f8fafc;
+  background: rgba(2, 20, 17, 0.72);
 }
 
 .uniformity-grid span,
 .batch-metrics span,
 .correlation-grid span {
-  color: #64748b;
+  color: rgba(190, 226, 210, 0.74);
   font-size: 13px;
   line-height: 1.55;
 }
 
 .uniformity-grid strong,
 .batch-metrics strong {
-  color: #111827;
+  color: #effff7;
   font-size: 24px;
 }
 
 .uniformity-grid small {
-  color: #0f766e;
+  color: #00f5b2;
   font-weight: 800;
 }
 
@@ -1777,20 +1362,20 @@ h2 {
   gap: 5px;
   padding: 12px;
   border-radius: 8px;
-  background: #f8fafc;
+  background: rgba(2, 20, 17, 0.72);
 }
 
 .suggestion-list span,
 .efficiency-list span,
 .efficiency-list small {
-  color: #64748b;
+  color: rgba(190, 226, 210, 0.74);
   font-size: 13px;
   line-height: 1.55;
 }
 
 .suggestion-list p {
   margin: 0;
-  color: #334155;
+  color: rgba(190, 226, 210, 0.78);
   line-height: 1.6;
 }
 
@@ -1800,7 +1385,7 @@ h2 {
   gap: 8px;
   padding: 12px;
   border-radius: 8px;
-  background: #f8fafc;
+  background: rgba(2, 20, 17, 0.72);
 }
 
 .efficiency-list b {
@@ -1809,8 +1394,8 @@ h2 {
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: #ccfbf1;
-  color: #0f766e;
+  background: rgba(0, 245, 178, 0.16);
+  color: #8ef6ca;
 }
 
 .efficiency-list small {
@@ -1838,7 +1423,7 @@ h2 {
   padding: 14px;
   border: 1px solid rgba(15, 23, 42, 0.08);
   border-radius: 8px;
-  background: #f8fafc;
+  background: rgba(2, 20, 17, 0.72);
 }
 
 .lifecycle-step span {
@@ -1847,35 +1432,35 @@ h2 {
   width: 30px;
   height: 26px;
   border-radius: 6px;
-  background: #e2e8f0;
-  color: #475569;
+  background: rgba(110, 232, 186, 0.14);
+  color: rgba(190, 226, 210, 0.74);
   font-size: 12px;
   font-weight: 900;
 }
 
 .lifecycle-step strong {
-  color: #0f172a;
+  color: #effff7;
   font-size: 15px;
 }
 
 .lifecycle-step small {
-  color: #64748b;
+  color: rgba(190, 226, 210, 0.74);
   line-height: 1.45;
 }
 
 .lifecycle-step.done {
-  background: #f0fdfa;
+  background: rgba(0, 245, 178, 0.1);
 }
 
 .lifecycle-step.done span,
 .lifecycle-step.current span {
-  background: #0f766e;
+  background: #00f5b2;
   color: #fff;
 }
 
 .lifecycle-step.current {
   border-color: rgba(15, 118, 110, 0.34);
-  background: linear-gradient(180deg, #ecfeff, #f0fdfa);
+  background: linear-gradient(180deg, rgba(8, 39, 31, 0.82), rgba(2, 20, 17, 0.9));
   box-shadow: 0 16px 36px rgba(15, 118, 110, 0.12);
 }
 
@@ -1887,13 +1472,13 @@ h2 {
 }
 
 .batch-card dt {
-  color: #64748b;
+  color: rgba(190, 226, 210, 0.74);
   font-size: 13px;
 }
 
 .batch-card dd {
   margin: 0;
-  color: #111827;
+  color: #effff7;
   font-weight: 800;
 }
 
@@ -1904,7 +1489,7 @@ h2 {
 }
 
 .batch-metrics small {
-  color: #64748b;
+  color: rgba(190, 226, 210, 0.74);
 }
 
 .batch-wide {
@@ -1922,7 +1507,7 @@ h2 {
 }
 
 .correlation-grid strong {
-  color: #0f766e;
+  color: #00f5b2;
 }
 
 .workflow-layout,
@@ -1962,7 +1547,7 @@ h2 {
   gap: 5px;
   padding: 12px;
   border-radius: 8px;
-  background: #f8fafc;
+  background: rgba(2, 20, 17, 0.72);
 }
 
 .task-list article {
@@ -1978,7 +1563,7 @@ h2 {
 .task-list b {
   grid-column: 2;
   grid-row: 1 / span 2;
-  color: #0f766e;
+  color: #00f5b2;
 }
 
 .task-list span,
@@ -1992,7 +1577,7 @@ h2 {
 .role-list span,
 .notification-list span {
   margin: 0;
-  color: #64748b;
+  color: rgba(190, 226, 210, 0.74);
   font-size: 13px;
   line-height: 1.6;
 }
@@ -2010,18 +1595,18 @@ h2 {
   gap: 6px;
   padding: 13px;
   border-radius: 8px;
-  background: #f8fafc;
+  background: rgba(2, 20, 17, 0.72);
 }
 
 .handover-grid span,
 .review-grid span {
-  color: #64748b;
+  color: rgba(190, 226, 210, 0.74);
   font-size: 13px;
 }
 
 .handover-grid strong,
 .review-grid strong {
-  color: #111827;
+  color: #effff7;
   font-size: 18px;
 }
 
@@ -2029,12 +1614,12 @@ h2 {
   margin-top: 12px;
   padding: 12px;
   border-radius: 8px;
-  background: #f0fdfa;
+  background: rgba(0, 245, 178, 0.1);
 }
 
 .handover-note p {
   margin: 6px 0 0;
-  color: #475569;
+  color: rgba(190, 226, 210, 0.74);
   line-height: 1.6;
 }
 
@@ -2061,11 +1646,11 @@ h2 {
 .checklist small {
   display: block;
   margin-top: 3px;
-  color: #64748b;
+  color: rgba(190, 226, 210, 0.74);
 }
 
 .checklist b {
-  color: #0f766e;
+  color: #00f5b2;
 }
 
 .sop-list {
@@ -2075,7 +1660,7 @@ h2 {
 .sop-list ol {
   margin: 4px 0 0;
   padding-left: 20px;
-  color: #334155;
+  color: rgba(190, 226, 210, 0.78);
   line-height: 1.7;
 }
 
@@ -2089,8 +1674,8 @@ h2 {
   min-height: 44px;
   border: 1px solid rgba(15, 118, 110, 0.18);
   border-radius: 8px;
-  background: #f0fdfa;
-  color: #0f766e;
+  background: rgba(0, 245, 178, 0.1);
+  color: #00f5b2;
   font-weight: 800;
   cursor: pointer;
 }
@@ -2103,7 +1688,7 @@ h2 {
   border-radius: 8px;
   background:
     linear-gradient(135deg, rgba(15, 118, 110, 0.92), rgba(37, 99, 235, 0.8)),
-    #0f766e;
+    #00f5b2;
   color: #fff;
   text-align: center;
 }
@@ -2153,7 +1738,7 @@ h2 {
   gap: 5px;
   padding: 12px;
   border-radius: 8px;
-  background: #f8fafc;
+  background: rgba(2, 20, 17, 0.72);
 }
 
 .threshold-list span,
@@ -2161,13 +1746,13 @@ h2 {
 .history-list span,
 .threshold-list small,
 .history-list small {
-  color: #64748b;
+  color: rgba(190, 226, 210, 0.74);
   font-size: 13px;
   line-height: 1.55;
 }
 
 .api-list strong {
-  color: #0f766e;
+  color: #00f5b2;
   font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
 }
 
@@ -2182,8 +1767,8 @@ h2 {
   min-height: 40px;
   padding: 0 12px;
   border-radius: 8px;
-  background: #f8fafc;
-  color: #334155;
+  background: rgba(2, 20, 17, 0.72);
+  color: rgba(190, 226, 210, 0.78);
 }
 
 .query-controls button,
@@ -2192,7 +1777,7 @@ h2 {
   min-height: 40px;
   border: 0;
   border-radius: 8px;
-  background: #0f766e;
+  background: #00f5b2;
   color: #fff;
   font-weight: 800;
   cursor: pointer;
@@ -2205,7 +1790,7 @@ h2 {
 
 .report-card p {
   min-height: 74px;
-  color: #475569;
+  color: rgba(190, 226, 210, 0.74);
   line-height: 1.7;
 }
 
@@ -2220,21 +1805,21 @@ h2 {
   margin: 16px auto 0;
   padding: 28px;
   border-radius: 8px;
-  background: #f8fafc;
+  background: rgba(2, 20, 17, 0.72);
   text-align: center;
 }
 
 .login-box strong {
-  color: #0f766e;
+  color: #00f5b2;
   font-size: 24px;
 }
 
 .login-box span {
-  color: #64748b;
+  color: rgba(190, 226, 210, 0.74);
 }
 
 .role-list small {
-  color: #0f766e;
+  color: #00f5b2;
   font-weight: 800;
 }
 
@@ -2251,8 +1836,8 @@ h2 {
 .setting-tags span {
   padding: 8px 10px;
   border-radius: 8px;
-  background: #f0fdfa;
-  color: #0f766e;
+  background: rgba(0, 245, 178, 0.1);
+  color: #00f5b2;
   font-size: 13px;
   font-weight: 800;
 }
@@ -2265,7 +1850,7 @@ h2 {
   border-radius: 8px;
   background:
     linear-gradient(135deg, rgba(15, 118, 110, 0.95), rgba(15, 23, 42, 0.92)),
-    #0f172a;
+    #effff7;
   color: #fff;
 }
 
@@ -2276,7 +1861,7 @@ h2 {
   align-items: center;
   padding: 18px;
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(8, 39, 31, 0.34);
 }
 
 .screen-header span,
@@ -2306,7 +1891,7 @@ h2 {
   min-height: 140px;
   padding: 18px;
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(8, 39, 31, 0.42);
 }
 
 .screen-grid span {
@@ -2321,7 +1906,7 @@ h2 {
   margin-top: 18px;
   padding: 18px;
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(8, 39, 31, 0.34);
 }
 
 .demo-grid {
@@ -2336,15 +1921,15 @@ h2 {
   margin-bottom: 12px;
   padding: 13px;
   border-radius: 8px;
-  background: #f0fdfa;
+  background: rgba(0, 245, 178, 0.1);
 }
 
 .demo-state strong {
-  color: #0f766e;
+  color: #00f5b2;
 }
 
 .demo-state span {
-  color: #475569;
+  color: rgba(190, 226, 210, 0.74);
   line-height: 1.55;
 }
 
@@ -2355,23 +1940,23 @@ h2 {
   padding: 14px;
   border: 1px solid rgba(15, 118, 110, 0.18);
   border-radius: 8px;
-  background: #f8fafc;
-  color: #334155;
+  background: rgba(2, 20, 17, 0.72);
+  color: rgba(190, 226, 210, 0.78);
   text-align: left;
   cursor: pointer;
 }
 
 .demo-grid button.active {
   border-color: rgba(15, 118, 110, 0.35);
-  background: #ecfeff;
+  background: rgba(0, 245, 178, 0.14);
 }
 
 .demo-grid strong {
-  color: #0f766e;
+  color: #00f5b2;
 }
 
 .demo-grid span {
-  color: #64748b;
+  color: rgba(190, 226, 210, 0.74);
   line-height: 1.55;
 }
 
@@ -2390,7 +1975,7 @@ h2 {
 
 .decision-note {
   margin: 0;
-  color: #475569;
+  color: rgba(190, 226, 210, 0.74);
   line-height: 1.7;
   text-align: center;
 }
@@ -2403,8 +1988,8 @@ h2 {
 .growth-state strong {
   padding: 18px;
   border-radius: 8px;
-  background: #f0fdfa;
-  color: #0f766e;
+  background: rgba(0, 245, 178, 0.1);
+  color: #00f5b2;
   font-size: 30px;
   text-align: center;
 }
@@ -2412,8 +1997,8 @@ h2 {
 .growth-state span {
   padding: 10px 12px;
   border-radius: 8px;
-  background: #f8fafc;
-  color: #334155;
+  background: rgba(2, 20, 17, 0.72);
+  color: rgba(190, 226, 210, 0.78);
 }
 
 .chain-list,
@@ -2429,21 +2014,21 @@ h2 {
   gap: 10px;
   padding: 14px;
   border-radius: 8px;
-  background: #f8fafc;
+  background: rgba(2, 20, 17, 0.72);
 }
 
 .chain-list span {
   position: relative;
   padding: 8px 10px;
   border-radius: 8px;
-  background: #fff;
-  color: #334155;
+  background: rgba(4, 28, 23, 0.88);
+  color: rgba(190, 226, 210, 0.78);
 }
 
 .chain-list span::before {
   content: "→";
   margin-right: 6px;
-  color: #0f766e;
+  color: #00f5b2;
   font-weight: 800;
 }
 
@@ -2456,14 +2041,14 @@ h2 {
 .curve-points span {
   padding: 8px 6px;
   border-radius: 8px;
-  background: #fff;
-  color: #334155;
+  background: rgba(4, 28, 23, 0.88);
+  color: rgba(190, 226, 210, 0.78);
   font-size: 12px;
   text-align: center;
 }
 
 .response-grid small {
-  color: #0f766e;
+  color: #00f5b2;
   font-weight: 800;
 }
 
@@ -2474,10 +2059,10 @@ h2 {
 
 .trace-chain span {
   padding: 12px 14px;
-  border-left: 4px solid #0f766e;
+  border-left: 4px solid #00f5b2;
   border-radius: 8px;
-  background: #f8fafc;
-  color: #334155;
+  background: rgba(2, 20, 17, 0.72);
+  color: rgba(190, 226, 210, 0.78);
   font-weight: 800;
 }
 
@@ -2499,7 +2084,7 @@ h2 {
 
 .trace-chain.horizontal span {
   border-left: 0;
-  border-top: 4px solid #0f766e;
+  border-top: 4px solid #00f5b2;
   text-align: center;
 }
 
@@ -2516,12 +2101,12 @@ h2 {
   gap: 8px;
   padding: 14px;
   border-radius: 8px;
-  background: #f8fafc;
+  background: rgba(2, 20, 17, 0.72);
 }
 
 .help-grid span,
 .drill-grid span {
-  color: #64748b;
+  color: rgba(190, 226, 210, 0.74);
   line-height: 1.55;
   font-size: 13px;
 }
@@ -2529,13 +2114,13 @@ h2 {
 .drill-grid span {
   padding: 7px 8px;
   border-radius: 8px;
-  background: #fff;
-  color: #334155;
+  background: rgba(4, 28, 23, 0.88);
+  color: rgba(190, 226, 210, 0.78);
 }
 
 .drill-grid span::before {
   content: "→ ";
-  color: #0f766e;
+  color: #00f5b2;
   font-weight: 800;
 }
 
@@ -2562,8 +2147,8 @@ h2 {
   padding: 0 16px;
   border: 1px dashed rgba(15, 118, 110, 0.35);
   border-radius: 8px;
-  background: #f0fdfa;
-  color: #0f766e;
+  background: rgba(0, 245, 178, 0.1);
+  color: #00f5b2;
   font-weight: 800;
 }
 
@@ -2582,19 +2167,19 @@ h2 {
   gap: 7px;
   padding: 14px;
   border-radius: 8px;
-  background: #f8fafc;
+  background: rgba(2, 20, 17, 0.72);
 }
 
 .search-results span,
 .point-profile span,
 .delivery-grid span {
-  color: #64748b;
+  color: rgba(190, 226, 210, 0.74);
   line-height: 1.55;
   font-size: 13px;
 }
 
 .point-profile strong {
-  color: #0f766e;
+  color: #00f5b2;
 }
 
 .point-archive-workbench {
@@ -2700,17 +2285,6 @@ h2 {
 .duty-workbench {
   grid-template-columns: minmax(0, 1.1fr) minmax(360px, 0.9fr);
   align-items: start;
-}
-
-.duty-workbench .section-title {
-  align-items: flex-start;
-}
-
-.duty-workbench .section-title p {
-  margin: 3px 0 0;
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.45;
 }
 
 .duty-queue,
@@ -2877,75 +2451,7 @@ h2 {
   margin: 0;
   color: var(--muted);
   line-height: 1.5;
-}
-
-.ops-command-strip,
-.delivery-command-strip {
-  display: grid;
-  gap: 10px;
-  margin-bottom: 14px;
-}
-
-.ops-command-strip {
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-}
-
-.delivery-command-strip {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-}
-
-.ops-command-strip button,
-.delivery-command-strip button {
-  display: grid;
-  grid-template-columns: 28px minmax(0, 1fr);
-  align-items: center;
-  gap: 4px 10px;
-  min-height: 74px;
-  padding: 12px 14px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  background: var(--surface);
-  color: var(--fg);
-  cursor: pointer;
-  text-align: left;
-  transition: background .15s ease, border-color .15s ease, transform .15s ease;
-}
-
-.ops-command-strip button:hover,
-.delivery-command-strip button:hover {
-  border-color: var(--border-strong);
-  background: var(--hover);
-}
-
-.ops-command-strip button.active,
-.delivery-command-strip button.active {
-  border-color: color-mix(in oklch, var(--primary) 42%, var(--border));
-  background: var(--primary-soft);
-}
-
-.ops-command-strip svg,
-.delivery-command-strip svg {
-  grid-row: 1 / span 2;
-  color: var(--primary-strong);
-}
-
-.ops-command-strip span,
-.delivery-command-strip span {
-  color: var(--muted);
-  font-size: 12px;
-}
-
-.ops-command-strip strong,
-.delivery-command-strip strong {
-  overflow: hidden;
-  color: var(--fg);
-  font-size: 17px;
-  line-height: 1.15;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.ops-view-environment .env-card,
+}.ops-view-environment .env-card,
 .ops-view-control .env-card {
   min-height: 0;
 }
@@ -3058,7 +2564,7 @@ button.asset-row:hover,
   font-size: 28px;
 }
 
-/* Whole-site shell unification. Home keeps twin layout, ops pages inherit dark workbench, app pages stay lighter but on-brand. */
+/* Whole-site shell unification. Every route inherits the approved twin-green system language. */
 .app-shell.twin-page {
   --system-shell-mode: twin;
 }
@@ -3073,7 +2579,6 @@ button.asset-row:hover,
   --system-shell-mode: app;
 }
 
-.shell-app .panel-block,
 .shell-app .report-section,
 .shell-app .summary-card,
 .shell-app .delivery-card,
@@ -3081,20 +2586,14 @@ button.asset-row:hover,
 .shell-app .feature-card,
 .shell-app .stage-card,
 .shell-app .rule-card {
-  border-color: rgba(15, 118, 110, 0.16);
-  background: linear-gradient(180deg, rgba(251, 254, 253, 0.96), rgba(241, 248, 245, 0.96));
-  box-shadow: 0 1px 0 rgba(15, 23, 42, 0.04), 0 12px 26px rgba(15, 23, 42, 0.06);
+  border-color: rgba(110, 232, 186, 0.18);
+  background: linear-gradient(180deg, rgba(8, 39, 31, 0.82), rgba(4, 20, 17, 0.9));
+  box-shadow: inset 0 1px 0 rgba(164, 255, 221, 0.04);
 }
 
-.shell-app .section-title h2,
-.shell-app .report-section h2,
-.shell-app .panel-block h2 {
-  color: var(--app-text, #172033);
+.shell-app .report-section h2 {
+  color: var(--twin-text, #effff7);
   font-size: 16px;
-}
-
-.shell-app .section-title svg {
-  color: var(--app-primary, #0f766e);
 }
 
 .shell-app .asset-row,
@@ -3107,14 +2606,14 @@ button.asset-row:hover,
 .shell-app .trace-node,
 .shell-app .recipe-grid article,
 .shell-app .plan-list article {
-  border: 1px solid rgba(15, 118, 110, 0.1);
-  background: rgba(244, 248, 246, 0.92);
+  border: 1px solid rgba(110, 232, 186, 0.14);
+  background: rgba(2, 20, 17, 0.46);
 }
 
 .shell-app .asset-row.head,
 .shell-app .rtable-head {
-  background: rgba(15, 118, 110, 0.09);
-  color: var(--app-text-muted, #64748b);
+  background: rgba(0, 245, 178, 0.1);
+  color: rgba(190, 226, 210, 0.74);
 }
 
 .shell-app button:not(.drawer-close):not(.role-menu-popover button),
@@ -3125,75 +2624,9 @@ button.asset-row:hover,
 .shell-app .btn-sm:not(:disabled):hover,
 .shell-app button.asset-row:hover,
 .shell-app .rtable-row:hover {
-  border-color: rgba(15, 118, 110, 0.32);
-  background: rgba(223, 247, 240, 0.86);
-}
-
-.shell-ops .ops-command-strip,
-.shell-ops .delivery-command-strip {
-  border: 1px solid rgba(110, 232, 186, 0.16);
-  border-radius: 10px;
-  background: linear-gradient(180deg, rgba(6, 39, 32, 0.82), rgba(3, 22, 18, 0.92));
-  box-shadow: inset 0 1px 0 rgba(164, 255, 221, 0.05), 0 14px 30px rgba(2, 12, 10, 0.14);
-}
-
-.shell-ops .ops-command-strip button,
-.shell-ops .delivery-command-strip button {
-  border-color: rgba(110, 232, 186, 0.16);
-  background: rgba(2, 20, 17, 0.52);
-  color: rgba(224, 255, 240, 0.78);
-}
-
-.shell-ops .ops-command-strip button svg,
-.shell-ops .delivery-command-strip button svg {
-  color: #8ef6ca;
-}
-
-.shell-ops .ops-command-strip button span,
-.shell-ops .delivery-command-strip button span {
-  color: rgba(190, 226, 210, 0.72);
-}
-
-.shell-ops .ops-command-strip button strong,
-.shell-ops .delivery-command-strip button strong {
-  color: #effff7;
-}
-
-.shell-ops .ops-command-strip button.active,
-.shell-ops .delivery-command-strip button.active {
-  border-color: rgba(112, 242, 192, 0.42);
-  background: linear-gradient(180deg, rgba(31, 136, 96, 0.42), rgba(8, 55, 42, 0.7));
-}
-
-.shell-ops .ops-command-strip button.active::after,
-.shell-ops .delivery-command-strip button.active::after {
-  content: "";
-  display: block;
-  grid-column: 1 / -1;
-  height: 2px;
-  margin-top: 4px;
-  border-radius: 999px;
-  background: linear-gradient(90deg, transparent, #70f2c0, transparent);
-}
-
-.shell-ops .panel-block:not(.ops-workbench-shell .panel-block),
-.shell-ops .scene-panel {
-  border-color: rgba(110, 232, 186, 0.16);
-  background: linear-gradient(180deg, rgba(7, 36, 30, 0.84), rgba(3, 20, 17, 0.94));
-  box-shadow: inset 0 1px 0 rgba(164, 255, 221, 0.05), 0 14px 30px rgba(2, 12, 10, 0.16);
-}
-
-.shell-ops .panel-block:not(.ops-workbench-shell .panel-block) .section-title h2 {
-  color: #effff7;
-}
-
-.shell-ops .panel-block:not(.ops-workbench-shell .panel-block) .section-title p,
-.shell-ops .panel-block:not(.ops-workbench-shell .panel-block) p,
-.shell-ops .panel-block:not(.ops-workbench-shell .panel-block) small {
-  color: rgba(190, 226, 210, 0.72);
-}
-
-.shell-ops .asset-row,
+  border-color: rgba(110, 232, 186, 0.28);
+  background: rgba(0, 245, 178, 0.12);
+}.shell-ops .asset-row,
 .shell-ops .sensor-list button,
 .shell-ops .mini-table button,
 .shell-ops .attention-point-row button,
@@ -3257,7 +2690,6 @@ button.asset-row:hover,
 }
 
 .ops-workbench-shell .ops-page-header,
-.ops-workbench-shell .panel-block,
 .ops-workbench-shell .ops-panel,
 .ops-workbench-shell .ops-table,
 .ops-workbench-shell .alarm-queue-panel {
@@ -3353,497 +2785,6 @@ button.asset-row:hover,
   border-color: rgba(255, 187, 99, 0.58);
   background: linear-gradient(180deg, #ffc56d, #e89524);
   color: #1d1003;
-}
-
-/* Legacy bridge, temporary.
-   These selectors keep old un-migrated pages from returning to white cards.
-   New work should prefer system-page/system-panel/system-card/system-table and
-   remove page-specific entries from this bridge as pages migrate. */
-.system-shell:not(.overview-mode) {
-  min-height: 100vh;
-  color: var(--twin-text, #effff7);
-}
-
-.system-shell.shell-app,
-.system-shell.shell-ops {
-  background:
-    radial-gradient(circle at 14% 0%, rgba(94, 255, 197, 0.16), transparent 28%),
-    radial-gradient(circle at 86% 8%, rgba(255, 187, 99, 0.08), transparent 24%),
-    linear-gradient(180deg, #061c16 0%, #08261f 42%, #041511 100%) !important;
-}
-
-.system-shell.shell-app .system-section,
-.system-shell.shell-ops .system-section,
-.system-shell.shell-app .section-content,
-.system-shell.shell-ops .section-content {
-  color: var(--twin-text, #effff7);
-}
-
-.system-shell.shell-app .topbar,
-.system-shell.shell-ops .topbar,
-.system-shell.shell-app .system-topbar,
-.system-shell.shell-ops .system-topbar {
-  border-color: rgba(110, 232, 186, 0.2) !important;
-  background:
-    linear-gradient(180deg, rgba(6, 39, 32, 0.94), rgba(4, 24, 20, 0.98)) !important;
-  box-shadow:
-    inset 0 1px 0 rgba(164, 255, 221, 0.07),
-    0 18px 34px rgba(2, 12, 10, 0.18) !important;
-}
-
-.system-shell.shell-app .primary-nav-bar,
-.system-shell.shell-ops .primary-nav-bar,
-.system-shell.shell-app .system-nav,
-.system-shell.shell-ops .system-nav {
-  border-color: rgba(110, 232, 186, 0.2) !important;
-  background:
-    radial-gradient(circle at 12% 0%, rgba(0, 245, 178, 0.1), transparent 28%),
-    linear-gradient(180deg, rgba(5, 35, 29, 0.94), rgba(2, 17, 14, 0.98)) !important;
-  box-shadow:
-    inset 0 1px 0 rgba(156, 255, 213, 0.06),
-    0 16px 32px rgba(2, 12, 10, 0.16) !important;
-}
-
-.system-shell.shell-app .topbar h1,
-.system-shell.shell-ops .topbar h1,
-.system-shell.shell-app .section-title h2,
-.system-shell.shell-ops .section-title h2,
-.system-shell.shell-app .section-title h3,
-.system-shell.shell-ops .section-title h3,
-.system-shell.shell-app .panel-block h2,
-.system-shell.shell-ops .panel-block h2,
-.system-shell.shell-app .panel-block h3,
-.system-shell.shell-ops .panel-block h3,
-.system-shell.shell-app .report-section h2,
-.system-shell.shell-ops .report-section h2,
-.system-shell.shell-app .report-section h3,
-.system-shell.shell-ops .report-section h3 {
-  color: var(--twin-text, #effff7) !important;
-}
-
-.system-shell.shell-app .topbar .eyebrow,
-.system-shell.shell-ops .topbar .eyebrow,
-.system-shell.shell-app .section-title svg,
-.system-shell.shell-ops .section-title svg,
-.system-shell.shell-app .panel-section-title svg,
-.system-shell.shell-ops .panel-section-title svg {
-  color: var(--twin-normal, #8ef6ca) !important;
-}
-
-.system-shell.shell-app .section-title p,
-.system-shell.shell-ops .section-title p,
-.system-shell.shell-app .panel-block p,
-.system-shell.shell-ops .panel-block p,
-.system-shell.shell-app .report-section p,
-.system-shell.shell-ops .report-section p,
-.system-shell.shell-app .panel-block small,
-.system-shell.shell-ops .panel-block small,
-.system-shell.shell-app .report-section small,
-.system-shell.shell-ops .report-section small,
-.system-shell.shell-app .muted,
-.system-shell.shell-ops .muted {
-  color: rgba(190, 226, 210, 0.74) !important;
-}
-
-.system-shell.shell-app .panel-block,
-.system-shell.shell-ops .panel-block,
-.system-shell.shell-app .scene-panel,
-.system-shell.shell-ops .scene-panel,
-.system-shell.shell-app .metric,
-.system-shell.shell-ops .metric,
-.system-shell.shell-app .report-delivery-center,
-.system-shell.shell-ops .report-delivery-center,
-.system-shell.shell-app .report-section,
-.system-shell.shell-ops .report-section,
-.system-shell.shell-app .summary-card,
-.system-shell.shell-ops .summary-card,
-.system-shell.shell-app .delivery-card,
-.system-shell.shell-ops .delivery-card,
-.system-shell.shell-app .feature-card,
-.system-shell.shell-ops .feature-card,
-.system-shell.shell-app .stage-card,
-.system-shell.shell-ops .stage-card,
-.system-shell.shell-app .rule-card,
-.system-shell.shell-ops .rule-card,
-.system-shell.shell-app .overview-state-panel,
-.system-shell.shell-ops .overview-state-panel,
-.system-shell.shell-app .overview-quick-panel,
-.system-shell.shell-ops .overview-quick-panel,
-.system-shell.shell-app .overview-demo-panel,
-.system-shell.shell-ops .overview-demo-panel,
-.system-shell.shell-app .batch-production-board,
-.system-shell.shell-ops .batch-production-board,
-.system-shell.shell-app .delivery-package-board,
-.system-shell.shell-ops .delivery-package-board,
-.system-shell.shell-app .alarm-inline-workbench,
-.system-shell.shell-ops .alarm-inline-workbench,
-.system-shell.shell-app .environment-monitor-table,
-.system-shell.shell-ops .environment-monitor-table {
-  border-color: rgba(110, 232, 186, 0.18) !important;
-  background:
-    linear-gradient(180deg, rgba(7, 36, 30, 0.86), rgba(3, 20, 17, 0.94)) !important;
-  box-shadow:
-    inset 0 1px 0 rgba(164, 255, 221, 0.05),
-    0 14px 30px rgba(2, 12, 10, 0.16) !important;
-}
-
-.system-shell.shell-app .panel-block.lifecycle-wide,
-.system-shell.shell-app .batch-command-hero,
-.system-shell.shell-app .stage-release-card,
-.system-shell.shell-app .quality-wide,
-.system-shell.shell-app .director-wide,
-.system-shell.shell-app .economics-wide,
-.system-shell.shell-app .collaboration-wide,
-.system-shell.shell-app .strategy-wide {
-  background:
-    radial-gradient(circle at 10% 0%, rgba(142, 246, 202, 0.1), transparent 24%),
-    linear-gradient(180deg, rgba(8, 43, 35, 0.9), rgba(4, 24, 20, 0.96)) !important;
-}
-
-.system-shell.shell-app .metric,
-.system-shell.shell-ops .metric,
-.system-shell.shell-app .stage-status-grid > div,
-.system-shell.shell-ops .stage-status-grid > div,
-.system-shell.shell-app .production-summary-grid article,
-.system-shell.shell-ops .production-summary-grid article,
-.system-shell.shell-app .handover-grid article,
-.system-shell.shell-ops .handover-grid article,
-.system-shell.shell-app .review-grid article,
-.system-shell.shell-ops .review-grid article,
-.system-shell.shell-app .threshold-list article,
-.system-shell.shell-ops .threshold-list article,
-.system-shell.shell-app .api-list article,
-.system-shell.shell-ops .api-list article,
-.system-shell.shell-app .history-list article,
-.system-shell.shell-ops .history-list article,
-.system-shell.shell-app .plan-list article,
-.system-shell.shell-ops .plan-list article,
-.system-shell.shell-app .chain-list article,
-.system-shell.shell-ops .chain-list article,
-.system-shell.shell-app .response-grid article,
-.system-shell.shell-ops .response-grid article,
-.system-shell.shell-app .help-grid article,
-.system-shell.shell-ops .help-grid article,
-.system-shell.shell-app .drill-grid article,
-.system-shell.shell-ops .drill-grid article,
-.system-shell.shell-app .search-results article,
-.system-shell.shell-ops .search-results article,
-.system-shell.shell-app .point-profile article,
-.system-shell.shell-ops .point-profile article,
-.system-shell.shell-app .delivery-grid article,
-.system-shell.shell-ops .delivery-grid article,
-.system-shell.shell-app .recipe-grid article,
-.system-shell.shell-ops .recipe-grid article,
-.system-shell.shell-app .demo-card,
-.system-shell.shell-ops .demo-card,
-.system-shell.shell-app .asset-row,
-.system-shell.shell-ops .asset-row,
-.system-shell.shell-app .device-row,
-.system-shell.shell-ops .device-row,
-.system-shell.shell-app .sensor-list button,
-.system-shell.shell-ops .sensor-list button,
-.system-shell.shell-app .action-list span,
-.system-shell.shell-ops .action-list span,
-.system-shell.shell-app .process-list span,
-.system-shell.shell-ops .process-list span,
-.system-shell.shell-app .growth-state span,
-.system-shell.shell-ops .growth-state span,
-.system-shell.shell-app .summary-item,
-.system-shell.shell-ops .summary-item,
-.system-shell.shell-app .trace-node,
-.system-shell.shell-ops .trace-node,
-.system-shell.shell-app .batch-metrics article,
-.system-shell.shell-ops .batch-metrics article,
-.system-shell.shell-app .correlation-grid article,
-.system-shell.shell-ops .correlation-grid article,
-.system-shell.shell-app .lifecycle-step,
-.system-shell.shell-ops .lifecycle-step,
-.system-shell.shell-app .stage-line,
-.system-shell.shell-ops .stage-line,
-.system-shell.shell-app .feature-value,
-.system-shell.shell-ops .feature-value,
-.system-shell.shell-app .batch-health-metrics,
-.system-shell.shell-ops .batch-health-metrics,
-.system-shell.shell-app .batch-health-metrics div,
-.system-shell.shell-ops .batch-health-metrics div,
-.system-shell.shell-app .duty-focus,
-.system-shell.shell-ops .duty-focus,
-.system-shell.shell-app .handover-note,
-.system-shell.shell-ops .handover-note,
-.system-shell.shell-app .growth-state strong,
-.system-shell.shell-ops .growth-state strong,
-.system-shell.shell-app .trace-chain span,
-.system-shell.shell-ops .trace-chain span,
-.system-shell.shell-app .demo-state,
-.system-shell.shell-ops .demo-state,
-.system-shell.shell-app .rtable-row,
-.system-shell.shell-ops .rtable-row,
-.system-shell.shell-app .rtable-head,
-.system-shell.shell-ops .rtable-head,
-.system-shell.shell-app .app-table-row,
-.system-shell.shell-ops .app-table-row,
-.system-shell.shell-app .app-table-head,
-.system-shell.shell-ops .app-table-head {
-  border-color: rgba(110, 232, 186, 0.12) !important;
-  background: rgba(2, 20, 17, 0.56) !important;
-  color: rgba(239, 255, 247, 0.9) !important;
-}
-
-.system-shell.shell-app .lifecycle-step.current,
-.system-shell.shell-ops .lifecycle-step.current,
-.system-shell.shell-app .stage-card.current,
-.system-shell.shell-ops .stage-card.current,
-.system-shell.shell-app .app-status-chip,
-.system-shell.shell-ops .app-status-chip,
-.system-shell.shell-app .tag,
-.system-shell.shell-ops .tag,
-.system-shell.shell-app .rule-status,
-.system-shell.shell-ops .rule-status,
-.system-shell.shell-app .report-status,
-.system-shell.shell-ops .report-status {
-  border-color: rgba(142, 246, 202, 0.28) !important;
-  background: rgba(142, 246, 202, 0.12) !important;
-  color: var(--twin-normal, #8ef6ca) !important;
-}
-
-.system-shell.shell-app .alarm-item,
-.system-shell.shell-ops .alarm-item,
-.system-shell.shell-app .timeline-item,
-.system-shell.shell-ops .timeline-item,
-.system-shell.shell-app .warning,
-.system-shell.shell-ops .warning {
-  border-color: rgba(255, 187, 99, 0.34) !important;
-  background: rgba(255, 187, 99, 0.1) !important;
-}
-
-.system-shell.shell-app .reading-value,
-.system-shell.shell-ops .reading-value,
-.system-shell.shell-app .metric svg,
-.system-shell.shell-ops .metric svg,
-.system-shell.shell-app .stage-status-grid strong,
-.system-shell.shell-ops .stage-status-grid strong,
-.system-shell.shell-app .production-summary-grid strong,
-.system-shell.shell-ops .production-summary-grid strong,
-.system-shell.shell-app .feature-value strong,
-.system-shell.shell-ops .feature-value strong,
-.system-shell.shell-app .mini-table strong,
-.system-shell.shell-ops .mini-table strong,
-.system-shell.shell-app .rule-card dt,
-.system-shell.shell-ops .rule-card dt,
-.system-shell.shell-app .handover-note strong,
-.system-shell.shell-ops .handover-note strong,
-.system-shell.shell-app .setting-tags span,
-.system-shell.shell-ops .setting-tags span,
-.system-shell.shell-app .demo-grid strong,
-.system-shell.shell-ops .demo-grid strong,
-.system-shell.shell-app .delivery-grid strong,
-.system-shell.shell-ops .delivery-grid strong,
-.system-shell.shell-app .recipe-grid strong,
-.system-shell.shell-ops .recipe-grid strong,
-.system-shell.shell-app .plan-list span,
-.system-shell.shell-ops .plan-list span,
-.system-shell.shell-app .asset-row strong,
-.system-shell.shell-ops .asset-row strong,
-.system-shell.shell-app .demo-card span,
-.system-shell.shell-ops .demo-card span,
-.system-shell.shell-app .director-summary strong,
-.system-shell.shell-ops .director-summary strong,
-.system-shell.shell-app .point-profile strong,
-.system-shell.shell-ops .point-profile strong,
-.system-shell.shell-app .batch-metrics strong,
-.system-shell.shell-ops .batch-metrics strong,
-.system-shell.shell-app .summary-item strong,
-.system-shell.shell-ops .summary-item strong,
-.system-shell.shell-app .rtable-row strong,
-.system-shell.shell-ops .rtable-row strong {
-  color: var(--twin-text, #effff7) !important;
-}
-
-.system-shell.shell-app .metric span,
-.system-shell.shell-ops .metric span,
-.system-shell.shell-app .metric small,
-.system-shell.shell-ops .metric small,
-.system-shell.shell-app .batch-metrics span,
-.system-shell.shell-ops .batch-metrics span,
-.system-shell.shell-app .batch-metrics small,
-.system-shell.shell-ops .batch-metrics small,
-.system-shell.shell-app .correlation-grid span,
-.system-shell.shell-ops .correlation-grid span,
-.system-shell.shell-app .summary-item span,
-.system-shell.shell-ops .summary-item span,
-.system-shell.shell-app .asset-row span,
-.system-shell.shell-ops .asset-row span,
-.system-shell.shell-app .rtable-row span,
-.system-shell.shell-ops .rtable-row span,
-.system-shell.shell-app .rtable-head,
-.system-shell.shell-ops .rtable-head,
-.system-shell.shell-app dt,
-.system-shell.shell-ops dt {
-  color: rgba(190, 226, 210, 0.74) !important;
-}
-
-.system-shell.shell-app button:not(.drawer-close),
-.system-shell.shell-ops button:not(.drawer-close),
-.system-shell.shell-app .btn-sm,
-.system-shell.shell-ops .btn-sm {
-  border-color: rgba(110, 232, 186, 0.24) !important;
-  background: rgba(4, 31, 25, 0.82) !important;
-  color: #c9ffea !important;
-}
-
-.system-shell.shell-app button:not(.drawer-close):hover,
-.system-shell.shell-ops button:not(.drawer-close):hover,
-.system-shell.shell-app .btn-sm:not(:disabled):hover,
-.system-shell.shell-ops .btn-sm:not(:disabled):hover {
-  border-color: rgba(142, 246, 202, 0.48) !important;
-  background: rgba(20, 110, 82, 0.72) !important;
-  color: #effff7 !important;
-}
-
-.system-shell.shell-app .segmented button.active,
-.system-shell.shell-ops .segmented button.active,
-.system-shell.shell-app .work-mode-buttons button.active,
-.system-shell.shell-ops .work-mode-buttons button.active,
-.system-shell.shell-app .query-controls button.active,
-.system-shell.shell-ops .query-controls button.active,
-.system-shell.shell-app .report-card button,
-.system-shell.shell-ops .report-card button,
-.system-shell.shell-app .login-box button,
-.system-shell.shell-ops .login-box button,
-.system-shell.shell-app .batch-stage-actions button:nth-child(2),
-.system-shell.shell-ops .batch-stage-actions button:nth-child(2),
-.system-shell.shell-app .stage-action-strip button:nth-child(2),
-.system-shell.shell-ops .stage-action-strip button:nth-child(2) {
-  border-color: rgba(142, 246, 202, 0.5) !important;
-  background: linear-gradient(180deg, #20e6aa, #0c9f78) !important;
-  color: #021610 !important;
-}
-
-.system-shell.shell-app input,
-.system-shell.shell-ops input,
-.system-shell.shell-app select,
-.system-shell.shell-ops select,
-.system-shell.shell-app textarea,
-.system-shell.shell-ops textarea {
-  border-color: rgba(110, 232, 186, 0.18) !important;
-  background: rgba(2, 20, 17, 0.72) !important;
-  color: var(--twin-text, #effff7) !important;
-}
-
-/* Whole-site shell final precedence. */
-.shell-app .panel-block,
-.shell-app .report-section,
-.shell-app .summary-card,
-.shell-app .delivery-card,
-.shell-app .metric,
-.shell-app .feature-card,
-.shell-app .stage-card,
-.shell-app .rule-card {
-  border-color: rgba(15, 118, 110, 0.16);
-  background: linear-gradient(180deg, rgba(251, 254, 253, 0.96), rgba(241, 248, 245, 0.96));
-  box-shadow: 0 1px 0 rgba(15, 23, 42, 0.04), 0 12px 26px rgba(15, 23, 42, 0.06);
-}
-
-.shell-app .section-title h2,
-.shell-app .report-section h2,
-.shell-app .panel-block h2 {
-  color: var(--app-text, #172033);
-  font-size: 16px;
-}
-
-.shell-app .section-title svg {
-  color: var(--app-primary, #0f766e);
-}
-
-.shell-app .asset-row,
-.shell-app .rtable-row,
-.shell-app .review-grid article,
-.shell-app .threshold-list article,
-.shell-app .suggestion-list article,
-.shell-app .summary-item,
-.shell-app .trace-node,
-.shell-app .recipe-grid article,
-.shell-app .plan-list article {
-  border: 1px solid rgba(15, 118, 110, 0.1);
-  background: rgba(244, 248, 246, 0.92);
-}
-
-.shell-app .asset-row.head,
-.shell-app .rtable-head {
-  background: rgba(15, 118, 110, 0.09);
-  color: var(--app-text-muted, #64748b);
-}
-
-.shell-app .btn-sm,
-.shell-app .batch-stage-actions button,
-.shell-app .stage-action-strip button {
-  border-color: rgba(15, 118, 110, 0.18);
-}
-
-.shell-ops .ops-command-strip,
-.shell-ops .delivery-command-strip {
-  border: 1px solid rgba(110, 232, 186, 0.16);
-  border-radius: 10px;
-  background: linear-gradient(180deg, rgba(6, 39, 32, 0.82), rgba(3, 22, 18, 0.92));
-  box-shadow: inset 0 1px 0 rgba(164, 255, 221, 0.05), 0 14px 30px rgba(2, 12, 10, 0.14);
-}
-
-.shell-ops .ops-command-strip button,
-.shell-ops .delivery-command-strip button {
-  border-color: rgba(110, 232, 186, 0.16);
-  background: rgba(2, 20, 17, 0.52);
-  color: rgba(224, 255, 240, 0.78);
-}
-
-.shell-ops .ops-command-strip button svg,
-.shell-ops .delivery-command-strip button svg {
-  color: #8ef6ca;
-}
-
-.shell-ops .ops-command-strip button span,
-.shell-ops .delivery-command-strip button span {
-  color: rgba(190, 226, 210, 0.72);
-}
-
-.shell-ops .ops-command-strip button strong,
-.shell-ops .delivery-command-strip button strong {
-  color: #effff7;
-}
-
-.shell-ops .ops-command-strip button.active,
-.shell-ops .delivery-command-strip button.active {
-  border-color: rgba(112, 242, 192, 0.42);
-  background: linear-gradient(180deg, rgba(31, 136, 96, 0.42), rgba(8, 55, 42, 0.7));
-}
-
-.shell-ops .panel-block:not(.ops-workbench-shell .panel-block),
-.shell-ops .scene-panel {
-  border-color: rgba(110, 232, 186, 0.16);
-  background: linear-gradient(180deg, rgba(7, 36, 30, 0.84), rgba(3, 20, 17, 0.94));
-  box-shadow: inset 0 1px 0 rgba(164, 255, 221, 0.05), 0 14px 30px rgba(2, 12, 10, 0.16);
-}
-
-.shell-ops .panel-block:not(.ops-workbench-shell .panel-block) .section-title h2 {
-  color: #effff7;
-}
-
-.shell-ops .panel-block:not(.ops-workbench-shell .panel-block) .section-title p,
-.shell-ops .panel-block:not(.ops-workbench-shell .panel-block) p,
-.shell-ops .panel-block:not(.ops-workbench-shell .panel-block) small {
-  color: rgba(190, 226, 210, 0.72);
-}
-
-.shell-ops .asset-row,
-.shell-ops .sensor-list button,
-.shell-ops .mini-table button,
-.shell-ops .attention-point-row button,
-.shell-ops .ops-mini-card,
-.shell-ops .ops-rule-list article,
-.shell-ops .ops-maintenance-card,
-.shell-ops .maintenance-check-list article {
-  border-color: rgba(110, 232, 186, 0.12);
-  background: rgba(2, 20, 17, 0.56);
-  color: #effff7;
 }
 
 /* P0 dark operation layer: daily work and alarm handling only. */
@@ -3952,7 +2893,6 @@ button.asset-row:hover,
   color: var(--ops-green);
 }
 
-.ops-workbench-shell .panel-block,
 .ops-panel,
 .ops-table {
   border-color: var(--ops-border);
@@ -3963,17 +2903,14 @@ button.asset-row:hover,
     0 14px 30px rgba(2, 12, 10, 0.18);
 }
 
-.ops-workbench-shell .section-title h2,
 .ops-workbench-shell .app-panel-title h3 {
   color: var(--ops-text);
 }
 
-.ops-workbench-shell .section-title svg,
 .ops-workbench-shell .app-panel-title svg {
   color: var(--ops-green);
 }
 
-.ops-workbench-shell .section-title p,
 .ops-workbench-shell .app-panel-title p {
   color: var(--ops-muted);
 }
@@ -5104,12 +4041,7 @@ button.asset-row:hover,
 }
 
 /* Final layout guard: the 3D workspace sits inside the padded app shell. */
-.workspace {
-  max-width: calc(100vw - 40px);
-  grid-template-columns: minmax(240px, 294px) minmax(0, 1fr) minmax(280px, 340px);
-}
 
-.workspace > *,
 .duty-workbench,
 .duty-focus,
 .sensor-list,
@@ -5119,43 +4051,7 @@ button.asset-row:hover,
 
 .duty-workbench {
   grid-template-columns: minmax(0, 1fr);
-}
-
-@media (max-width: 1180px) {
-  .workspace {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* UI收口：首页、环境、报警、批次、交付五个高频场景 */
-.overview-command-center {
-  display: grid;
-  grid-template-columns: minmax(280px, .92fr) minmax(360px, 1.15fr) minmax(300px, .9fr);
-  gap: 14px;
-  margin-bottom: 14px;
-}
-
-.overview-state-panel,
-.overview-quick-panel,
-.overview-demo-panel,
-.batch-production-board,
-.delivery-package-board,
-.alarm-inline-workbench,
-.environment-monitor-table {
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  background: var(--surface);
-  box-shadow: var(--shadow-card);
-}
-
-.overview-state-panel,
-.overview-quick-panel,
-.overview-demo-panel {
-  min-height: 238px;
-  padding: 16px;
-}
-
-.overview-score-line {
+}.overview-score-line {
   display: flex;
   align-items: baseline;
   gap: 10px;
@@ -5187,124 +4083,7 @@ button.asset-row:hover,
   padding: 8px 10px;
   border-radius: 8px;
   background: var(--surface-alt);
-}
-
-.overview-state-grid b,
-.overview-action-list small,
-.overview-route-mini small,
-.env-monitor-row small,
-.batch-board-metrics small,
-.delivery-package-grid small,
-.alarm-workbench-meta {
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.45;
-}
-
-.overview-state-grid span,
-.overview-action-list b,
-.overview-route-mini span {
-  color: var(--fg);
-  font-weight: 760;
-}
-
-.overview-quick-panel header {
-  margin-bottom: 12px;
-}
-
-.overview-quick-panel h2,
-.batch-board-main h2,
-.delivery-package-board h2,
-.alarm-workbench-main h2 {
-  margin: 0;
-  color: var(--fg);
-  font-size: 20px;
-  line-height: 1.25;
-}
-
-.overview-quick-panel p,
-.batch-board-main p,
-.delivery-package-board p,
-.alarm-workbench-main p {
-  margin: 6px 0 0;
-  color: var(--muted);
-  line-height: 1.55;
-}
-
-.overview-action-list {
-  display: grid;
-  gap: 9px;
-}
-
-.overview-action-list button,
-.overview-route-mini,
-.batch-board-metrics button,
-.delivery-package-grid button,
-.alarm-workbench-actions button,
-.env-monitor-row {
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  background: var(--surface-alt);
-  color: var(--fg);
-  cursor: pointer;
-  transition: border-color .15s ease, background .15s ease, transform .15s ease;
-}
-
-.overview-action-list button {
-  display: grid;
-  grid-template-columns: 32px minmax(0, 1fr);
-  gap: 10px;
-  align-items: center;
-  min-height: 54px;
-  padding: 10px 12px;
-  text-align: left;
-}
-
-.overview-action-list span {
-  display: grid;
-  gap: 4px;
-}
-
-.overview-action-list button:hover,
-.overview-route-mini:hover,
-.batch-board-metrics button:hover,
-.delivery-package-grid button:hover,
-.alarm-workbench-actions button:hover,
-.env-monitor-row:hover {
-  border-color: var(--border-strong);
-  background: var(--hover);
-  transform: translateY(-1px);
-}
-
-.overview-demo-panel {
-  display: grid;
-  align-content: start;
-  gap: 8px;
-}
-
-.overview-route-mini {
-  display: grid;
-  grid-template-columns: 28px minmax(0, 1fr);
-  gap: 4px 8px;
-  min-height: 46px;
-  padding: 9px 10px;
-  text-align: left;
-}
-
-.overview-route-mini strong {
-  grid-row: span 2;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 26px;
-  height: 26px;
-  border-radius: 999px;
-  background: var(--primary-soft);
-  color: var(--primary-strong);
-  font-size: 12px;
-}
-
-.batch-production-board,
+}.batch-production-board,
 .delivery-package-board {
   display: grid;
   grid-template-columns: minmax(260px, .72fr) minmax(420px, 1fr);
@@ -5439,27 +4218,14 @@ button.asset-row:hover,
 }
 
 @media (max-width: 1100px) {
-  .overview-command-center,
-  .batch-production-board,
-  .delivery-package-board,
-  .alarm-inline-workbench {
-    grid-template-columns: 1fr;
-  }
-
-  .batch-board-metrics,
+.batch-board-metrics,
   .delivery-package-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 720px) {
-  .overview-state-panel,
-  .overview-quick-panel,
-  .overview-demo-panel {
-    min-height: auto;
-  }
-
-  .overview-score-line strong {
+.overview-score-line strong {
     font-size: 44px;
   }
 
@@ -5482,59 +4248,7 @@ button.asset-row:hover,
 /* Unified UI vocabulary: cards, rows, buttons, tags and dense workbench rhythm. */
 .app-shell {
   color: var(--fg);
-}
-
-.topbar,
-.primary-nav-bar,
-.page-summary-row,
-.ops-command-strip,
-.delivery-command-strip,
-.overview-command-center,
-.module-grid,
-.workspace {
-  width: min(1600px, 100%);
-}
-
-.topbar {
-  padding: 0 18px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  background: var(--surface);
-  box-shadow: var(--shadow-card);
-}
-
-.topbar-status {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(120px, 1fr));
-  gap: 8px;
-}
-
-.status-item,
-.summary-chip,
-.core-card,
-.entry-card,
-.feature-card,
-.metric,
-.stage-card,
-.demo-card,
-.report-card,
-.task-list article,
-.log-list article,
-.plan-list article,
-.handover-grid article,
-.review-grid article,
-.threshold-list article,
-.api-list article,
-.history-list article,
-.chain-list article,
-.search-results article {
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  background: var(--surface);
-  box-shadow: none;
-}
-
-.status-item,
+}.status-item,
 .summary-chip {
   min-height: 44px;
   padding: 8px 11px;
@@ -5553,31 +4267,7 @@ button.asset-row:hover,
   color: var(--fg);
   font-size: 13px;
   font-weight: 780;
-}
-
-.page-summary-row {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 10px;
-  margin-bottom: 12px;
-}
-
-.panel-block,
-.report-section,
-.overview-state-panel,
-.overview-quick-panel,
-.overview-demo-panel,
-.batch-production-board,
-.delivery-package-board,
-.alarm-inline-workbench,
-.environment-monitor-table {
-  border-color: var(--border);
-  border-radius: 8px;
-  background: var(--surface);
-  box-shadow: var(--shadow-card);
-}
-
-.panel-section-shell {
+}.panel-section-shell {
   display: grid;
   gap: 12px;
 }
@@ -5595,21 +4285,7 @@ button.asset-row:hover,
   gap: 12px;
 }
 
-.section-title {
-  min-height: 26px;
-}
-
-.section-title p {
-  max-width: 72ch;
-  margin: 4px 0 0;
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.5;
-}
-
-.section-title h2,
-.report-section h3,
-.panel-block h3 {
+.report-section h3 {
   color: var(--fg);
   font-size: 15px;
   font-weight: 850;
@@ -5630,55 +4306,7 @@ button:not(:disabled) {
 button:disabled {
   cursor: not-allowed;
   opacity: .55;
-}
-
-.anchor-strip button,
-.segmented button,
-.work-mode-buttons button,
-.query-controls button,
-.point-filter-bar button,
-.drawer-actions button,
-.report-actions button,
-.export-grid button,
-.login-box button,
-.alarm-workbench-actions button,
-.ops-command-strip button,
-.delivery-command-strip button {
-  border: 1px solid var(--border);
-  background: var(--surface);
-  color: var(--fg);
-  font-weight: 760;
-  transition: background .15s ease, border-color .15s ease, color .15s ease, transform .15s ease;
-}
-
-.anchor-strip button:hover,
-.segmented button:hover,
-.work-mode-buttons button:hover,
-.query-controls button:hover,
-.point-filter-bar button:hover,
-.drawer-actions button:hover,
-.report-actions button:hover,
-.export-grid button:hover,
-.login-box button:hover,
-.alarm-workbench-actions button:hover,
-.ops-command-strip button:hover,
-.delivery-command-strip button:hover {
-  border-color: var(--border-strong);
-  background: var(--hover);
-}
-
-.anchor-strip button.active,
-.segmented button.active,
-.work-mode-buttons button.active,
-.query-controls button.active,
-.ops-command-strip button.active,
-.delivery-command-strip button.active {
-  border-color: var(--primary);
-  background: var(--primary-soft);
-  color: var(--primary-strong);
-}
-
-.asset-row,
+}.asset-row,
 .timeline-item,
 .alarm-item,
 .sensor-list button,
@@ -5734,38 +4362,15 @@ button.alarm-item:hover,
   color: var(--warning);
 }
 
-@media (max-width: 1100px) {
-  .topbar {
-    align-items: flex-start;
-  }
 
-  .topbar-status,
-  .page-summary-row {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
 
 @media (max-width: 720px) {
   h1 {
     font-size: 24px;
-  }
-
-  .topbar {
-    padding: 14px;
-  }
-
-  .topbar-status,
-  .page-summary-row {
-    grid-template-columns: 1fr;
-  }
-}
+  }}
 
 .ops-view-alarms .alarms-layout {
   grid-template-columns: minmax(0, 1.45fr) minmax(300px, .55fr);
-}
-
-.ops-view-alarms .panel-block {
-  padding: 14px;
 }
 
 .ops-view-alarms .uniformity-grid {
@@ -5818,10 +4423,6 @@ button.alarm-item:hover,
 .ops-view-alarms .process-list span {
   min-height: 32px;
   padding: 7px 9px;
-}
-
-.ops-view-environment .module-grid:not(.wide) {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .ops-view-environment .feature-card {
@@ -6331,7 +4932,7 @@ button.alarm-item:hover,
 }
 
 .delivery-grid strong {
-  color: #0f766e;
+  color: #00f5b2;
   font-size: 18px;
 }
 
@@ -6385,16 +4986,16 @@ button.alarm-item:hover,
   align-content: start;
   padding: 14px;
   border-radius: 8px;
-  background: #f8fafc;
+  background: rgba(2, 20, 17, 0.72);
 }
 
 .recipe-grid strong {
-  color: #0f766e;
+  color: #00f5b2;
 }
 
 .recipe-grid span,
 .recipe-grid small {
-  color: #64748b;
+  color: rgba(190, 226, 210, 0.74);
   line-height: 1.55;
   font-size: 13px;
 }
@@ -6409,11 +5010,11 @@ button.alarm-item:hover,
   gap: 5px;
   padding: 12px;
   border-radius: 8px;
-  background: #f8fafc;
+  background: rgba(2, 20, 17, 0.72);
 }
 
 .plan-list span {
-  color: #0f766e;
+  color: #00f5b2;
   font-weight: 700;
 }
 
@@ -6430,15 +5031,15 @@ button.alarm-item:hover,
   min-height: 42px;
   border: 0;
   border-radius: 8px;
-  background: #f8fafc;
-  color: #334155;
+  background: rgba(2, 20, 17, 0.72);
+  color: rgba(190, 226, 210, 0.78);
   padding: 9px 11px;
   text-align: left;
 }
 
 .asset-row.head {
-  background: #e2e8f0;
-  color: #475569;
+  background: rgba(110, 232, 186, 0.14);
+  color: rgba(190, 226, 210, 0.74);
   font-size: 12px;
   font-weight: 800;
 }
@@ -6448,7 +5049,7 @@ button.asset-row {
 }
 
 .asset-row strong {
-  color: #0f766e;
+  color: #00f5b2;
 }
 
 .asset-row.production-row {
@@ -6456,7 +5057,7 @@ button.asset-row {
 }
 
 .asset-row.production-row small {
-  color: #64748b;
+  color: rgba(190, 226, 210, 0.74);
   line-height: 1.45;
 }
 
@@ -6520,7 +5121,7 @@ button.asset-row {
 .asset-row.acceptance-row small,
 .asset-row.permission-row small,
 .asset-row.script-row small {
-  color: #64748b;
+  color: rgba(190, 226, 210, 0.74);
   line-height: 1.45;
 }
 
@@ -6536,24 +5137,24 @@ button.asset-row {
   padding: 14px;
   border: 0;
   border-radius: 8px;
-  background: #f8fafc;
-  color: #334155;
+  background: rgba(2, 20, 17, 0.72);
+  color: rgba(190, 226, 210, 0.78);
   text-align: left;
   cursor: pointer;
 }
 
 .demo-card span {
-  color: #0f766e;
+  color: #00f5b2;
   font-weight: 800;
 }
 
 .demo-card strong {
-  color: #0f172a;
+  color: #effff7;
   line-height: 1.45;
 }
 
 .demo-card small {
-  color: #64748b;
+  color: rgba(190, 226, 210, 0.74);
 }
 
 .director-summary {
@@ -6569,86 +5170,78 @@ button.asset-row {
   align-content: start;
   padding: 16px;
   border-radius: 8px;
-  background: #f0fdfa;
+  background: rgba(0, 245, 178, 0.1);
 }
 
 .director-summary span {
-  color: #64748b;
+  color: rgba(190, 226, 210, 0.74);
   font-size: 13px;
 }
 
 .director-summary strong {
-  color: #0f766e;
+  color: #00f5b2;
   font-size: 24px;
 }
 
 .director-summary small {
-  color: #334155;
+  color: rgba(190, 226, 210, 0.78);
   line-height: 1.5;
 }
 
 .sensor-list button.active {
-  background: #ecfeff;
-  outline: 2px solid rgba(14, 116, 144, 0.2);
+  background: rgba(0, 245, 178, 0.12);
+  outline: 2px solid rgba(142, 246, 202, 0.24);
 }
 
 .empty {
   margin: 0;
-  color: #64748b;
+  color: rgba(190, 226, 210, 0.74);
 }
 
 @media (max-width: 1180px) {
   .process-steps {
     grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
-  .metric-strip {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .module-grid,
-  .module-grid.wide,
-  .growth-layout,
-  .alarms-layout,
-  .maintenance-layout,
-  .professional-layout,
-  .batch-layout,
-  .workflow-layout,
-  .sop-layout,
-  .governance-layout,
-  .display-layout,
-  .config-layout,
-  .history-layout,
-  .security-layout,
-  .reports-layout,
-  .settings-layout,
-  .decision-layout,
-  .trace-layout,
-  .audit-layout,
-  .engineering-layout,
-  .integration-layout,
-  .drill-layout,
-  .search-layout,
-  .user-layout,
-  .point-layout,
-  .explain-layout,
-  .delivery-layout,
-  .recipe-layout,
-  .calendar-layout,
-  .bio-layout,
-  .production-layout,
-  .harvest-layout,
-  .experience-layout,
-  .closure-layout,
-  .review-meeting-layout,
-  .quality-layout,
-  .director-layout,
-  .economics-layout,
-  .collaboration-layout,
-  .brain-layout,
-  .strategy-layout,
-  .acceptance-layout,
-  .presentation-layout {
+  }.growth-layout,
+.alarms-layout,
+.maintenance-layout,
+.professional-layout,
+.batch-layout,
+.workflow-layout,
+.sop-layout,
+.governance-layout,
+.display-layout,
+.config-layout,
+.history-layout,
+.security-layout,
+.reports-layout,
+.settings-layout,
+.decision-layout,
+.trace-layout,
+.audit-layout,
+.engineering-layout,
+.integration-layout,
+.drill-layout,
+.search-layout,
+.user-layout,
+.point-layout,
+.explain-layout,
+.delivery-layout,
+.recipe-layout,
+.calendar-layout,
+.bio-layout,
+.production-layout,
+.harvest-layout,
+.experience-layout,
+.closure-layout,
+.review-meeting-layout,
+.quality-layout,
+.director-layout,
+.economics-layout,
+.collaboration-layout,
+.brain-layout,
+.strategy-layout,
+.acceptance-layout,
+.presentation-layout {
     grid-template-columns: 1fr;
   }
 
@@ -6710,10 +5303,6 @@ button.asset-row {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .workspace {
-    grid-template-columns: 1fr;
-  }
-
   .left-panel,
   .right-panel {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -6723,56 +5312,9 @@ button.asset-row {
 @media (max-width: 720px) {
   .app-shell {
     padding: 12px;
-  }
-
-  .topbar {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  .topbar-actions,
-  .command-bar,
-  .utility-bar {
-    align-items: stretch;
-    flex-direction: column;
-    width: 100%;
-  }
-
-  .command-bar {
-    display: flex;
-  }
-
-  .global-top-search,
-  .batch-switcher {
-    width: 100%;
-  }
-
-  .metric-strip,
-  .left-panel,
-  .right-panel,
-  .role-switcher,
-  .module-nav.grouped {
-    grid-template-columns: 1fr;
-  }
-
-  .work-mode-strip {
-    align-items: stretch;
-    flex-direction: column;
-  }
-
-  .work-mode-buttons {
-    justify-content: flex-start;
-  }
-
-  .process-steps {
+  }.process-steps {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .active-module-drawer {
-    grid-template-columns: 1fr;
-  }
-
-  .scene-toolbar {
+  }.scene-toolbar {
     align-items: flex-start;
     flex-direction: column;
   }
@@ -6864,8 +5406,7 @@ button.asset-row {
     display: none;
   }
 
-  .cabin-scene,
-  .scene-panel {
+  .cabin-scene {
     height: 560px;
     min-height: 0;
   }
@@ -6888,8 +5429,6 @@ select:focus-visible {
   outline-offset: 2px;
 }
 
-.panel-block,
-.scene-panel,
 .metric,
 .report-delivery-center,
 .report-section,
@@ -6901,24 +5440,6 @@ select:focus-visible {
   box-shadow: var(--shadow-card);
 }
 
-.panel-block {
-  padding: 16px;
-}
-
-.section-title {
-  align-items: flex-start;
-  gap: 10px;
-  margin-bottom: 12px;
-}
-
-.section-title h2 {
-  color: var(--fg);
-  font-size: 15px;
-  font-weight: 850;
-  line-height: 1.25;
-}
-
-.section-title small,
 .muted,
 .sensor-head small,
 .alarm-item small,
@@ -6974,28 +5495,7 @@ button.asset-row:hover,
 .mini-table button:hover {
   border-color: var(--border-strong);
   background: var(--hover);
-}
-
-.segmented button,
-.work-mode-buttons button,
-.anchor-strip button,
-.query-controls button,
-.report-card button,
-.login-box button,
-.export-grid button {
-  border-radius: 8px;
-}
-
-.segmented button.active,
-.work-mode-buttons button.active,
-.query-controls button,
-.report-card button,
-.login-box button {
-  background: var(--primary);
-  color: var(--surface);
-}
-
-.alarm-item,
+}.alarm-item,
 .timeline-item {
   border-left-width: 0;
   border: 1px solid color-mix(in oklch, var(--warning) 28%, var(--border));
@@ -7027,7 +5527,6 @@ button.asset-row:hover,
 
 .reading-value,
 .metric svg,
-.section-title svg,
 .stage-status-grid strong,
 .production-summary-grid strong,
 .feature-value strong,
@@ -7047,10 +5546,6 @@ button.asset-row:hover,
 .director-summary strong,
 .point-profile strong {
   color: var(--primary-strong);
-}
-
-.scene-panel {
-  min-height: 600px;
 }
 
 .cabin-scene {
@@ -7144,25 +5639,10 @@ button.asset-row:hover,
     min-width: 0;
   }
 
-  .panel-block {
-    padding: 14px;
-  }
-
   .overview-focus-board,
   .focus-kpi-grid {
     grid-template-columns: 1fr;
-  }
-
-  .ops-command-strip,
-  .delivery-command-strip {
-    grid-template-columns: 1fr;
-  }
-
-  .ops-command-strip button,
-  .delivery-command-strip button {
-    min-height: 58px;
-  }
-}
+  }}
 
 /* Final component vocabulary layer. Keep high-frequency rows visually consistent. */
 .timeline-item,
@@ -7276,7 +5756,6 @@ button.asset-row:hover,
 }
 
 .ops-workbench-shell .ops-page-header,
-.ops-workbench-shell .panel-block,
 .ops-workbench-shell .ops-panel,
 .ops-workbench-shell .ops-table,
 .ops-workbench-shell .alarm-queue-panel {
@@ -7374,300 +5853,7 @@ button.asset-row:hover,
   color: #1d1003;
 }
 
-/* Legacy bridge lock, temporary. Keep near EOF until the old page components have
-   moved off panel-block/module-grid/report-section naming. */
-.system-shell:not(.overview-mode).shell-app,
-.system-shell:not(.overview-mode).shell-ops {
-  background:
-    radial-gradient(circle at 14% 0%, rgba(94, 255, 197, 0.16), transparent 28%),
-    radial-gradient(circle at 86% 8%, rgba(255, 187, 99, 0.08), transparent 24%),
-    linear-gradient(180deg, #061c16 0%, #08261f 42%, #041511 100%) !important;
-  color: var(--twin-text, #effff7) !important;
-}
-
-.system-shell:not(.overview-mode).shell-app .section-content,
-.system-shell:not(.overview-mode).shell-ops .section-content,
-.system-shell:not(.overview-mode).shell-app .system-section,
-.system-shell:not(.overview-mode).shell-ops .system-section,
-.system-shell:not(.overview-mode).shell-app .module-grid,
-.system-shell:not(.overview-mode).shell-ops .module-grid {
-  color: var(--twin-text, #effff7) !important;
-}
-
-.system-shell:not(.overview-mode).shell-app .panel-block,
-.system-shell:not(.overview-mode).shell-ops .panel-block,
-.system-shell:not(.overview-mode).shell-app .scene-panel,
-.system-shell:not(.overview-mode).shell-ops .scene-panel,
-.system-shell:not(.overview-mode).shell-app .metric,
-.system-shell:not(.overview-mode).shell-ops .metric,
-.system-shell:not(.overview-mode).shell-app .report-delivery-center,
-.system-shell:not(.overview-mode).shell-ops .report-delivery-center,
-.system-shell:not(.overview-mode).shell-app .report-section,
-.system-shell:not(.overview-mode).shell-ops .report-section,
-.system-shell:not(.overview-mode).shell-app .summary-card,
-.system-shell:not(.overview-mode).shell-ops .summary-card,
-.system-shell:not(.overview-mode).shell-app .delivery-card,
-.system-shell:not(.overview-mode).shell-ops .delivery-card,
-.system-shell:not(.overview-mode).shell-app .feature-card,
-.system-shell:not(.overview-mode).shell-ops .feature-card,
-.system-shell:not(.overview-mode).shell-app .stage-card,
-.system-shell:not(.overview-mode).shell-ops .stage-card,
-.system-shell:not(.overview-mode).shell-app .rule-card,
-.system-shell:not(.overview-mode).shell-ops .rule-card,
-.system-shell:not(.overview-mode).shell-app .overview-state-panel,
-.system-shell:not(.overview-mode).shell-ops .overview-state-panel,
-.system-shell:not(.overview-mode).shell-app .overview-quick-panel,
-.system-shell:not(.overview-mode).shell-ops .overview-quick-panel,
-.system-shell:not(.overview-mode).shell-app .overview-demo-panel,
-.system-shell:not(.overview-mode).shell-ops .overview-demo-panel,
-.system-shell:not(.overview-mode).shell-app .batch-production-board,
-.system-shell:not(.overview-mode).shell-ops .batch-production-board,
-.system-shell:not(.overview-mode).shell-app .delivery-package-board,
-.system-shell:not(.overview-mode).shell-ops .delivery-package-board,
-.system-shell:not(.overview-mode).shell-app .alarm-inline-workbench,
-.system-shell:not(.overview-mode).shell-ops .alarm-inline-workbench,
-.system-shell:not(.overview-mode).shell-app .environment-monitor-table,
-.system-shell:not(.overview-mode).shell-ops .environment-monitor-table {
-  border-color: rgba(110, 232, 186, 0.18) !important;
-  background:
-    linear-gradient(180deg, rgba(7, 36, 30, 0.86), rgba(3, 20, 17, 0.94)) !important;
-  box-shadow:
-    inset 0 1px 0 rgba(164, 255, 221, 0.05),
-    0 14px 30px rgba(2, 12, 10, 0.16) !important;
-}
-
-.system-shell:not(.overview-mode).shell-app .metric,
-.system-shell:not(.overview-mode).shell-ops .metric,
-.system-shell:not(.overview-mode).shell-app .stage-status-grid > div,
-.system-shell:not(.overview-mode).shell-ops .stage-status-grid > div,
-.system-shell:not(.overview-mode).shell-app .production-summary-grid article,
-.system-shell:not(.overview-mode).shell-ops .production-summary-grid article,
-.system-shell:not(.overview-mode).shell-app .handover-grid article,
-.system-shell:not(.overview-mode).shell-ops .handover-grid article,
-.system-shell:not(.overview-mode).shell-app .review-grid article,
-.system-shell:not(.overview-mode).shell-ops .review-grid article,
-.system-shell:not(.overview-mode).shell-app .threshold-list article,
-.system-shell:not(.overview-mode).shell-ops .threshold-list article,
-.system-shell:not(.overview-mode).shell-app .api-list article,
-.system-shell:not(.overview-mode).shell-ops .api-list article,
-.system-shell:not(.overview-mode).shell-app .history-list article,
-.system-shell:not(.overview-mode).shell-ops .history-list article,
-.system-shell:not(.overview-mode).shell-app .plan-list article,
-.system-shell:not(.overview-mode).shell-ops .plan-list article,
-.system-shell:not(.overview-mode).shell-app .chain-list article,
-.system-shell:not(.overview-mode).shell-ops .chain-list article,
-.system-shell:not(.overview-mode).shell-app .response-grid article,
-.system-shell:not(.overview-mode).shell-ops .response-grid article,
-.system-shell:not(.overview-mode).shell-app .help-grid article,
-.system-shell:not(.overview-mode).shell-ops .help-grid article,
-.system-shell:not(.overview-mode).shell-app .drill-grid article,
-.system-shell:not(.overview-mode).shell-ops .drill-grid article,
-.system-shell:not(.overview-mode).shell-app .search-results article,
-.system-shell:not(.overview-mode).shell-ops .search-results article,
-.system-shell:not(.overview-mode).shell-app .point-profile article,
-.system-shell:not(.overview-mode).shell-ops .point-profile article,
-.system-shell:not(.overview-mode).shell-app .delivery-grid article,
-.system-shell:not(.overview-mode).shell-ops .delivery-grid article,
-.system-shell:not(.overview-mode).shell-app .recipe-grid article,
-.system-shell:not(.overview-mode).shell-ops .recipe-grid article,
-.system-shell:not(.overview-mode).shell-app .demo-card,
-.system-shell:not(.overview-mode).shell-ops .demo-card,
-.system-shell:not(.overview-mode).shell-app .asset-row,
-.system-shell:not(.overview-mode).shell-ops .asset-row,
-.system-shell:not(.overview-mode).shell-app .device-row,
-.system-shell:not(.overview-mode).shell-ops .device-row,
-.system-shell:not(.overview-mode).shell-app .sensor-list button,
-.system-shell:not(.overview-mode).shell-ops .sensor-list button,
-.system-shell:not(.overview-mode).shell-app .action-list span,
-.system-shell:not(.overview-mode).shell-ops .action-list span,
-.system-shell:not(.overview-mode).shell-app .process-list span,
-.system-shell:not(.overview-mode).shell-ops .process-list span,
-.system-shell:not(.overview-mode).shell-app .growth-state span,
-.system-shell:not(.overview-mode).shell-ops .growth-state span,
-.system-shell:not(.overview-mode).shell-app .summary-item,
-.system-shell:not(.overview-mode).shell-ops .summary-item,
-.system-shell:not(.overview-mode).shell-app .trace-node,
-.system-shell:not(.overview-mode).shell-ops .trace-node,
-.system-shell:not(.overview-mode).shell-app .batch-metrics article,
-.system-shell:not(.overview-mode).shell-ops .batch-metrics article,
-.system-shell:not(.overview-mode).shell-app .correlation-grid article,
-.system-shell:not(.overview-mode).shell-ops .correlation-grid article,
-.system-shell:not(.overview-mode).shell-app .lifecycle-step,
-.system-shell:not(.overview-mode).shell-ops .lifecycle-step,
-.system-shell:not(.overview-mode).shell-app .stage-line,
-.system-shell:not(.overview-mode).shell-ops .stage-line,
-.system-shell:not(.overview-mode).shell-app .feature-value,
-.system-shell:not(.overview-mode).shell-ops .feature-value,
-.system-shell:not(.overview-mode).shell-app .batch-health-metrics,
-.system-shell:not(.overview-mode).shell-ops .batch-health-metrics,
-.system-shell:not(.overview-mode).shell-app .batch-health-metrics div,
-.system-shell:not(.overview-mode).shell-ops .batch-health-metrics div,
-.system-shell:not(.overview-mode).shell-app .duty-focus,
-.system-shell:not(.overview-mode).shell-ops .duty-focus,
-.system-shell:not(.overview-mode).shell-app .handover-note,
-.system-shell:not(.overview-mode).shell-ops .handover-note,
-.system-shell:not(.overview-mode).shell-app .growth-state strong,
-.system-shell:not(.overview-mode).shell-ops .growth-state strong,
-.system-shell:not(.overview-mode).shell-app .trace-chain span,
-.system-shell:not(.overview-mode).shell-ops .trace-chain span,
-.system-shell:not(.overview-mode).shell-app .demo-state,
-.system-shell:not(.overview-mode).shell-ops .demo-state,
-.system-shell:not(.overview-mode).shell-app .rtable-row,
-.system-shell:not(.overview-mode).shell-ops .rtable-row,
-.system-shell:not(.overview-mode).shell-app .rtable-head,
-.system-shell:not(.overview-mode).shell-ops .rtable-head,
-.system-shell:not(.overview-mode).shell-app .app-table-row,
-.system-shell:not(.overview-mode).shell-ops .app-table-row,
-.system-shell:not(.overview-mode).shell-app .app-table-head,
-.system-shell:not(.overview-mode).shell-ops .app-table-head {
-  border-color: rgba(110, 232, 186, 0.12) !important;
-  background: rgba(2, 20, 17, 0.56) !important;
-  color: rgba(239, 255, 247, 0.9) !important;
-}
-
-.system-shell:not(.overview-mode).shell-app h1,
-.system-shell:not(.overview-mode).shell-ops h1,
-.system-shell:not(.overview-mode).shell-app h2,
-.system-shell:not(.overview-mode).shell-ops h2,
-.system-shell:not(.overview-mode).shell-app h3,
-.system-shell:not(.overview-mode).shell-ops h3,
-.system-shell:not(.overview-mode).shell-app strong,
-.system-shell:not(.overview-mode).shell-ops strong,
-.system-shell:not(.overview-mode).shell-app dd,
-.system-shell:not(.overview-mode).shell-ops dd {
-  color: var(--twin-text, #effff7) !important;
-}
-
-.system-shell:not(.overview-mode).shell-app p,
-.system-shell:not(.overview-mode).shell-ops p,
-.system-shell:not(.overview-mode).shell-app small,
-.system-shell:not(.overview-mode).shell-ops small,
-.system-shell:not(.overview-mode).shell-app span,
-.system-shell:not(.overview-mode).shell-ops span,
-.system-shell:not(.overview-mode).shell-app dt,
-.system-shell:not(.overview-mode).shell-ops dt,
-.system-shell:not(.overview-mode).shell-app .muted,
-.system-shell:not(.overview-mode).shell-ops .muted {
-  color: rgba(190, 226, 210, 0.74) !important;
-}
-
-.system-shell:not(.overview-mode).shell-app .section-title svg,
-.system-shell:not(.overview-mode).shell-ops .section-title svg,
-.system-shell:not(.overview-mode).shell-app .metric svg,
-.system-shell:not(.overview-mode).shell-ops .metric svg,
-.system-shell:not(.overview-mode).shell-app .text-good,
-.system-shell:not(.overview-mode).shell-ops .text-good,
-.system-shell:not(.overview-mode).shell-app .text-ok,
-.system-shell:not(.overview-mode).shell-ops .text-ok {
-  color: var(--twin-normal, #8ef6ca) !important;
-}
-
-.system-shell:not(.overview-mode).shell-app .text-warn,
-.system-shell:not(.overview-mode).shell-ops .text-warn,
-.system-shell:not(.overview-mode).shell-app .warning,
-.system-shell:not(.overview-mode).shell-ops .warning {
-  color: var(--twin-warning, #ffbb63) !important;
-}
-
-.system-shell:not(.overview-mode).shell-app button:not(.drawer-close),
-.system-shell:not(.overview-mode).shell-ops button:not(.drawer-close),
-.system-shell:not(.overview-mode).shell-app .btn-sm,
-.system-shell:not(.overview-mode).shell-ops .btn-sm {
-  border-color: rgba(110, 232, 186, 0.24) !important;
-  background: rgba(4, 31, 25, 0.82) !important;
-  color: #c9ffea !important;
-}
-
-.system-shell:not(.overview-mode).shell-app button:not(.drawer-close):hover,
-.system-shell:not(.overview-mode).shell-ops button:not(.drawer-close):hover,
-.system-shell:not(.overview-mode).shell-app .btn-sm:not(:disabled):hover,
-.system-shell:not(.overview-mode).shell-ops .btn-sm:not(:disabled):hover {
-  border-color: rgba(142, 246, 202, 0.48) !important;
-  background: rgba(20, 110, 82, 0.72) !important;
-  color: #effff7 !important;
-}
-
-.system-shell:not(.overview-mode).shell-app .segmented button.active,
-.system-shell:not(.overview-mode).shell-ops .segmented button.active,
-.system-shell:not(.overview-mode).shell-app .work-mode-buttons button.active,
-.system-shell:not(.overview-mode).shell-ops .work-mode-buttons button.active,
-.system-shell:not(.overview-mode).shell-app .query-controls button.active,
-.system-shell:not(.overview-mode).shell-ops .query-controls button.active,
-.system-shell:not(.overview-mode).shell-app .report-card button,
-.system-shell:not(.overview-mode).shell-ops .report-card button,
-.system-shell:not(.overview-mode).shell-app .login-box button,
-.system-shell:not(.overview-mode).shell-ops .login-box button,
-.system-shell:not(.overview-mode).shell-app .batch-stage-actions button:nth-child(2),
-.system-shell:not(.overview-mode).shell-ops .batch-stage-actions button:nth-child(2),
-.system-shell:not(.overview-mode).shell-app .stage-action-strip button:nth-child(2),
-.system-shell:not(.overview-mode).shell-ops .stage-action-strip button:nth-child(2) {
-  border-color: rgba(142, 246, 202, 0.5) !important;
-  background: linear-gradient(180deg, #20e6aa, #0c9f78) !important;
-  color: #021610 !important;
-}
-
-/* FINAL PATCH: operation-page local cards that are not covered by shared panel classes. */
-.system-shell:not(.overview-mode).shell-ops .environment-action-card article,
-.system-shell:not(.overview-mode).shell-app .environment-action-card article,
-.system-shell:not(.overview-mode).shell-ops .environment-next-action,
-.system-shell:not(.overview-mode).shell-app .environment-next-action,
-.system-shell:not(.overview-mode).shell-ops .ops-alert-summary article,
-.system-shell:not(.overview-mode).shell-app .ops-alert-summary article,
-.system-shell:not(.overview-mode).shell-ops .ops-mini-card,
-.system-shell:not(.overview-mode).shell-app .ops-mini-card,
-.system-shell:not(.overview-mode).shell-ops .ops-rule-list article,
-.system-shell:not(.overview-mode).shell-app .ops-rule-list article,
-.system-shell:not(.overview-mode).shell-ops .ops-maintenance-card,
-.system-shell:not(.overview-mode).shell-app .ops-maintenance-card,
-.system-shell:not(.overview-mode).shell-ops .maintenance-check-list article,
-.system-shell:not(.overview-mode).shell-app .maintenance-check-list article,
-.system-shell:not(.overview-mode).shell-ops .attention-point-row button,
-.system-shell:not(.overview-mode).shell-app .attention-point-row button,
-.system-shell:not(.overview-mode).shell-ops .mini-table button,
-.system-shell:not(.overview-mode).shell-app .mini-table button,
-.system-shell:not(.overview-mode).shell-ops .point-type-strip button,
-.system-shell:not(.overview-mode).shell-app .point-type-strip button,
-.system-shell:not(.overview-mode).shell-ops .point-filter-bar,
-.system-shell:not(.overview-mode).shell-app .point-filter-bar {
-  border-color: rgba(110, 232, 186, 0.14) !important;
-  background: rgba(2, 20, 17, 0.58) !important;
-  color: rgba(239, 255, 247, 0.9) !important;
-  box-shadow: inset 0 1px 0 rgba(164, 255, 221, 0.04) !important;
-}
-
-.system-shell:not(.overview-mode).shell-ops .environment-action-card article span,
-.system-shell:not(.overview-mode).shell-app .environment-action-card article span,
-.system-shell:not(.overview-mode).shell-ops .ops-alert-summary span,
-.system-shell:not(.overview-mode).shell-app .ops-alert-summary span,
-.system-shell:not(.overview-mode).shell-ops .ops-mini-card span,
-.system-shell:not(.overview-mode).shell-app .ops-mini-card span,
-.system-shell:not(.overview-mode).shell-ops .attention-point-row span,
-.system-shell:not(.overview-mode).shell-app .attention-point-row span,
-.system-shell:not(.overview-mode).shell-ops .mini-table span,
-.system-shell:not(.overview-mode).shell-app .mini-table span,
-.system-shell:not(.overview-mode).shell-ops .point-type-strip span,
-.system-shell:not(.overview-mode).shell-app .point-type-strip span,
-.system-shell:not(.overview-mode).shell-ops .point-type-strip small,
-.system-shell:not(.overview-mode).shell-app .point-type-strip small {
-  color: rgba(190, 226, 210, 0.74) !important;
-}
-
-.system-shell:not(.overview-mode).shell-ops .environment-action-card article strong,
-.system-shell:not(.overview-mode).shell-app .environment-action-card article strong,
-.system-shell:not(.overview-mode).shell-ops .ops-alert-summary strong,
-.system-shell:not(.overview-mode).shell-app .ops-alert-summary strong,
-.system-shell:not(.overview-mode).shell-ops .ops-mini-card strong,
-.system-shell:not(.overview-mode).shell-app .ops-mini-card strong,
-.system-shell:not(.overview-mode).shell-ops .attention-point-row strong,
-.system-shell:not(.overview-mode).shell-app .attention-point-row strong,
-.system-shell:not(.overview-mode).shell-ops .mini-table strong,
-.system-shell:not(.overview-mode).shell-app .mini-table strong,
-.system-shell:not(.overview-mode).shell-ops .point-type-strip strong,
-.system-shell:not(.overview-mode).shell-app .point-type-strip strong {
-  color: var(--twin-text, #effff7) !important;
-}
-
-/* SYSTEM SKIN FINAL LOCK: non-home pages must share the approved twin-green visual language. */
+/* Shared twin-green system surface for all non-home pages. */
 .system-shell:not(.overview-mode) .system-twin-content {
   color: var(--twin-text, #effff7);
 }
@@ -7775,8 +5961,8 @@ button.asset-row:hover,
 
 .system-shell:not(.overview-mode) .system-twin-content [style*="background: var(--surface)"],
 .system-shell:not(.overview-mode) .system-twin-content [style*="background:var(--surface)"],
-.system-shell:not(.overview-mode) .system-twin-content [style*="background: #fff"],
-.system-shell:not(.overview-mode) .system-twin-content [style*="background:#fff"] {
+.system-shell:not(.overview-mode) .system-twin-content [style*="background: rgba(4, 28, 23, 0.88)"],
+.system-shell:not(.overview-mode) .system-twin-content [style*="background:rgba(4, 28, 23, 0.88)"] {
   background: rgba(2, 20, 17, 0.58) !important;
   color: var(--twin-text, #effff7) !important;
 }

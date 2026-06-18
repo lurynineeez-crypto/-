@@ -32,9 +32,20 @@ function isActiveGroup(group: GroupedNavItem) {
   return group.items.some((item) => item.key === props.activeView);
 }
 
-function selectGroup(group: GroupedNavItem) {
-  const target = group.items.find((item) => item.key === props.activeView) ?? group.items[0];
-  if (target) emit('selectView', target.key);
+function selectItem(item: NavItem, event?: MouseEvent) {
+  emit('selectView', item.key);
+  const menu = (event?.currentTarget as HTMLElement | null)?.closest('details');
+  menu?.removeAttribute('open');
+}
+
+function closeOtherMenus(event: Event) {
+  const current = event.currentTarget as HTMLDetailsElement | null;
+  if (!current?.open) return;
+  current.parentElement
+    ?.querySelectorAll<HTMLDetailsElement>('details.twin-nav-group-menu[open]')
+    .forEach((menu) => {
+      if (menu !== current) menu.removeAttribute('open');
+    });
 }
 </script>
 
@@ -65,16 +76,31 @@ function selectGroup(group: GroupedNavItem) {
     </header>
 
     <nav v-if="groupedNavItems?.length" class="twin-unified-nav" aria-label="系统模块与页面选择">
-      <button
+      <details
         v-for="(group, index) in groupedNavItems"
         :key="group.name"
-        type="button"
-        :class="{ active: isActiveGroup(group) }"
-        @click="selectGroup(group)"
+        :class="['twin-nav-group-menu', { active: isActiveGroup(group) }]"
+        @toggle="closeOtherMenus"
       >
-        <span>{{ String(index + 1).padStart(2, '0') }}</span>
-        <strong>{{ group.name }}</strong>
-      </button>
+        <summary>
+          <span class="twin-nav-index">{{ String(index + 1).padStart(2, '0') }}</span>
+          <strong class="twin-nav-label">{{ group.name }}</strong>
+          <small class="twin-nav-count">{{ group.items.length }}</small>
+        </summary>
+        <div class="twin-nav-dropdown" role="menu">
+          <button
+            v-for="item in group.items"
+            :key="item.key"
+            type="button"
+            :class="{ active: item.key === activeView }"
+            role="menuitem"
+            @click="selectItem(item, $event)"
+          >
+            <span>{{ item.label }}</span>
+            <small v-if="item.key === activeView">当前</small>
+          </button>
+        </div>
+      </details>
     </nav>
   </div>
 </template>
@@ -229,7 +255,17 @@ function selectGroup(group: GroupedNavItem) {
   box-shadow: inset 0 1px 0 rgba(152, 255, 214, 0.04);
 }
 
-.twin-unified-nav button {
+.twin-nav-group-menu {
+  position: relative;
+  min-width: 0;
+  border-right: 1px solid rgba(0, 245, 178, 0.08);
+}
+
+.twin-nav-group-menu:last-child {
+  border-right: 0;
+}
+
+.twin-nav-group-menu summary {
   position: relative;
   display: flex;
   align-items: center;
@@ -237,27 +273,26 @@ function selectGroup(group: GroupedNavItem) {
   gap: 7px;
   min-height: 38px;
   padding: 0 12px;
-  border: 0;
-  border-right: 1px solid rgba(0, 245, 178, 0.08);
-  background: transparent;
   color: rgba(172, 220, 202, 0.46);
   cursor: pointer;
   text-align: left;
+  list-style: none;
 }
 
-.twin-unified-nav button:last-child {
-  border-right: 0;
+.twin-nav-group-menu summary::-webkit-details-marker {
+  display: none;
 }
 
-.twin-unified-nav button.active {
+.twin-nav-group-menu.active summary {
   color: var(--topbar-text);
 }
 
-.twin-unified-nav button:hover {
+.twin-nav-group-menu[open] summary,
+.twin-nav-group-menu summary:hover {
   background: rgba(9, 64, 49, 0.42);
 }
 
-.twin-unified-nav button.active::after {
+.twin-nav-group-menu.active summary::after {
   content: "";
   position: absolute;
   left: 14px;
@@ -269,7 +304,7 @@ function selectGroup(group: GroupedNavItem) {
   box-shadow: 0 0 12px rgba(0, 245, 178, 0.48);
 }
 
-.twin-unified-nav button span {
+.twin-nav-index {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -284,12 +319,12 @@ function selectGroup(group: GroupedNavItem) {
   transform: translateY(-0.5px);
 }
 
-.twin-unified-nav button.active span {
+.twin-nav-group-menu.active .twin-nav-index {
   background: linear-gradient(180deg, rgba(82, 229, 172, 0.86), rgba(31, 136, 96, 0.92));
   color: #032119;
 }
 
-.twin-unified-nav button strong {
+.twin-nav-label {
   display: inline-flex;
   align-items: center;
   height: 17px;
@@ -297,6 +332,88 @@ function selectGroup(group: GroupedNavItem) {
   font-weight: 700;
   line-height: 17px;
   white-space: nowrap;
+}
+
+.twin-nav-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 16px;
+  margin-left: auto;
+  border-radius: 999px;
+  background: rgba(0, 245, 178, 0.08);
+  color: rgba(172, 220, 202, 0.55);
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.twin-nav-group-menu.active .twin-nav-count {
+  color: rgba(236, 255, 248, 0.82);
+}
+
+.twin-nav-dropdown {
+  position: absolute;
+  z-index: 120;
+  left: 8px;
+  right: 8px;
+  top: calc(100% + 6px);
+  display: grid;
+  gap: 6px;
+  max-height: min(420px, calc(100vh - 170px));
+  overflow: auto;
+  padding: 8px;
+  border: 1px solid rgba(0, 245, 178, 0.34);
+  border-radius: 8px;
+  background: linear-gradient(180deg, rgba(4, 37, 29, 0.98), rgba(1, 15, 13, 0.98));
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.42), 0 0 24px rgba(0, 245, 178, 0.16),
+    inset 0 1px 0 rgba(167, 255, 220, 0.08);
+}
+
+.twin-nav-dropdown button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-height: 32px;
+  padding: 0 10px;
+  border: 1px solid rgba(0, 245, 178, 0.14);
+  border-radius: 6px;
+  background: rgba(3, 31, 25, 0.82);
+  color: rgba(217, 255, 239, 0.76);
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+}
+
+.twin-nav-dropdown button:hover {
+  border-color: rgba(0, 245, 178, 0.38);
+  background: rgba(7, 57, 45, 0.92);
+  color: var(--topbar-text);
+}
+
+.twin-nav-dropdown button.active {
+  border-color: rgba(0, 245, 178, 0.62);
+  background: linear-gradient(180deg, rgba(14, 95, 72, 0.86), rgba(5, 49, 38, 0.94));
+  color: var(--topbar-text);
+}
+
+.twin-nav-dropdown button span {
+  min-width: 0;
+  overflow: hidden;
+  font-size: 12.5px;
+  font-weight: 650;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.twin-nav-dropdown button small {
+  flex: 0 0 auto;
+  color: var(--topbar-green);
+  font-size: 10px;
+  font-weight: 800;
 }
 
 @media (max-width: 1420px) {
@@ -323,12 +440,12 @@ function selectGroup(group: GroupedNavItem) {
     overflow-x: auto;
   }
 
-  .twin-unified-nav button {
+  .twin-nav-group-menu {
     flex: 0 0 220px;
   }
 }
 
-/* Component lock: legacy page-level .twin-* rules must not override the shared topbar. */
+/* Shared topbar sizing guard. */
 .twin-system-topbar .twin-header {
   grid-template-columns: minmax(430px, 1fr) minmax(420px, 0.9fr) minmax(500px, 1.08fr);
 }
@@ -364,12 +481,12 @@ function selectGroup(group: GroupedNavItem) {
   letter-spacing: 0.2em;
 }
 
-.twin-system-topbar .twin-unified-nav button strong {
+.twin-system-topbar .twin-nav-label {
   font-size: 12.5px;
   font-weight: 650;
 }
 
-.twin-system-topbar .twin-unified-nav button span {
+.twin-system-topbar .twin-nav-index {
   font-size: 11.5px;
 }
 

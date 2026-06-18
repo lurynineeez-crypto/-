@@ -10,8 +10,8 @@ defineProps<{
 </script>
 
 <template>
-  <article :class="['panel-block', 'panel-section-shell', { 'panel-section-wide': wide }]">
-    <header class="section-title panel-section-title">
+  <article :class="['system-panel', 'panel-section-shell', { 'panel-section-wide': wide }]">
+    <header class="system-panel-header panel-section-title">
       <component :is="icon" v-if="icon" :size="18" />
       <div>
         <h2>{{ title }}</h2>

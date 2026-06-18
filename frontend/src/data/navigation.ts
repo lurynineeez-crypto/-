@@ -40,7 +40,6 @@ export const navItems: NavItem[] = [
   { key: 'environment', label: '环境监测' },
   { key: 'control', label: '联动规则配置' },
   { key: 'alarms', label: '报警处置' },
-  { key: 'maintenance', label: '维护校准' },
   { key: 'point', label: '点位巡检' },
   { key: 'professional', label: '专业判断摘要' },
 
@@ -52,9 +51,6 @@ export const navItems: NavItem[] = [
   { key: 'config', label: '系统配置' },
 
   { key: 'user', label: '用户中心' },
-  { key: 'security', label: '登录权限' },
-  { key: 'settings', label: '系统设置' },
-  { key: 'demo', label: '演示控制' },
   { key: 'decision', label: '风险决策' },
   { key: 'trace', label: '批次追溯' },
   { key: 'history', label: '历史查询' },
@@ -75,23 +71,62 @@ export const navItems: NavItem[] = [
 export const navGroups: NavGroup[] = [
   {
     name: '总览',
-    items: ['overview', 'cabin', 'screen']
+    items: ['overview', 'cabin', 'screen', 'brain']
   },
   {
     name: '今日作业',
-    items: ['workflow', 'sop']
+    items: ['workflow', 'sop', 'user']
   },
   {
     name: '种植批次',
-    items: ['batch', 'growth', 'production', 'harvest', 'calendar', 'recipe', 'closure', 'biosecurity', 'experience', 'quality']
+    items: [
+      'batch',
+      'growth',
+      'production',
+      'harvest',
+      'calendar',
+      'recipe',
+      'closure',
+      'biosecurity',
+      'experience',
+      'quality',
+      'director',
+      'economics',
+      'collaboration',
+      'strategy',
+      'reviewMeeting'
+    ]
   },
   {
     name: '运维处置',
-    items: ['environment', 'alarms', 'point', 'professional']
+    items: [
+      'environment',
+      'control',
+      'alarms',
+      'point',
+      'professional',
+      'decision'
+    ]
   },
   {
     name: '报告交付',
-    items: ['reports', 'acceptance', 'audit', 'presentation']
+    items: [
+      'reports',
+      'acceptance',
+      'audit',
+      'presentation',
+      'engineering',
+      'integration',
+      'delivery',
+      'drill',
+      'search',
+      'explain',
+      'config',
+      'governance',
+      'history',
+      'display',
+      'trace'
+    ]
   }
 ];
 

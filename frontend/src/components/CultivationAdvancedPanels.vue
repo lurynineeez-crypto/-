@@ -160,8 +160,8 @@ const lifecycleSteps = [
 </script>
 
 <template>
-  <section v-if="activeView === 'batch'" class="module-grid batch-layout lifecycle-layout batch-command-view">
-    <article class="panel-block lifecycle-wide batch-command-hero">
+  <section v-if="activeView === 'batch'" class="system-content-grid batch-layout lifecycle-layout batch-command-view">
+    <article class="system-panel lifecycle-wide batch-command-hero">
       <div>
         <span>当前批次</span>
         <strong>{{ batchProfile.id }}</strong>
@@ -189,8 +189,8 @@ const lifecycleSteps = [
       </footer>
     </article>
 
-    <article class="panel-block lifecycle-wide">
-      <div class="section-title">
+    <article class="system-panel lifecycle-wide">
+      <div class="system-panel-header">
         <ListChecks :size="18" />
         <h2>种植生命周期进度</h2>
       </div>
@@ -207,8 +207,8 @@ const lifecycleSteps = [
       </div>
     </article>
 
-    <article class="panel-block batch-card batch-profile-card">
-      <div class="section-title">
+    <article class="system-panel batch-card batch-profile-card">
+      <div class="system-panel-header">
         <ClipboardList :size="18" />
         <h2>当前种植批次</h2>
       </div>
@@ -228,8 +228,8 @@ const lifecycleSteps = [
       </dl>
     </article>
 
-    <article class="panel-block batch-metric-card">
-      <div class="section-title">
+    <article class="system-panel batch-metric-card">
+      <div class="system-panel-header">
         <Gauge :size="18" />
         <h2>批次运行摘要</h2>
       </div>
@@ -242,8 +242,8 @@ const lifecycleSteps = [
       </div>
     </article>
 
-    <article class="panel-block batch-compliance-card">
-      <div class="section-title">
+    <article class="system-panel batch-compliance-card">
+      <div class="system-panel-header">
         <FileText :size="18" />
         <h2>阶段合规报告</h2>
       </div>
@@ -256,8 +256,8 @@ const lifecycleSteps = [
       </div>
     </article>
 
-    <article class="panel-block batch-wide">
-      <div class="section-title">
+    <article class="system-panel batch-wide">
+      <div class="system-panel-header">
         <Sprout :size="18" />
         <h2>产量与环境关联</h2>
       </div>
@@ -284,9 +284,9 @@ const lifecycleSteps = [
       </div>
     </article>
   </section>
-  <section v-else-if="activeView === 'growth'" class="module-grid growth-layout">
-    <article class="panel-block growth-wide stage-release-card">
-      <div class="section-title">
+  <section v-else-if="activeView === 'growth'" class="system-content-grid growth-layout">
+    <article class="system-panel growth-wide stage-release-card">
+      <div class="system-panel-header">
         <Sprout :size="18" />
         <h2>当前阶段管理</h2>
       </div>
@@ -319,9 +319,9 @@ const lifecycleSteps = [
     <article
       v-for="stage in growthStages"
       :key="stage.name"
-      :class="['panel-block stage-card', { current: summaryStage === stage.name }]"
+      :class="['system-panel stage-card', { current: summaryStage === stage.name }]"
     >
-      <div class="section-title">
+      <div class="system-panel-header">
         <Sprout :size="18" />
         <h2>{{ stage.name }}</h2>
       </div>
@@ -334,8 +334,8 @@ const lifecycleSteps = [
       <p>{{ stage.strategy }}</p>
     </article>
 
-    <article class="panel-block growth-wide">
-      <div class="section-title">
+    <article class="system-panel growth-wide">
+      <div class="system-panel-header">
         <CheckCircle2 :size="18" />
         <h2>阶段放行判断</h2>
       </div>
@@ -358,9 +358,9 @@ const lifecycleSteps = [
       </div>
     </article>
   </section>
-  <section v-else-if="activeView === 'recipe'" class="module-grid recipe-layout">
-      <article class="panel-block recipe-wide">
-        <div class="section-title">
+  <section v-else-if="activeView === 'recipe'" class="system-content-grid recipe-layout">
+      <article class="system-panel recipe-wide">
+        <div class="system-panel-header">
           <Sprout :size="18" />
           <h2>金耳生长工艺配方</h2>
         </div>
@@ -374,8 +374,8 @@ const lifecycleSteps = [
         </div>
       </article>
 
-      <article class="panel-block">
-        <div class="section-title">
+      <article class="system-panel">
+        <div class="system-panel-header">
           <Target :size="18" />
           <h2>阶段自动判定逻辑</h2>
         </div>
@@ -385,8 +385,8 @@ const lifecycleSteps = [
         </div>
       </article>
 
-      <article class="panel-block">
-        <div class="section-title">
+      <article class="system-panel">
+        <div class="system-panel-header">
           <HeartPulse :size="18" />
           <h2>生长压力指数</h2>
         </div>
@@ -399,8 +399,8 @@ const lifecycleSteps = [
         </div>
       </article>
 
-      <article class="panel-block">
-        <div class="section-title">
+      <article class="system-panel">
+        <div class="system-panel-header">
           <SlidersHorizontal :size="18" />
           <h2>阶段切换建议</h2>
         </div>
@@ -416,8 +416,8 @@ const lifecycleSteps = [
         </div>
       </article>
 
-      <article class="panel-block">
-        <div class="section-title">
+      <article class="system-panel">
+        <div class="system-panel-header">
           <MapPinned :size="18" />
           <h2>环境舒适区图谱</h2>
         </div>
@@ -430,9 +430,9 @@ const lifecycleSteps = [
       </article>
     </section>
 
-    <section v-else-if="activeView === 'calendar'" class="module-grid calendar-layout">
-      <article class="panel-block">
-        <div class="section-title">
+    <section v-else-if="activeView === 'calendar'" class="system-content-grid calendar-layout">
+      <article class="system-panel">
+        <div class="system-panel-header">
           <CalendarClock :size="18" />
           <h2>种植日历</h2>
         </div>
@@ -444,8 +444,8 @@ const lifecycleSteps = [
         </div>
       </article>
 
-      <article class="panel-block">
-        <div class="section-title">
+      <article class="system-panel">
+        <div class="system-panel-header">
           <TrendingUp :size="18" />
           <h2>累计偏离时长</h2>
         </div>
@@ -458,8 +458,8 @@ const lifecycleSteps = [
         </div>
       </article>
 
-      <article class="panel-block">
-        <div class="section-title">
+      <article class="system-panel">
+        <div class="system-panel-header">
           <Gauge :size="18" />
           <h2>采收窗口预测</h2>
         </div>
@@ -470,8 +470,8 @@ const lifecycleSteps = [
         </div>
       </article>
 
-      <article class="panel-block">
-        <div class="section-title">
+      <article class="system-panel">
+        <div class="system-panel-header">
           <ShieldAlert :size="18" />
           <h2>异常对产量影响估算</h2>
         </div>
@@ -483,8 +483,8 @@ const lifecycleSteps = [
         </div>
       </article>
 
-      <article class="panel-block calendar-wide">
-        <div class="section-title">
+      <article class="system-panel calendar-wide">
+        <div class="system-panel-header">
           <BarChart3 :size="18" />
           <h2>批次对比</h2>
         </div>
@@ -507,9 +507,9 @@ const lifecycleSteps = [
       </article>
     </section>
 
-    <section v-else-if="activeView === 'biosecurity'" class="module-grid bio-layout">
-      <article class="panel-block">
-        <div class="section-title">
+    <section v-else-if="activeView === 'biosecurity'" class="system-content-grid bio-layout">
+      <article class="system-panel">
+        <div class="system-panel-header">
           <ClipboardList :size="18" />
           <h2>栽培操作记录模板</h2>
         </div>
@@ -518,8 +518,8 @@ const lifecycleSteps = [
         </div>
       </article>
 
-      <article class="panel-block">
-        <div class="section-title">
+      <article class="system-panel">
+        <div class="system-panel-header">
           <CheckCircle2 :size="18" />
           <h2>清舱消毒流程</h2>
         </div>
@@ -528,8 +528,8 @@ const lifecycleSteps = [
         </div>
       </article>
 
-      <article class="panel-block">
-        <div class="section-title">
+      <article class="system-panel">
+        <div class="system-panel-header">
           <ShieldAlert :size="18" />
           <h2>生物安全记录</h2>
         </div>
@@ -541,8 +541,8 @@ const lifecycleSteps = [
         </div>
       </article>
 
-      <article class="panel-block">
-        <div class="section-title">
+      <article class="system-panel">
+        <div class="system-panel-header">
           <FileText :size="18" />
           <h2>种植知识库</h2>
         </div>
@@ -555,8 +555,8 @@ const lifecycleSteps = [
         </div>
       </article>
 
-      <article class="panel-block bio-wide">
-        <div class="section-title">
+      <article class="system-panel bio-wide">
+        <div class="system-panel-header">
           <Settings2 :size="18" />
           <h2>工艺参数版本管理</h2>
         </div>
@@ -570,9 +570,9 @@ const lifecycleSteps = [
       </article>
     </section>
 
-    <section v-else-if="activeView === 'production'" class="module-grid production-layout">
-      <article class="panel-block production-wide production-metrics">
-        <div class="section-title">
+    <section v-else-if="activeView === 'production'" class="system-content-grid production-layout">
+      <article class="system-panel production-wide production-metrics">
+        <div class="system-panel-header">
           <Box :size="18" />
           <h2>菌包生产作业总览</h2>
         </div>
@@ -612,8 +612,8 @@ const lifecycleSteps = [
         </div>
       </article>
 
-      <article class="panel-block">
-        <div class="section-title">
+      <article class="system-panel">
+        <div class="system-panel-header">
           <ShieldAlert :size="18" />
           <h2>污染风险管理</h2>
         </div>
@@ -626,8 +626,8 @@ const lifecycleSteps = [
         </div>
       </article>
 
-      <article class="panel-block production-wide">
-        <div class="section-title">
+      <article class="system-panel production-wide">
+        <div class="system-panel-header">
           <Box :size="18" />
           <h2>菌包批次档案</h2>
         </div>
@@ -651,8 +651,8 @@ const lifecycleSteps = [
         </div>
       </article>
 
-      <article class="panel-block">
-        <div class="section-title">
+      <article class="system-panel">
+        <div class="system-panel-header">
           <FileText :size="18" />
           <h2>异常形态记录</h2>
         </div>
@@ -665,8 +665,8 @@ const lifecycleSteps = [
         </div>
       </article>
 
-      <article class="panel-block production-wide">
-        <div class="section-title">
+      <article class="system-panel production-wide">
+        <div class="system-panel-header">
           <Layers :size="18" />
           <h2>层架微环境排行</h2>
         </div>
@@ -681,9 +681,9 @@ const lifecycleSteps = [
       </article>
     </section>
 
-    <section v-else-if="activeView === 'harvest'" class="module-grid harvest-layout">
-      <article class="panel-block harvest-wide harvest-metrics">
-        <div class="section-title">
+    <section v-else-if="activeView === 'harvest'" class="system-content-grid harvest-layout">
+      <article class="system-panel harvest-wide harvest-metrics">
+        <div class="system-panel-header">
           <Gauge :size="18" />
           <h2>采收质量总览</h2>
         </div>
@@ -735,8 +735,8 @@ const lifecycleSteps = [
         </div>
       </article>
 
-      <article class="panel-block">
-        <div class="section-title">
+      <article class="system-panel">
+        <div class="system-panel-header">
           <Gauge :size="18" />
           <h2>菌包损耗率 / 成品率</h2>
         </div>
@@ -749,8 +749,8 @@ const lifecycleSteps = [
         </div>
       </article>
 
-      <article class="panel-block">
-        <div class="section-title">
+      <article class="system-panel">
+        <div class="system-panel-header">
           <CheckCircle2 :size="18" />
           <h2>采收分级记录</h2>
         </div>
@@ -762,8 +762,8 @@ const lifecycleSteps = [
         </div>
       </article>
 
-      <article class="panel-block harvest-wide">
-        <div class="section-title">
+      <article class="system-panel harvest-wide">
+        <div class="system-panel-header">
           <BarChart3 :size="18" />
           <h2>层架产量记录</h2>
         </div>
@@ -787,8 +787,8 @@ const lifecycleSteps = [
         </div>
       </article>
 
-      <article class="panel-block harvest-wide">
-        <div class="section-title">
+      <article class="system-panel harvest-wide">
+        <div class="system-panel-header">
           <Power :size="18" />
           <h2>能耗与产量效率</h2>
         </div>
@@ -803,9 +803,9 @@ const lifecycleSteps = [
       </article>
     </section>
 
-    <section v-else-if="activeView === 'experience'" class="module-grid experience-layout">
-      <article class="panel-block experience-wide">
-        <div class="section-title">
+    <section v-else-if="activeView === 'experience'" class="system-content-grid experience-layout">
+      <article class="system-panel experience-wide">
+        <div class="system-panel-header">
           <Lightbulb :size="18" />
           <h2>工艺优化建议</h2>
         </div>
@@ -818,8 +818,8 @@ const lifecycleSteps = [
         </div>
       </article>
 
-      <article class="panel-block experience-wide">
-        <div class="section-title">
+      <article class="system-panel experience-wide">
+        <div class="system-panel-header">
           <Database :size="18" />
           <h2>多批次经验库</h2>
       </div>
@@ -832,8 +832,8 @@ const lifecycleSteps = [
         </div>
       </article>
 
-      <article class="panel-block">
-        <div class="section-title">
+      <article class="system-panel">
+        <div class="system-panel-header">
           <Target :size="18" />
           <h2>下一批次复用目标</h2>
         </div>
@@ -844,9 +844,9 @@ const lifecycleSteps = [
       </article>
     </section>
 
-    <section v-else-if="activeView === 'closure'" class="module-grid closure-layout">
-      <article class="panel-block">
-        <div class="section-title">
+    <section v-else-if="activeView === 'closure'" class="system-content-grid closure-layout">
+      <article class="system-panel">
+        <div class="system-panel-header">
           <ShieldAlert :size="18" />
           <h2>种植异常分级处置</h2>
         </div>
@@ -859,8 +859,8 @@ const lifecycleSteps = [
         </div>
       </article>
 
-      <article class="panel-block">
-        <div class="section-title">
+      <article class="system-panel">
+        <div class="system-panel-header">
           <CheckCircle2 :size="18" />
           <h2>污染隔离流程</h2>
         </div>
@@ -869,8 +869,8 @@ const lifecycleSteps = [
         </div>
       </article>
 
-      <article class="panel-block">
-        <div class="section-title">
+      <article class="system-panel">
+        <div class="system-panel-header">
           <CalendarClock :size="18" />
           <h2>采收窗口动态调整</h2>
         </div>
@@ -883,8 +883,8 @@ const lifecycleSteps = [
         </div>
       </article>
 
-      <article class="panel-block">
-        <div class="section-title">
+      <article class="system-panel">
+        <div class="system-panel-header">
           <TrendingUp :size="18" />
           <h2>产量损失估算</h2>
         </div>
@@ -897,8 +897,8 @@ const lifecycleSteps = [
         </div>
       </article>
 
-      <article class="panel-block closure-wide">
-        <div class="section-title">
+      <article class="system-panel closure-wide">
+        <div class="system-panel-header">
           <Box :size="18" />
           <h2>菌包生命周期追踪</h2>
         </div>
@@ -920,8 +920,8 @@ const lifecycleSteps = [
         </div>
       </article>
 
-      <article class="panel-block closure-wide">
-        <div class="section-title">
+      <article class="system-panel closure-wide">
+        <div class="system-panel-header">
           <Activity :size="18" />
           <h2>操作影响评估</h2>
         </div>
@@ -936,9 +936,9 @@ const lifecycleSteps = [
       </article>
     </section>
 
-    <section v-else-if="activeView === 'reviewMeeting'" class="module-grid review-meeting-layout">
-      <article class="panel-block">
-        <div class="section-title">
+    <section v-else-if="activeView === 'reviewMeeting'" class="system-content-grid review-meeting-layout">
+      <article class="system-panel">
+        <div class="system-panel-header">
           <Gauge :size="18" />
           <h2>批次成熟度指数 <small>— 距采收窗口的进度</small></h2>
         </div>
@@ -955,8 +955,8 @@ const lifecycleSteps = [
         </div>
       </article>
 
-      <article class="panel-block">
-        <div class="section-title">
+      <article class="system-panel">
+        <div class="system-panel-header">
           <Layers :size="18" />
           <h2>单层架复盘</h2>
         </div>
@@ -970,16 +970,16 @@ const lifecycleSteps = [
         </div>
       </article>
 
-      <article class="panel-block review-meeting-wide">
-        <div class="section-title">
+      <article class="system-panel review-meeting-wide">
+        <div class="system-panel-header">
           <SlidersHorizontal :size="18" />
           <h2>参数偏差审计</h2>
         </div>
         <p class="decision-note">偏差审计明细已合一至工程交付视图，此处仅显示条数：{{ parameterDeviationAudit.length }}项</p>
       </article>
 
-      <article class="panel-block review-meeting-wide">
-        <div class="section-title">
+      <article class="system-panel review-meeting-wide">
+        <div class="system-panel-header">
           <ClipboardList :size="18" />
           <h2>种植复盘会议</h2>
         </div>
@@ -991,8 +991,8 @@ const lifecycleSteps = [
         </div>
       </article>
 
-      <article class="panel-block review-meeting-wide">
-        <div class="section-title">
+      <article class="system-panel review-meeting-wide">
+        <div class="system-panel-header">
           <ListChecks :size="18" />
           <h2>会议行动项</h2>
         </div>
@@ -1015,9 +1015,9 @@ const lifecycleSteps = [
       </article>
     </section>
 
-    <section v-else-if="activeView === 'quality'" class="module-grid quality-layout">
-      <article class="panel-block quality-wide">
-        <div class="section-title">
+    <section v-else-if="activeView === 'quality'" class="system-content-grid quality-layout">
+      <article class="system-panel quality-wide">
+        <div class="system-panel-header">
           <Activity :size="18" />
           <h2>工艺执行一致性</h2>
         </div>
@@ -1039,8 +1039,8 @@ const lifecycleSteps = [
         </div>
       </article>
 
-      <article class="panel-block">
-        <div class="section-title">
+      <article class="system-panel">
+        <div class="system-panel-header">
           <Target :size="18" />
           <h2>关键控制点 CCP</h2>
         </div>
@@ -1053,8 +1053,8 @@ const lifecycleSteps = [
         </div>
       </article>
 
-      <article class="panel-block">
-        <div class="section-title">
+      <article class="system-panel">
+        <div class="system-panel-header">
           <CheckCircle2 :size="18" />
           <h2>关键质量属性 CQA</h2>
         </div>
@@ -1067,8 +1067,8 @@ const lifecycleSteps = [
         </div>
       </article>
 
-      <article class="panel-block quality-wide">
-        <div class="section-title">
+      <article class="system-panel quality-wide">
+        <div class="system-panel-header">
           <ClipboardList :size="18" />
           <h2>工艺偏差 CAPA</h2>
         </div>
@@ -1090,8 +1090,8 @@ const lifecycleSteps = [
         </div>
       </article>
 
-      <article class="panel-block">
-        <div class="section-title">
+      <article class="system-panel">
+        <div class="system-panel-header">
           <ShieldAlert :size="18" />
           <h2>批次冻结/锁定</h2>
         </div>
@@ -1104,8 +1104,8 @@ const lifecycleSteps = [
         </div>
       </article>
 
-      <article class="panel-block">
-        <div class="section-title">
+      <article class="system-panel">
+        <div class="system-panel-header">
           <FileText :size="18" />
           <h2>质量判定规则库</h2>
         </div>
@@ -1119,9 +1119,9 @@ const lifecycleSteps = [
       </article>
     </section>
 
-    <section v-else-if="activeView === 'director'" class="module-grid director-layout">
-      <article class="panel-block director-wide">
-        <div class="section-title">
+    <section v-else-if="activeView === 'director'" class="system-content-grid director-layout">
+      <article class="system-panel director-wide">
+        <div class="system-panel-header">
           <Monitor :size="18" />
           <h2>种植主任工作台</h2>
         </div>
@@ -1144,8 +1144,8 @@ const lifecycleSteps = [
         </div>
       </article>
 
-      <article class="panel-block">
-        <div class="section-title">
+      <article class="system-panel">
+        <div class="system-panel-header">
           <BarChart3 :size="18" />
           <h2>批次风险预警雷达</h2>
         </div>
@@ -1158,8 +1158,8 @@ const lifecycleSteps = [
         </div>
       </article>
 
-      <article class="panel-block">
-        <div class="section-title">
+      <article class="system-panel">
+        <div class="system-panel-header">
           <ListChecks :size="18" />
           <h2>阶段放行机制</h2>
         </div>
@@ -1172,8 +1172,8 @@ const lifecycleSteps = [
         </div>
       </article>
 
-      <article class="panel-block director-wide">
-        <div class="section-title">
+      <article class="system-panel director-wide">
+        <div class="system-panel-header">
           <ClipboardList :size="18" />
           <h2>采收前检查清单</h2>
         </div>
@@ -1197,8 +1197,8 @@ const lifecycleSteps = [
         </div>
       </article>
 
-      <article class="panel-block director-wide">
-        <div class="section-title">
+      <article class="system-panel director-wide">
+        <div class="system-panel-header">
           <Lightbulb :size="18" />
           <h2>主任决策建议</h2>
         </div>
@@ -1208,9 +1208,9 @@ const lifecycleSteps = [
       </article>
     </section>
 
-    <section v-else-if="activeView === 'economics'" class="module-grid economics-layout">
-      <article class="panel-block economics-wide">
-        <div class="section-title">
+    <section v-else-if="activeView === 'economics'" class="system-content-grid economics-layout">
+      <article class="system-panel economics-wide">
+        <div class="system-panel-header">
           <Database :size="18" />
           <h2>单批次成本核算</h2>
         </div>
@@ -1224,8 +1224,8 @@ const lifecycleSteps = [
         </div>
       </article>
 
-      <article class="panel-block">
-        <div class="section-title">
+      <article class="system-panel">
+        <div class="system-panel-header">
           <TrendingUp :size="18" />
           <h2>环境-产量贡献分析</h2>
         </div>
@@ -1238,8 +1238,8 @@ const lifecycleSteps = [
         </div>
       </article>
 
-      <article class="panel-block">
-        <div class="section-title">
+      <article class="system-panel">
+        <div class="system-panel-header">
           <Target :size="18" />
           <h2>批次可复制性评估</h2>
         </div>
@@ -1255,8 +1255,8 @@ const lifecycleSteps = [
         </div>
       </article>
 
-      <article class="panel-block economics-wide">
-        <div class="section-title">
+      <article class="system-panel economics-wide">
+        <div class="system-panel-header">
           <BarChart3 :size="18" />
           <h2>生产KPI看板</h2>
         </div>
@@ -1277,9 +1277,9 @@ const lifecycleSteps = [
       </article>
     </section>
 
-    <section v-else-if="activeView === 'collaboration'" class="module-grid collaboration-layout">
-      <article class="panel-block collaboration-wide">
-        <div class="section-title">
+    <section v-else-if="activeView === 'collaboration'" class="system-content-grid collaboration-layout">
+      <article class="system-panel collaboration-wide">
+        <div class="system-panel-header">
           <ListChecks :size="18" />
           <h2>标准作业偏离分析</h2>
         </div>
@@ -1301,8 +1301,8 @@ const lifecycleSteps = [
         </div>
       </article>
 
-      <article class="panel-block">
-        <div class="section-title">
+      <article class="system-panel">
+        <div class="system-panel-header">
           <ShieldAlert :size="18" />
           <h2>证据链完整性评估 <small>— 报告是否可追溯</small></h2>
         </div>
@@ -1318,8 +1318,8 @@ const lifecycleSteps = [
         </div>
       </article>
 
-      <article class="panel-block">
-        <div class="section-title">
+      <article class="system-panel">
+        <div class="system-panel-header">
           <ClipboardList :size="18" />
           <h2>班组责任矩阵</h2>
         </div>
@@ -1332,8 +1332,8 @@ const lifecycleSteps = [
         </div>
       </article>
 
-      <article class="panel-block collaboration-wide">
-        <div class="section-title">
+      <article class="system-panel collaboration-wide">
+        <div class="system-panel-header">
           <FileText :size="18" />
           <h2>下一批次工艺推荐单</h2>
         </div>
@@ -1345,8 +1345,8 @@ const lifecycleSteps = [
         </div>
       </article>
 
-      <article class="panel-block">
-        <div class="section-title">
+      <article class="system-panel">
+        <div class="system-panel-header">
           <Lightbulb :size="18" />
           <h2>种植知识沉淀卡片</h2>
         </div>
@@ -1359,8 +1359,8 @@ const lifecycleSteps = [
         </div>
       </article>
 
-      <article class="panel-block">
-        <div class="section-title">
+      <article class="system-panel">
+        <div class="system-panel-header">
           <CalendarClock :size="18" />
           <h2>交接班专业模板</h2>
         </div>
@@ -1375,9 +1375,9 @@ const lifecycleSteps = [
     </section>
 
 
-    <section v-else-if="activeView === 'strategy'" class="module-grid strategy-layout">
-      <article class="panel-block strategy-wide">
-        <div class="section-title">
+    <section v-else-if="activeView === 'strategy'" class="system-content-grid strategy-layout">
+      <article class="system-panel strategy-wide">
+        <div class="system-panel-header">
           <SlidersHorizontal :size="18" />
           <h2>事件驱动规则中心 <small>— 自动触发工单与处置策略</small></h2>
         </div>
@@ -1399,8 +1399,8 @@ const lifecycleSteps = [
         </div>
       </article>
 
-      <article class="panel-block">
-        <div class="section-title">
+      <article class="system-panel">
+        <div class="system-panel-header">
           <Gauge :size="18" />
           <h2>专家参数沙盘 <small>— 下批参数调整建议</small></h2>
         </div>
@@ -1413,8 +1413,8 @@ const lifecycleSteps = [
         </div>
       </article>
 
-      <article class="panel-block">
-        <div class="section-title">
+      <article class="system-panel">
+        <div class="system-panel-header">
           <Target :size="18" />
           <h2>多目标优化建议 <small>— 产量/质量/成本/稳态权重</small></h2>
         </div>
@@ -1427,8 +1427,8 @@ const lifecycleSteps = [
         </div>
       </article>
 
-      <article class="panel-block">
-        <div class="section-title">
+      <article class="system-panel">
+        <div class="system-panel-header">
           <FileText :size="18" />
           <h2>批次画像标签</h2>
         </div>
@@ -1441,8 +1441,8 @@ const lifecycleSteps = [
         </div>
       </article>
 
-      <article class="panel-block">
-        <div class="section-title">
+      <article class="system-panel">
+        <div class="system-panel-header">
           <ShieldAlert :size="18" />
           <h2>生产例外管理</h2>
         </div>
@@ -1455,8 +1455,8 @@ const lifecycleSteps = [
         </div>
       </article>
 
-      <article class="panel-block strategy-wide">
-        <div class="section-title">
+      <article class="system-panel strategy-wide">
+        <div class="system-panel-header">
           <BarChart3 :size="18" />
           <h2>批次对标库</h2>
         </div>

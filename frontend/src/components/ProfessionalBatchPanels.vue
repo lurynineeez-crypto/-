@@ -47,12 +47,12 @@ const decisionSummaryCards = computed(() => [
 </script>
 
 <template>
-  <section class="module-grid" :class="activeView === 'decision' ? 'decision-layout' : 'professional-layout'">
+  <section class="system-content-grid" :class="activeView === 'decision' ? 'decision-layout' : 'professional-layout'">
     <PageSummaryBar :title="activeView === 'decision' ? '决策闭环摘要' : '专业分析摘要'" :cards="decisionSummaryCards" />
 
     <template v-if="activeView === 'decision'">
-      <article class="panel-block score-card">
-        <div class="section-title">
+      <article class="system-panel score-card">
+        <div class="system-panel-header">
           <ShieldAlert :size="18" />
           <h2>风险指数</h2>
         </div>
@@ -64,8 +64,8 @@ const decisionSummaryCards = computed(() => [
         <small>明细见策略视图例外管理</small>
       </article>
 
-      <article class="panel-block">
-        <div class="section-title">
+      <article class="system-panel">
+        <div class="system-panel-header">
           <Sprout :size="18" />
           <h2>作物生长状态判定</h2>
         </div>
@@ -75,8 +75,8 @@ const decisionSummaryCards = computed(() => [
         </div>
       </article>
 
-      <article class="panel-block decision-wide">
-        <div class="section-title">
+      <article class="system-panel decision-wide">
+        <div class="system-panel-header">
           <MapPinned :size="18" />
           <h2>异常传播链分析</h2>
         </div>
@@ -88,8 +88,8 @@ const decisionSummaryCards = computed(() => [
         </div>
       </article>
 
-      <article class="panel-block decision-wide">
-        <div class="section-title">
+      <article class="system-panel decision-wide">
+        <div class="system-panel-header">
           <TrendingUp :size="18" />
           <h2>设备-环境响应曲线</h2>
         </div>
@@ -104,16 +104,16 @@ const decisionSummaryCards = computed(() => [
         </div>
       </article>
 
-      <article class="panel-block">
-        <div class="section-title">
+      <article class="system-panel">
+        <div class="system-panel-header">
           <SlidersHorizontal :size="18" />
           <h2>参数敏感性推演</h2>
         </div>
         <p class="decision-note">参数调节后果推演已合一至策略视图专家参数沙盘</p>
       </article>
 
-      <article class="panel-block">
-        <div class="section-title">
+      <article class="system-panel">
+        <div class="system-panel-header">
           <Wrench :size="18" />
           <h2>预测性维护</h2>
         </div>
@@ -128,8 +128,8 @@ const decisionSummaryCards = computed(() => [
     </template>
 
     <template v-else>
-      <article class="panel-block score-card">
-        <div class="section-title">
+      <article class="system-panel score-card">
+        <div class="system-panel-header">
           <Target :size="18" />
           <h2>环境达标评分</h2>
         </div>
@@ -149,8 +149,8 @@ const decisionSummaryCards = computed(() => [
         </div>
       </article>
 
-      <article class="panel-block">
-        <div class="section-title">
+      <article class="system-panel">
+        <div class="system-panel-header">
           <BarChart3 :size="18" />
           <h2>空间均匀性分析</h2>
         </div>
@@ -163,8 +163,8 @@ const decisionSummaryCards = computed(() => [
         </div>
       </article>
 
-      <article class="panel-block">
-        <div class="section-title">
+      <article class="system-panel">
+        <div class="system-panel-header">
           <TrendingUp :size="18" />
           <h2>环境稳定性分析</h2>
         </div>
@@ -177,16 +177,16 @@ const decisionSummaryCards = computed(() => [
         </div>
       </article>
 
-      <article class="panel-block">
-        <div class="section-title">
+      <article class="system-panel">
+        <div class="system-panel-header">
           <Settings2 :size="18" />
           <h2>操作建议</h2>
         </div>
         <p class="decision-note">操作建议已合一至策略视图多目标优化模块，点击导航切换</p>
       </article>
 
-      <article class="panel-block">
-        <div class="section-title">
+      <article class="system-panel">
+        <div class="system-panel-header">
           <TrendingUp :size="18" />
           <h2>设备效能分析</h2>
         </div>
@@ -202,16 +202,16 @@ const decisionSummaryCards = computed(() => [
         </div>
       </article>
 
-      <article class="panel-block">
-        <div class="section-title">
+      <article class="system-panel">
+        <div class="system-panel-header">
           <Bell :size="18" />
           <h2>报警处置</h2>
         </div>
         <p class="decision-note">报警闭环入口已合一至运维视图，点击导航切换</p>
       </article>
 
-      <article class="panel-block health-panel">
-        <div class="section-title">
+      <article class="system-panel health-panel">
+        <div class="system-panel-header">
           <HeartPulse :size="18" />
           <h2>传感器健康度</h2>
         </div>

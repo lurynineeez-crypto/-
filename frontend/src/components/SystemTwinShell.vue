@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue';
 import type { Component } from 'vue';
-import { Activity, Database, Leaf, Server, ShieldCheck } from 'lucide-vue-next';
 import type { NavItem } from '../data/navigation';
 import type { ViewKey } from '../types';
 import TwinCommandFooter from './TwinCommandFooter.vue';
@@ -19,6 +17,8 @@ interface StatusCard {
   tone?: string;
 }
 
+type WorkspaceLayout = 'overview' | 'task' | 'batch' | 'ops' | 'delivery' | 'admin';
+
 const props = defineProps<{
   title: string;
   eyebrow: string;
@@ -29,31 +29,13 @@ const props = defineProps<{
   rightHeaderCards?: StatusCard[];
   footerStatusModules: StatusCard[];
   footerActions: Array<{ label: string; view: ViewKey }>;
+  workspaceLayout: WorkspaceLayout;
   mode?: 'ops' | 'app';
 }>();
 
 const emit = defineEmits<{
   selectView: [view: ViewKey];
 }>();
-
-const activeGroup = computed(() =>
-  props.groupedNavItems.find((group) => group.items.some((item) => item.key === props.activeView))
-);
-
-const activeItem = computed(() =>
-  activeGroup.value?.items.find((item) => item.key === props.activeView) ?? activeGroup.value?.items[0]
-);
-
-const contextCards = computed(() => {
-  const base = props.leftHeaderCards?.length ? props.leftHeaderCards : props.statusCards;
-  return base.slice(0, 3);
-});
-
-const systemCards = computed(() => [
-  { icon: Activity, label: '系统框架', value: '实时在线', detail: '顶部、导航、工作区与底栏统一保持。' },
-  { icon: ShieldCheck, label: '数据链路', value: '可追溯', detail: '采集、入库、报告与审计连续留痕。' },
-  { icon: Database, label: '页面内容', value: activeItem.value?.label ?? '当前页面', detail: '只替换中间工作区内容，不改变系统外框。' }
-]);
 </script>
 
 <template>
@@ -74,70 +56,17 @@ const systemCards = computed(() => [
       @select-view="emit('selectView', $event)"
     />
 
-    <div class="system-twin-content system-shell-content twin-shared-content">
-      <div class="system-content-frame twin-body-grid home3d-grid">
-        <aside class="twin-left-column side-panel system-context-panel">
-          <header class="panel-head">
-            <div class="panel-title">
-              <Leaf :size="18" />
-              <div>
-                <h2>{{ activeGroup?.name ?? '系统工作区' }}</h2>
-                <p>{{ eyebrow }}</p>
-              </div>
-            </div>
-          </header>
-
-          <div class="system-context-list">
-            <article v-for="item in contextCards" :key="item.label" :class="['system-context-card', item.tone]">
-              <component v-if="item.icon" :is="item.icon" :size="16" />
-              <div>
-                <span>{{ item.label }}</span>
-                <strong>{{ item.value }}</strong>
-              </div>
-            </article>
-          </div>
-        </aside>
-
-        <section class="twin-center-stage center-stage system-content-stage">
-          <header class="stage-head">
-            <div>
-              <h2>{{ activeItem?.label ?? activeGroup?.name ?? '当前页面' }}</h2>
-            </div>
-            <div class="stage-meta">
-              <span>系统网络</span>
-              <strong>正常</strong>
-              <span>页面内容已接入统一工作区</span>
-            </div>
-          </header>
-
-          <div class="system-content-stage-body">
-            <slot />
-          </div>
-        </section>
-
-        <aside class="twin-right-column side-panel system-status-panel">
-          <header class="panel-head">
-            <div class="panel-title">
-              <Server :size="18" />
-              <div>
-                <h2>系统运行态势</h2>
-                <p>所有页面共用同一套运行状态与框架反馈。</p>
-              </div>
-            </div>
-          </header>
-
-          <div class="system-status-list">
-            <article v-for="item in systemCards" :key="item.label" class="system-state-card">
-              <component :is="item.icon" :size="18" />
-              <div class="state-copy">
-                <span>{{ item.label }}</span>
-                <p>{{ item.detail }}</p>
-              </div>
-              <strong>{{ item.value }}</strong>
-            </article>
-          </div>
-        </aside>
-      </div>
+    <div
+      :class="[
+        'system-twin-content',
+        'system-shell-content',
+        'twin-shared-content',
+        `workspace-layout-${workspaceLayout}`
+      ]"
+    >
+      <section class="system-workspace-canvas" :aria-label="eyebrow">
+        <slot />
+      </section>
     </div>
 
     <TwinCommandFooter
@@ -173,6 +102,36 @@ const systemCards = computed(() => [
   --cc-ok: #8ef6ca;
   --cc-warn: #ffbb63;
   --cc-danger: #ff8375;
+  --bg: #03120f;
+  --bg-soft: #061c16;
+  --surface: rgba(4, 28, 23, 0.86);
+  --surface-alt: rgba(2, 20, 17, 0.72);
+  --surface-strong: rgba(7, 36, 30, 0.92);
+  --fg: var(--cc-text);
+  --muted: var(--cc-muted);
+  --subtle: rgba(170, 218, 195, 0.56);
+  --border: rgba(110, 232, 186, 0.18);
+  --border-strong: rgba(132, 255, 211, 0.34);
+  --primary: #00f5b2;
+  --primary-strong: #8ef6ca;
+  --primary-soft: rgba(0, 245, 178, 0.12);
+  --hover: rgba(20, 110, 82, 0.42);
+  --success: #8ef6ca;
+  --warning: #ffbb63;
+  --danger: #ff8375;
+  --info: #7db7ff;
+  --app-bg: #03120f;
+  --app-bg-soft: #061c16;
+  --app-surface: rgba(4, 28, 23, 0.86);
+  --app-surface-alt: rgba(2, 20, 17, 0.72);
+  --app-border: rgba(110, 232, 186, 0.18);
+  --app-border-strong: rgba(132, 255, 211, 0.34);
+  --app-text: var(--cc-text);
+  --app-text-muted: var(--cc-muted);
+  --app-text-subtle: rgba(170, 218, 195, 0.56);
+  --app-primary: #00f5b2;
+  --app-primary-strong: #8ef6ca;
+  --app-primary-soft: rgba(0, 245, 178, 0.12);
   --shell-gap: 8px;
   --shell-padding: 10px;
   position: relative;
@@ -250,181 +209,72 @@ const systemCards = computed(() => [
   box-shadow: none;
 }
 
-.system-content-frame,
-.system-content-frame.home3d-grid,
-.system-content-frame.twin-body-grid {
+.system-workspace-canvas {
+  --ws-left: 320px;
+  --ws-right: 340px;
+  --ws-gap: var(--shell-gap);
+  --ws-pad: 12px;
+  --ws-radius: 8px;
+  --ws-title: 16px;
+  --ws-subtitle: 12px;
+  --ws-card-title: 14px;
+  --ws-body: 12.5px;
+  --ws-caption: 11.5px;
+  --ws-line: 1.38;
+  --ws-line-tight: 1.16;
+  --ws-panel-min: 92px;
+  position: relative;
+  z-index: 1;
   display: grid;
-  grid-template-columns: 320px minmax(620px, 1fr) 340px;
-  gap: var(--panel-gap);
-  min-height: 0;
+  grid-template-rows: minmax(0, 1fr);
+  width: 100%;
   height: 100%;
-  overflow: hidden;
-  align-items: stretch;
-}
-
-.system-content-frame .side-panel,
-.system-content-frame .center-stage {
+  min-width: 0;
   min-height: 0;
   overflow: hidden;
   border: 1px solid var(--twin-border);
   border-radius: 10px;
-  background: linear-gradient(180deg, rgba(5, 38, 30, 0.82), rgba(2, 17, 14, 0.96));
+  background:
+    linear-gradient(rgba(95, 227, 176, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(95, 227, 176, 0.026) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(5, 38, 30, 0.82), rgba(2, 17, 14, 0.96));
+  background-size: 48px 48px, 48px 48px, auto;
   box-shadow: var(--twin-glow), inset 0 1px 0 rgba(166, 255, 222, 0.08);
 }
 
-.system-content-frame .side-panel {
-  display: grid;
-  align-content: start;
-  gap: var(--panel-section-gap);
-  padding: 10px;
+@media (max-height: 860px), (max-width: 1500px) {
+  .system-workspace-canvas {
+    --ws-left: 300px;
+    --ws-right: 320px;
+    --ws-pad: 10px;
+    --ws-panel-min: 84px;
+  }
 }
 
-.system-content-frame .panel-head {
-  position: relative;
-  display: flex;
-  align-items: center;
-  min-height: 58px;
-  padding: 6px 0 12px;
-  margin: 0;
-  box-sizing: border-box;
+.workspace-layout-overview .system-workspace-canvas,
+.workspace-layout-ops .system-workspace-canvas {
+  --workspace-density: compact;
 }
 
-.system-content-frame .panel-head::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 1px;
-  background:
-    linear-gradient(90deg, transparent 0%, rgba(0, 245, 178, 0.18) 18%, rgba(0, 245, 178, 0.64) 50%, rgba(0, 245, 178, 0.18) 82%, transparent 100%);
-  box-shadow: 0 0 10px rgba(0, 245, 178, 0.22);
+.workspace-layout-task .system-workspace-canvas {
+  --workspace-density: execution;
 }
 
-.system-content-frame .panel-title {
-  display: grid;
-  grid-template-columns: 18px minmax(0, 1fr);
-  align-items: center;
-  gap: 8px;
+.workspace-layout-batch .system-workspace-canvas,
+.workspace-layout-delivery .system-workspace-canvas,
+.workspace-layout-admin .system-workspace-canvas {
+  --workspace-density: management;
+}
+
+.system-workspace-canvas > :deep(.section-content),
+.system-workspace-canvas > :deep(.system-section) {
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
   min-width: 0;
-}
-
-.system-content-frame .panel-title svg {
-  color: var(--twin-green);
-  filter: drop-shadow(0 0 8px rgba(0, 245, 178, 0.35));
-}
-
-.system-content-frame .panel-title h2,
-.system-content-frame .center-stage h2 {
-  margin: 0;
-  color: var(--twin-text);
-  font-size: 16px;
-  line-height: 1.2;
-  text-shadow: 0 0 10px rgba(0, 245, 178, 0.42);
-}
-
-.system-content-frame .panel-title p,
-.system-content-frame .stage-meta,
-.system-content-frame .state-copy p {
-  margin: 5px 0 0;
-  color: var(--twin-muted);
-  font-size: 12px;
-  line-height: 1.38;
-}
-
-.system-content-stage {
-  display: grid;
-  grid-template-rows: auto minmax(0, 1fr);
-}
-
-.system-content-frame .stage-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  min-height: 44px;
-  padding: 0 16px;
-  border-bottom: 1px solid var(--twin-border-soft);
-  background: linear-gradient(180deg, rgba(5, 38, 30, 0.42), rgba(2, 17, 14, 0.22));
-}
-
-.system-content-frame .stage-meta {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  margin: 0;
-  white-space: nowrap;
-}
-
-.system-content-frame .stage-meta strong {
-  display: inline-flex;
-  align-items: center;
-  min-height: 22px;
-  padding: 0 8px;
-  border-radius: 999px;
-  background: rgba(0, 245, 178, 0.12);
-  color: var(--twin-green);
-  font-size: 12px;
-}
-
-.system-content-stage-body {
   min-height: 0;
-  overflow: auto;
-  padding: 12px;
-}
-
-.system-context-list,
-.system-status-list {
-  display: grid;
-  gap: 10px;
-  min-height: 0;
-}
-
-.system-context-card,
-.system-state-card {
-  display: grid;
-  grid-template-columns: 20px minmax(0, 1fr) auto;
-  align-items: center;
-  gap: 10px;
-  min-height: 66px;
-  padding: 10px 12px;
-  border: 1px solid rgba(0, 245, 178, 0.18);
-  border-radius: 8px;
-  background: linear-gradient(180deg, rgba(7, 45, 35, 0.78), rgba(4, 24, 20, 0.86));
-}
-
-.system-context-card {
-  grid-template-columns: 20px minmax(0, 1fr);
-}
-
-.system-context-card svg,
-.system-state-card svg {
-  color: var(--twin-green);
-  filter: drop-shadow(0 0 8px rgba(0, 245, 178, 0.3));
-}
-
-.system-context-card span,
-.system-state-card span {
-  display: block;
-  color: var(--twin-muted);
-  font-size: 12px;
-  line-height: 1.2;
-}
-
-.system-context-card strong,
-.system-state-card strong {
-  display: block;
-  margin-top: 3px;
-  color: var(--twin-text);
-  font-size: 16px;
-  line-height: 1.2;
-}
-
-.system-state-card strong {
-  justify-self: end;
-  min-width: 58px;
-  color: var(--twin-green);
-  text-align: right;
+  margin: 0;
+  overflow: hidden;
 }
 
 .system-twin-content :deep(.system-section),
@@ -721,8 +571,8 @@ const systemCards = computed(() => [
   overflow: auto;
 }
 
-.system-twin-content :deep(.module-grid),
-.system-twin-content :deep(.panel-block),
+.system-twin-content :deep(.system-content-grid),
+.system-twin-content :deep(.system-panel),
 .system-twin-content :deep(.report-delivery-center),
 .system-twin-content :deep(.report-section),
 .system-twin-content :deep(.summary-card),
@@ -750,7 +600,7 @@ const systemCards = computed(() => [
   color: var(--cc-text);
 }
 
-.system-twin-content :deep(.panel-block),
+.system-twin-content :deep(.system-panel),
 .system-twin-content :deep(.report-section),
 .system-twin-content :deep(.summary-card),
 .system-twin-content :deep(.delivery-card),
@@ -802,9 +652,26 @@ const systemCards = computed(() => [
 .system-twin-content :deep(.ops-alert-summary article),
 .system-twin-content :deep(.point-type-strip button),
 .system-twin-content :deep(.point-filter-bar) {
-  border-color: rgba(110, 232, 186, 0.18);
-  background: linear-gradient(180deg, rgba(8, 39, 31, 0.82), rgba(4, 20, 17, 0.9));
-  box-shadow: inset 0 1px 0 rgba(164, 255, 221, 0.04);
+  border-color: rgba(110, 232, 186, 0.18) !important;
+  background: linear-gradient(180deg, rgba(8, 39, 31, 0.82), rgba(4, 20, 17, 0.9)) !important;
+  color: var(--cc-text) !important;
+  box-shadow: inset 0 1px 0 rgba(164, 255, 221, 0.04) !important;
+}
+
+.system-twin-content :deep(.system-panel article:not(.no-system-skin)),
+.system-twin-content :deep(.report-section article:not(.no-system-skin)),
+.system-twin-content :deep(.system-panel li:not(.no-system-skin)),
+.system-twin-content :deep(.report-section li:not(.no-system-skin)),
+.system-twin-content :deep(.system-panel .card),
+.system-twin-content :deep(.report-section .card) {
+  border-color: rgba(110, 232, 186, 0.14) !important;
+  background: rgba(2, 20, 17, 0.46) !important;
+  color: var(--cc-text) !important;
+}
+
+.system-twin-content :deep(.system-panel [style*="background"]),
+.system-twin-content :deep(.report-section [style*="background"]) {
+  background: rgba(2, 20, 17, 0.52) !important;
 }
 
 .system-twin-content :deep(.app-workflow-step.done),
@@ -829,10 +696,10 @@ const systemCards = computed(() => [
   opacity: 0.72;
 }
 
-.system-twin-content :deep(.section-title h2),
-.system-twin-content :deep(.section-title h3),
-.system-twin-content :deep(.panel-block h2),
-.system-twin-content :deep(.panel-block h3),
+.system-twin-content :deep(.system-panel-header h2),
+.system-twin-content :deep(.system-panel-header h3),
+.system-twin-content :deep(.system-panel h2),
+.system-twin-content :deep(.system-panel h3),
 .system-twin-content :deep(.report-section h2),
 .system-twin-content :deep(.report-section h3),
 .system-twin-content :deep(.lifecycle-step strong),
@@ -853,10 +720,10 @@ const systemCards = computed(() => [
   color: var(--cc-warn);
 }
 
-.system-twin-content :deep(.section-title p),
-.system-twin-content :deep(.panel-block p),
+.system-twin-content :deep(.system-panel-header p),
+.system-twin-content :deep(.system-panel p),
 .system-twin-content :deep(.report-section p),
-.system-twin-content :deep(.panel-block small),
+.system-twin-content :deep(.system-panel small),
 .system-twin-content :deep(.report-section small),
 .system-twin-content :deep(.lifecycle-step small),
 .system-twin-content :deep(.lifecycle-step span),
@@ -879,7 +746,7 @@ const systemCards = computed(() => [
   color: #032119;
 }
 
-.system-twin-content :deep(.section-title svg),
+.system-twin-content :deep(.system-panel-header svg),
 .system-twin-content :deep(.metric svg),
 .system-twin-content :deep(.text-good),
 .system-twin-content :deep(.text-ok) {
@@ -904,77 +771,309 @@ const systemCards = computed(() => [
   background: rgba(0, 245, 178, 0.14);
 }
 
-.system-content-stage-body :deep(.section-content),
-.system-content-stage-body :deep(.system-section),
-.system-content-stage-body :deep(.system-page),
-.system-content-stage-body :deep(.app-page),
-.system-content-stage-body :deep(.ops-workbench-shell),
-.system-content-stage-body :deep(.focused-workbench),
-.system-content-stage-body :deep(.report-center) {
-  display: grid;
+/* Workspace zoning standard
+   Third-module pages keep the approved shell size and only reorganize content inside it.
+   Region intent: left = context, center = primary work, right = status / evidence / feedback. */
+.system-twin-content :deep(.system-content-grid),
+.system-twin-content :deep(.focused-workbench > .system-content-grid),
+.system-twin-content :deep(.report-center) {
   width: 100%;
-  height: auto;
-  max-height: none;
+  height: 100%;
+  min-width: 0;
   min-height: 0;
   margin: 0;
-  overflow: visible;
-  background: transparent;
-  box-shadow: none;
+  padding: var(--ws-pad);
+  overflow: auto;
+  scrollbar-gutter: stable;
 }
 
-.system-content-stage-body :deep(.daily-workbench),
-.system-content-stage-body :deep(.alarm-ops-page) {
-  grid-template-columns: 1fr;
-  grid-template-rows: none;
-  gap: 12px;
-  height: auto;
-  max-height: none;
-  overflow: visible;
+.system-twin-content :deep(*) {
+  box-sizing: border-box;
 }
 
-.system-content-stage-body :deep(.daily-page-header),
-.system-content-stage-body :deep(.daily-flow-strip),
-.system-content-stage-body :deep(.daily-workbench-grid > *),
-.system-content-stage-body :deep(.alarm-page-header),
-.system-content-stage-body :deep(.alarm-priority-card),
-.system-content-stage-body :deep(.alarm-workflow-panel),
-.system-content-stage-body :deep(.alarm-queue-panel) {
-  grid-column: auto;
-  grid-row: auto;
-  width: 100%;
-  height: auto;
-  min-height: 0;
-  overflow: visible;
+.system-twin-content :deep(input),
+.system-twin-content :deep(select),
+.system-twin-content :deep(textarea) {
+  min-height: 32px;
+  border: 1px solid rgba(110, 232, 186, 0.2) !important;
+  border-radius: var(--ws-radius);
+  background: rgba(2, 20, 17, 0.66) !important;
+  color: var(--cc-text) !important;
+  box-shadow: inset 0 1px 0 rgba(164, 255, 221, 0.04) !important;
 }
 
-.system-content-stage-body :deep(.daily-workbench-grid),
-.system-content-stage-body :deep(.alarm-command-grid),
-.system-content-stage-body :deep(.module-grid),
-.system-content-stage-body :deep(.summary-grid),
-.system-content-stage-body :deep(.batch-metrics),
-.system-content-stage-body :deep(.production-summary-grid) {
+.system-twin-content :deep(input::placeholder),
+.system-twin-content :deep(textarea::placeholder) {
+  color: rgba(170, 218, 195, 0.52) !important;
+}
+
+.system-twin-content :deep(select option) {
+  color: var(--cc-text);
+  background: #03120f;
+}
+
+.system-twin-content :deep(.system-content-grid) {
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 12px;
+  grid-template-columns: var(--ws-left) minmax(0, 1fr) var(--ws-right);
+  grid-auto-rows: auto;
+  align-content: start;
+  gap: var(--ws-gap);
 }
 
-.system-content-stage-body :deep(.panel-block),
-.system-content-stage-body :deep(.report-section),
-.system-content-stage-body :deep(.system-panel),
-.system-content-stage-body :deep(.system-page-header),
-.system-content-stage-body :deep(.app-page-header) {
-  border-color: rgba(0, 245, 178, 0.2);
-  border-radius: 8px;
-  background: linear-gradient(180deg, rgba(7, 36, 30, 0.72), rgba(3, 20, 17, 0.9));
-  box-shadow: inset 0 1px 0 rgba(166, 255, 222, 0.05);
+.system-twin-content :deep(.report-center) {
+  display: grid;
+  grid-template-columns: var(--ws-left) minmax(0, 1fr) var(--ws-right);
+  grid-auto-rows: auto;
+  align-content: start;
+  gap: var(--ws-gap);
 }
 
-.system-content-stage-body :deep(.daily-flow-strip) {
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+.system-twin-content :deep(.system-content-grid > .system-panel),
+.system-twin-content :deep(.report-center > .report-section),
+.system-twin-content :deep(.focused-workbench > .system-panel) {
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+  max-height: 100%;
+  overflow: auto;
+  padding: 13px;
+  border-radius: var(--ws-radius);
 }
 
-.system-content-stage-body :deep(.alarm-workflow) {
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+.system-twin-content :deep(.system-content-grid > .system-panel[class*="-wide"]),
+.system-twin-content :deep(.system-content-grid > .system-panel[class*="wide"]),
+.system-twin-content :deep(.report-center > .report-section:not(.report-hero)) {
+  grid-column: span 2;
+}
+
+.system-twin-content :deep(.system-content-grid > .system-panel:first-child[class*="-wide"]),
+.system-twin-content :deep(.system-content-grid > .system-panel:first-child[class*="wide"]),
+.system-twin-content :deep(.report-center > .report-hero) {
+  grid-column: 1 / -1;
+}
+
+.system-twin-content.workspace-layout-task :deep(.system-content-grid),
+.system-twin-content.workspace-layout-ops :deep(.system-content-grid) {
+  grid-template-columns: var(--ws-left) minmax(0, 1fr) var(--ws-right);
+}
+
+.system-twin-content.workspace-layout-batch :deep(.system-content-grid) {
+  grid-template-columns: var(--ws-left) minmax(420px, 1fr) var(--ws-right);
+}
+
+.system-twin-content.workspace-layout-batch :deep(.growth-layout) {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.system-twin-content.workspace-layout-delivery :deep(.system-content-grid),
+.system-twin-content.workspace-layout-delivery :deep(.report-center),
+.system-twin-content.workspace-layout-admin :deep(.system-content-grid) {
+  grid-template-columns: minmax(280px, 0.85fr) minmax(520px, 1.4fr) minmax(280px, 0.85fr);
+}
+
+.system-twin-content.workspace-layout-task :deep(.user-layout > .user-wide:first-child),
+.system-twin-content.workspace-layout-task :deep(.sop-layout > .sop-panel:first-child) {
+  grid-column: 2;
+  grid-row: 1 / span 3;
+}
+
+.system-twin-content.workspace-layout-task :deep(.user-layout > .system-panel:nth-child(2)),
+.system-twin-content.workspace-layout-task :deep(.sop-layout > .system-panel:nth-child(2)) {
+  grid-column: 1;
+}
+
+.system-twin-content.workspace-layout-task :deep(.user-layout > .system-panel:nth-child(3)),
+.system-twin-content.workspace-layout-task :deep(.sop-layout > .system-panel:nth-child(3)) {
+  grid-column: 3;
+}
+
+.system-twin-content.workspace-layout-batch :deep(.batch-layout > .batch-command-hero),
+.system-twin-content.workspace-layout-batch :deep(.director-layout > .director-wide:first-child),
+.system-twin-content.workspace-layout-batch :deep(.economics-layout > .economics-wide:first-child),
+.system-twin-content.workspace-layout-batch :deep(.quality-layout > .quality-wide:first-child),
+.system-twin-content.workspace-layout-batch :deep(.strategy-layout > .strategy-wide:first-child) {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+}
+
+.system-twin-content.workspace-layout-batch :deep(.batch-layout > .batch-command-hero) {
+  grid-column: 1 / -1 !important;
+  grid-row: auto !important;
+}
+
+.system-twin-content.workspace-layout-batch :deep(.batch-layout > .lifecycle-wide:nth-child(2)),
+.system-twin-content.workspace-layout-batch :deep(.growth-layout > .growth-wide),
+.system-twin-content.workspace-layout-batch :deep(.calendar-layout > .calendar-wide),
+.system-twin-content.workspace-layout-batch :deep(.production-layout > .production-wide:first-child),
+.system-twin-content.workspace-layout-batch :deep(.harvest-layout > .harvest-wide:first-child),
+.system-twin-content.workspace-layout-batch :deep(.review-meeting-layout > .review-meeting-wide:first-child),
+.system-twin-content.workspace-layout-batch :deep(.collaboration-layout > .collaboration-wide:first-child) {
+  grid-column: 1 / -1 !important;
+  grid-row: auto !important;
+}
+
+.system-twin-content.workspace-layout-ops :deep(.professional-layout > .score-card),
+.system-twin-content.workspace-layout-ops :deep(.decision-layout > .score-card) {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+}
+
+.system-twin-content.workspace-layout-ops :deep(.professional-layout > .health-panel),
+.system-twin-content.workspace-layout-ops :deep(.decision-layout > .decision-wide:first-of-type) {
+  grid-column: 2 / -1;
+}
+
+.system-twin-content.workspace-layout-delivery :deep(.report-center > .report-section:not(.report-hero)),
+.system-twin-content.workspace-layout-admin :deep(.config-layout > .config-wide),
+.system-twin-content.workspace-layout-admin :deep(.history-layout > .history-wide) {
+  grid-column: 2 / -1;
+}
+
+.system-twin-content.workspace-layout-delivery :deep(.delivery-layout > .delivery-wide),
+.system-twin-content.workspace-layout-delivery :deep(.engineering-layout > .engineering-wide:first-child),
+.system-twin-content.workspace-layout-delivery :deep(.integration-layout > .integration-wide:first-child),
+.system-twin-content.workspace-layout-delivery :deep(.drill-layout > .drill-wide:first-child),
+.system-twin-content.workspace-layout-delivery :deep(.search-layout > .search-wide:first-child),
+.system-twin-content.workspace-layout-delivery :deep(.explain-layout > .system-panel:first-child) {
+  grid-column: 2 / -1;
+}
+
+.system-twin-content.workspace-layout-ops :deep(.point-layout > .point-wide) {
+  grid-column: 1 / -1 !important;
+  grid-row: auto !important;
+}
+
+.system-twin-content :deep(.system-panel-header) {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 36px;
+  margin: 0 0 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(110, 232, 186, 0.16);
+}
+
+.system-twin-content :deep(.system-panel-header svg) {
+  flex: 0 0 auto;
+  margin-top: 0;
+}
+
+.system-twin-content :deep(.system-panel-header h2),
+.system-twin-content :deep(.system-panel-header h3),
+.system-twin-content :deep(.panel-section-title h2),
+.system-twin-content :deep(.system-panel-header h3) {
+  margin: 0;
+  font-size: var(--ws-title);
+  font-weight: 700;
+  line-height: var(--ws-line-tight);
+  letter-spacing: 0;
+}
+
+.system-twin-content :deep(.system-panel-header p),
+.system-twin-content :deep(.panel-section-title p),
+.system-twin-content :deep(.system-panel-header p) {
+  margin: 4px 0 0;
+  max-width: 68ch;
+  font-size: var(--ws-subtitle);
+  font-weight: 400;
+  line-height: var(--ws-line);
+}
+
+.system-twin-content :deep(.system-panel strong),
+.system-twin-content :deep(.report-section strong),
+.system-twin-content :deep(.asset-row strong),
+.system-twin-content :deep(.rtable-row strong),
+.system-twin-content :deep(.threshold-list strong),
+.system-twin-content :deep(.review-grid strong) {
+  font-size: var(--ws-card-title);
+  font-weight: 700;
+  line-height: var(--ws-line-tight);
+}
+
+.system-twin-content :deep(.system-panel span),
+.system-twin-content :deep(.system-panel p),
+.system-twin-content :deep(.report-section span),
+.system-twin-content :deep(.report-section p),
+.system-twin-content :deep(.asset-row span),
+.system-twin-content :deep(.rtable-row span),
+.system-twin-content :deep(.threshold-list span),
+.system-twin-content :deep(.review-grid span) {
+  font-size: var(--ws-body);
+  line-height: var(--ws-line);
+}
+
+.system-twin-content :deep(.system-panel small),
+.system-twin-content :deep(.report-section small),
+.system-twin-content :deep(.asset-row small),
+.system-twin-content :deep(.rtable-row small),
+.system-twin-content :deep(.threshold-list small),
+.system-twin-content :deep(.review-grid small) {
+  font-size: var(--ws-caption);
+  line-height: var(--ws-line);
+}
+
+.system-twin-content :deep(.asset-table),
+.system-twin-content :deep(.report-table),
+.system-twin-content :deep(.threshold-list),
+.system-twin-content :deep(.suggestion-list),
+.system-twin-content :deep(.review-grid),
+.system-twin-content :deep(.uniformity-grid),
+.system-twin-content :deep(.timeline),
+.system-twin-content :deep(.delivery-grid),
+.system-twin-content :deep(.recipe-grid),
+.system-twin-content :deep(.drill-grid),
+.system-twin-content :deep(.search-results),
+.system-twin-content :deep(.help-grid) {
+  gap: 8px;
+}
+
+.system-twin-content :deep(.asset-row),
+.system-twin-content :deep(.rtable-row),
+.system-twin-content :deep(.threshold-list article),
+.system-twin-content :deep(.suggestion-list article),
+.system-twin-content :deep(.review-grid article),
+.system-twin-content :deep(.uniformity-grid article),
+.system-twin-content :deep(.delivery-grid article),
+.system-twin-content :deep(.recipe-grid article),
+.system-twin-content :deep(.drill-grid article),
+.system-twin-content :deep(.search-results article),
+.system-twin-content :deep(.help-grid article) {
+  min-height: 46px;
+  padding: 9px 11px;
+  border-radius: var(--ws-radius);
+}
+
+.system-twin-content :deep(.asset-row.head),
+.system-twin-content :deep(.rtable-head) {
+  min-height: 34px;
+  padding: 7px 11px;
+  color: rgba(190, 232, 213, 0.72);
+  font-size: var(--ws-caption);
+  font-weight: 700;
+}
+
+.system-twin-content :deep(.score-card strong),
+.system-twin-content :deep(.summary-item strong),
+.system-twin-content :deep(.feature-value strong),
+.system-twin-content :deep(.growth-state strong) {
+  font-size: 20px;
+  line-height: 1.1;
+}
+
+@media (max-width: 1180px) {
+  .system-twin-content :deep(.system-content-grid),
+  .system-twin-content :deep(.report-center) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .system-twin-content :deep(.system-content-grid > .system-panel),
+  .system-twin-content :deep(.system-content-grid > .system-panel[class*="-wide"]),
+  .system-twin-content :deep(.system-content-grid > .system-panel[class*="wide"]),
+  .system-twin-content :deep(.report-center > .report-section),
+  .system-twin-content :deep(.report-center > .report-hero) {
+    grid-column: auto;
+    grid-row: auto;
+  }
 }
 
 </style>

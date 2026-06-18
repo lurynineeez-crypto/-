@@ -76,9 +76,9 @@ function handlePreview(file: typeof reportFiles[0]) {
 </script>
 
 <template>
-  <div class="report-center focused-workbench">
-    <article class="report-section report-hero">
-      <div class="section-title">
+  <div class="report-center system-page focused-workbench">
+    <article class="system-panel report-section report-hero">
+      <div class="system-panel-header">
         <Activity :size="18" />
         <div>
           <h2>交付包状态</h2>
@@ -95,8 +95,8 @@ function handlePreview(file: typeof reportFiles[0]) {
       </div>
     </article>
 
-    <article v-if="activeView === 'reports'" class="report-section">
-      <div class="section-title"><FileText :size="18" /><h2>报告文件</h2></div>
+    <article v-if="activeView === 'reports'" class="system-panel report-section">
+      <div class="system-panel-header"><FileText :size="18" /><h2>报告文件</h2></div>
       <div class="report-table">
         <div class="rtable-head">
           <span>报告名称</span><span>类型</span><span>状态</span><span>生成时间</span><span>负责人</span><span>操作</span>
@@ -115,8 +115,8 @@ function handlePreview(file: typeof reportFiles[0]) {
       </div>
     </article>
 
-    <article v-else-if="activeView === 'acceptance'" class="report-section">
-      <div class="section-title"><CheckCircle2 :size="18" /><h2>验收材料</h2></div>
+    <article v-else-if="activeView === 'acceptance'" class="system-panel report-section">
+      <div class="system-panel-header"><CheckCircle2 :size="18" /><h2>验收材料</h2></div>
       <div class="report-table">
         <div class="rtable-head five-col">
           <span>验收项</span><span>验收标准</span><span>当前结果</span><span>责任人</span><span>状态</span>
@@ -132,8 +132,8 @@ function handlePreview(file: typeof reportFiles[0]) {
     </article>
 
     <template v-else-if="activeView === 'audit'">
-      <article class="report-section">
-        <div class="section-title"><Layers :size="18" /><h2>批次追溯链</h2></div>
+      <article class="system-panel report-section">
+        <div class="system-panel-header"><Layers :size="18" /><h2>批次追溯链</h2></div>
         <div class="trace-flow">
           <div v-for="(node, i) in traceChain" :key="node.node" class="trace-node">
             <div class="trace-dot">{{ i + 1 }}</div>
@@ -145,8 +145,8 @@ function handlePreview(file: typeof reportFiles[0]) {
         </div>
       </article>
 
-      <article class="report-section">
-        <div class="section-title"><ShieldAlert :size="18" /><h2>审计与阈值变更</h2></div>
+      <article class="system-panel report-section">
+        <div class="system-panel-header"><ShieldAlert :size="18" /><h2>审计与阈值变更</h2></div>
         <div class="report-table">
           <div class="rtable-head six-col">
             <span>修改人</span><span>修改时间</span><span>修改前</span><span>修改后</span><span>原因</span><span>审计状态</span>
@@ -163,8 +163,8 @@ function handlePreview(file: typeof reportFiles[0]) {
       </article>
     </template>
 
-    <article v-else class="report-section">
-      <div class="section-title"><MapPinned :size="18" /><h2>汇报演示脚本</h2></div>
+    <article v-else class="system-panel report-section">
+      <div class="system-panel-header"><MapPinned :size="18" /><h2>汇报演示脚本</h2></div>
       <div class="demo-script-table">
         <div class="rtable-head four-col">
           <span>步骤</span><span>讲什么</span><span>对应页面</span><span>关键证据</span>
@@ -182,23 +182,22 @@ function handlePreview(file: typeof reportFiles[0]) {
 
 <style scoped>
 .report-center { display: flex; flex-direction: column; gap: 12px; padding: 0 0 12px; }
-.report-section { padding: 14px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); box-shadow: var(--shadow-card); }
-.section-title { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
-.section-title h2 { font-size: 15px; margin: 0; }
-.section-title p { margin: 3px 0 0; color: var(--muted); font-size: 12px; }
+.report-section { padding: 14px; }
+.system-panel-header h2 { font-size: 15px; margin: 0; }
+.system-panel-header p { margin: 3px 0 0; color: var(--system-text-muted); font-size: 12px; }
 .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; }
-.summary-item { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; min-height: 72px; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface-alt); }
-.summary-item span { font-size: 11px; color: var(--muted); }
-.summary-item strong { color: var(--fg); font-size: 18px; line-height: 1.2; }
+.summary-item { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; min-height: 72px; padding: 10px 12px; border: 1px solid var(--system-panel-border); border-radius: 8px; background: rgba(2, 24, 20, 0.64); }
+.summary-item span { font-size: 11px; color: var(--system-text-muted); }
+.summary-item strong { color: var(--system-text); font-size: 18px; line-height: 1.2; }
 .text-good { color: var(--success); }
 .text-ok { color: var(--info); }
 .text-warn { color: var(--warning); }
 .report-table { display: grid; gap: 6px; overflow-x: auto; }
 .rtable-head,
 .rtable-row { display: grid; grid-template-columns: 2fr .8fr .8fr 1.2fr .9fr 1fr; gap: 8px; min-width: 860px; padding: 8px 12px; border-radius: 8px; align-items: center; }
-.rtable-head { background: color-mix(in oklch, var(--fg) 7%, var(--surface-alt)); color: var(--muted); font-size: 12px; font-weight: 700; }
-.rtable-row { min-height: 42px; background: var(--surface-alt); font-size: 13px; transition: background .15s ease, box-shadow .15s ease; }
-.rtable-row:hover { background: var(--hover); box-shadow: 0 5px 14px color-mix(in oklch, var(--fg) 5%, transparent); }
+.rtable-head { background: rgba(0, 245, 178, 0.08); color: var(--system-text-muted); font-size: 12px; font-weight: 700; }
+.rtable-row { min-height: 42px; background: rgba(2, 24, 20, 0.64); font-size: 13px; transition: background .15s ease, box-shadow .15s ease; }
+.rtable-row:hover { background: rgba(0, 245, 178, 0.08); box-shadow: 0 5px 14px rgba(0, 0, 0, 0.16); }
 .rtable-row.five-col,
 .rtable-head.five-col { grid-template-columns: 1.1fr 1.6fr 1.2fr .9fr .8fr; }
 .rtable-row.six-col,
@@ -206,19 +205,19 @@ function handlePreview(file: typeof reportFiles[0]) {
 .rtable-row.four-col,
 .rtable-head.four-col { grid-template-columns: .5fr 1.5fr 1fr 2fr; }
 .rtable-row span,
-.rtable-row small { color: var(--muted); line-height: 1.45; }
+.rtable-row small { color: var(--system-text-muted); line-height: 1.45; }
 .rtable-row > strong:not(:first-child),
 .trace-node em { display: inline-flex; align-items: center; justify-content: center; width: fit-content; min-height: 24px; padding: 0 9px; border-radius: 999px; background: var(--primary-soft); color: var(--primary-strong); font-size: 12px; font-weight: 750; line-height: 1; font-style: normal; }
 .rtable-actions { display: flex; gap: 6px; }
-.btn-sm { min-height: 26px; padding: 0 9px; border: 1px solid var(--border); border-radius: 999px; background: var(--surface); color: var(--primary-strong); font-size: 11px; font-weight: 700; cursor: pointer; }
+.btn-sm { min-height: 26px; padding: 0 9px; border: 1px solid var(--system-panel-border); border-radius: 999px; background: rgba(2, 24, 20, 0.7); color: var(--system-accent); font-size: 11px; font-weight: 700; cursor: pointer; }
 .btn-sm:disabled { opacity: .45; cursor: not-allowed; }
 .btn-sm:not(:disabled):hover { background: var(--primary); color: var(--surface); }
 .trace-flow { display: flex; gap: 8px; overflow-x: auto; padding: 4px 0 2px; }
-.trace-node { display: flex; flex-direction: column; align-items: flex-start; gap: 3px; min-width: 136px; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface-alt); }
+.trace-node { display: flex; flex-direction: column; align-items: flex-start; gap: 3px; min-width: 136px; padding: 10px 12px; border: 1px solid var(--system-panel-border); border-radius: 8px; background: rgba(2, 24, 20, 0.64); }
 .trace-dot { width: 24px; height: 24px; border-radius: 6px; background: var(--primary); color: var(--surface); font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
 .trace-node strong { font-size: 13px; }
 .trace-node span,
-.trace-node small { font-size: 11px; color: var(--muted); }
+.trace-node small { font-size: 11px; color: var(--system-text-muted); }
 .rtable-row.clickable { cursor: pointer; }
 @media (max-width: 768px) {
   .summary-grid { grid-template-columns: 1fr; }

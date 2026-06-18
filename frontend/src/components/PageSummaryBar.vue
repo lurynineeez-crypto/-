@@ -8,8 +8,8 @@ defineProps<{
 </script>
 
 <template>
-  <article class="panel-block" style="grid-column: 1 / -1;">
-    <div class="section-title">
+  <article class="system-panel page-summary-panel" style="grid-column: 1 / -1;">
+    <div class="system-panel-header">
       <SlidersHorizontal :size="18" />
       <h2>{{ title }}</h2>
     </div>

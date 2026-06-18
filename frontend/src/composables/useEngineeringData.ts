@@ -55,16 +55,10 @@ export function useEngineeringData() {
     { type: '报警', title: 'CO2预警', detail: '当前1720ppm' }
   ];
 
-  const engineeringNavKeys = ['engineering','integration','search','point','explain','acceptance','presentation'];
-
-  const adminNavKeys = ['governance','display','config','history','reports','audit','trace'];
-
   return {
     slaStatuses,
     selfCheckItems,
     globalSearchResults,
-    engineeringNavKeys,
-    adminNavKeys,
     acceptanceMetrics,
     dataLineage,
     integrationStatus,
