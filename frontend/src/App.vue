@@ -1,6 +1,6 @@
 ﻿<script setup lang="ts">
 import { computed, defineAsyncComponent, onMounted, onUnmounted, reactive, ref } from 'vue';
-import { Activity, Bell, Box, Clock3, FileText, Leaf, MapPinned, Radio, ShieldAlert, Target, Wrench } from 'lucide-vue-next';
+import { Activity, Bell, Box, Clock3, Cpu, Database, Leaf, MapPinned, Radio, ShieldAlert, Target, Video } from 'lucide-vue-next';
 import { api, connectTelemetry } from './api';
 import Home3DCommandCenter from './components/Home3DCommandCenter.vue';
 import OverviewWorkspace from './components/OverviewWorkspace.vue';
@@ -263,6 +263,20 @@ const twinHeaderRightCards = computed(() => [
   { icon: Radio, label: '班次', value: '晚班' }
 ]);
 
+const commandStatusModules = computed(() => [
+  { icon: Radio, label: '采集正常', value: `${displaySensors.value.length}/${displaySensors.value.length}`, tone: 'normal' },
+  { icon: Video, label: '视频在线', value: '6/6', tone: 'normal' },
+  { icon: Activity, label: '历史入库', value: '1 min', tone: 'normal' },
+  { icon: Cpu, label: '边缘计算', value: '<50ms', tone: 'normal' },
+  { icon: Database, label: '数据追溯', value: '可追溯', tone: 'normal' }
+]);
+
+const commandQuickActions = [
+  { label: '视频监控', view: 'cabin' as ViewKey },
+  { label: '历史曲线', view: 'environment' as ViewKey },
+  { label: '报警处置', view: 'alarms' as ViewKey }
+];
+
 /* ── 演示路线 ── */
 const demoRouteSteps = [
   { step: 1, title: '看总览状态', talk: '当前批次运行正常，环境评分稳定，下一关注点在下层湿度', target: 'overview' as ViewKey },
@@ -325,7 +339,7 @@ onUnmounted(() => disconnect?.());
 </script>
 
 <template>
-  <main :class="['app-shell', 'system-shell', pageShellClass, { 'overview-mode': isOverviewHome }]">
+  <main :class="['app-shell', 'app-host-shell', { 'overview-mode': isOverviewHome }]">
     <!-- Toast 容器 -->
     <div class="toast-container">
       <div v-for="t in toasts" :key="t.id" :class="['toast-item', `toast-${t.type}`]">{{ t.msg }}</div>
@@ -339,6 +353,8 @@ onUnmounted(() => disconnect?.());
         :scene-mode="sceneMode" :scene-modes="sceneModes" :selected-sensor="selectedSensor" :summary="displaySummary"
         :type-options="typeOptions" :active-view="activeView" :grouped-nav-items="groupedNavItems"
         :left-header-cards="twinHeaderLeftCards" :right-header-cards="twinHeaderRightCards"
+        :footer-status-modules="commandStatusModules"
+        :footer-actions="commandQuickActions"
         :unified-metrics="unifiedMetrics" @navigate="activeView = $event"
         @select-view="activeView = $event"
         @select-sensor="selectedSensor = $event" @update-active-layer="activeLayer = $event"
@@ -355,45 +371,11 @@ onUnmounted(() => disconnect?.());
       :status-cards="roleTopbarCards"
       :left-header-cards="twinHeaderLeftCards"
       :right-header-cards="twinHeaderRightCards"
+      :footer-status-modules="commandStatusModules"
+      :footer-actions="commandQuickActions"
       :mode="pageShellClass.includes('shell-app') ? 'app' : 'ops'"
       @select-view="activeView = $event"
     >
-      <template #footer>
-        <div class="system-twin-footer-status">
-          <span>SYSTEM</span>
-          <strong>NORMAL</strong>
-        </div>
-        <div class="system-twin-footer-modules">
-          <article>
-            <span>正常</span>
-            <strong>{{ statusCounts.normal }}</strong>
-          </article>
-          <article>
-            <span>预警</span>
-            <strong>{{ statusCounts.warning }}</strong>
-          </article>
-          <article>
-            <span>报警</span>
-            <strong>{{ statusCounts.alarm }}</strong>
-          </article>
-          <article>
-            <span>离线</span>
-            <strong>{{ statusCounts.offline }}</strong>
-          </article>
-          <article>
-            <span>在线点位</span>
-            <strong>{{ displaySensors.length }}</strong>
-          </article>
-        </div>
-        <div class="system-twin-footer-actions">
-          <button type="button" @click="activeView = 'cabin'">三维巡检</button>
-          <button type="button" @click="activeView = 'workflow'">今日作业</button>
-          <button type="button" @click="activeView = 'alarms'">报警处置</button>
-          <button type="button" @click="activeView = 'batch'">批次状态</button>
-          <button type="button" @click="activeView = 'reports'">报告查看</button>
-        </div>
-      </template>
-
     <!-- 总览 -->
     <section v-if="activeSection === '总览'" class="section-content system-section">
       <OverviewWorkspace
@@ -465,28 +447,6 @@ onUnmounted(() => disconnect?.());
 
     <!-- 运维处置 -->
     <section v-else-if="activeSection === '运维处置'" :class="['section-content', 'system-section', `ops-view-${activeView}`]">
-      <article class="ops-command-strip">
-        <button type="button" :class="{ active: isEnvironmentOpsView }" @click="activeView = 'environment'">
-          <Activity :size="18" />
-          <span>看环境</span>
-          <strong>{{ cult.environmentCards[0]?.primary ?? '稳定' }}</strong>
-        </button>
-        <button type="button" :class="{ active: isAlarmOpsView }" @click="activeView = 'alarms'">
-          <ShieldAlert :size="18" />
-          <span>处置报警</span>
-          <strong>{{ displayAlarms.filter(a => !a.handled).length }} 条待处理</strong>
-        </button>
-        <button type="button" :class="{ active: activeView === 'point' }" @click="activeView = 'point'">
-          <MapPinned :size="18" />
-          <span>查点位</span>
-          <strong>{{ displaySensors.length }} 个点位</strong>
-        </button>
-        <button type="button" :class="{ active: isProfessionalOpsView }" @click="activeView = 'professional'">
-          <Box :size="18" />
-          <span>看专业判断</span>
-          <strong>{{ cult.environmentScore.score }} 分</strong>
-        </button>
-      </article>
       <OpsWorkbenchPanels
         v-if="isEnvironmentOpsView || isAlarmOpsView"
         :active-view="opsWorkbenchView"
@@ -640,28 +600,6 @@ onUnmounted(() => disconnect?.());
 
     <!-- 报告交付：按二级导航渲染对应组件 -->
     <section v-else-if="activeSection === '报告交付'" class="section-content system-section">
-      <article class="delivery-command-strip">
-        <button type="button" :class="{ active: isReportCenterView }" @click="activeView = 'reports'">
-          <FileText :size="18" />
-          <span>看报告</span>
-          <strong>6 份文件</strong>
-        </button>
-        <button type="button" :class="{ active: activeView === 'acceptance' }" @click="activeView = 'acceptance'">
-          <ShieldAlert :size="18" />
-          <span>看验收</span>
-          <strong>4 / 7 通过</strong>
-        </button>
-        <button type="button" :class="{ active: activeView === 'audit' || activeView === 'trace' }" @click="activeView = 'audit'">
-          <Activity :size="18" />
-          <span>查审计</span>
-          <strong>2 条记录</strong>
-        </button>
-        <button type="button" :class="{ active: activeView === 'presentation' }" @click="activeView = 'presentation'">
-          <Box :size="18" />
-          <span>汇报演示</span>
-          <strong>5 步脚本</strong>
-        </button>
-      </article>
       <ReportDeliveryCenter
         v-if="isReportCenterView"
         :active-view="reportCenterView"
@@ -864,6 +802,18 @@ onUnmounted(() => disconnect?.());
 }
 
 .app-shell.overview-mode {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 10px 18px;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(68, 204, 150, 0.14), transparent 22%),
+    radial-gradient(circle at 12% 12%, rgba(20, 109, 83, 0.22), transparent 26%),
+    linear-gradient(180deg, #031814, #041e18 34%, #031511 100%);
+}
+
+.app-shell.app-host-shell {
   display: flex;
   align-items: center;
   justify-content: center;

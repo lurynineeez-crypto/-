@@ -17,11 +17,11 @@ import {
   ShieldAlert,
   Sun,
   Target,
-  Thermometer,
-  Video
+  Thermometer
 } from 'lucide-vue-next';
 import type { AlarmEvent, DashboardSummary, RoleKey, SceneMode, SensorPoint, SensorType, ViewKey } from '../types';
 import type { NavItem, sceneModes, typeOptions } from '../data/navigation';
+import TwinCommandFooter from './TwinCommandFooter.vue';
 import TwinSystemTopBar from './TwinSystemTopBar.vue';
 
 const CabinScene = defineAsyncComponent(() => import('./CabinScene.vue'));
@@ -57,6 +57,8 @@ const props = defineProps<{
   groupedNavItems?: GroupedNavItem[];
   leftHeaderCards?: HeaderCard[];
   rightHeaderCards?: HeaderCard[];
+  footerStatusModules: HeaderCard[];
+  footerActions: Array<{ label: string; view: ViewKey }>;
   unifiedMetrics: {
     batch: string;
     stage: string;
@@ -122,20 +124,6 @@ const batchOverviewCards = [
   { label: '下一动作', value: '17:30 复核', detail: '确认下层湿度与 CO₂ 回落曲线', tone: 'warn' }
 ];
 
-const commandStatusModules = [
-  { icon: Radio, label: '采集正常', value: '68/68', tone: 'normal' },
-  { icon: Video, label: '视频在线', value: '6/6', tone: 'normal' },
-  { icon: Activity, label: '历史入库', value: '1 min', tone: 'normal' },
-  { icon: Cpu, label: '边缘计算', value: '<50ms', tone: 'normal' },
-  { icon: Database, label: '数据追溯', value: '可追溯', tone: 'normal' }
-];
-
-const commandQuickActions = [
-  { label: '视频监控', view: 'cabin' as ViewKey },
-  { label: '历史曲线', view: 'environment' as ViewKey },
-  { label: '报警处置', view: 'alarms' as ViewKey }
-];
-
 const systemStatusCards = [
   { icon: Fan, label: '环境控制', value: '稳定', detail: '温湿度、CO₂、通风联动正常', tone: 'normal' },
   { icon: Cpu, label: '边缘计算', value: '在线', detail: '滤波、校准、异常检测运行中', tone: 'normal' },
@@ -194,7 +182,7 @@ const highlightedSensors = computed(() => {
 </script>
 
 <template>
-  <section class="home3d-shell digital-twin-home command-center-shell" aria-label="种植员 3D 总控台">
+  <section class="home3d-shell digital-twin-home command-center-shell twin-shared-command-frame" aria-label="种植员 3D 总控台">
     <TwinSystemTopBar
       title="智能种植方舱数字孪生系统"
       :active-view="activeView"
@@ -343,29 +331,11 @@ const highlightedSensors = computed(() => {
       </aside>
     </div>
 
-    <footer class="twin-command-bar">
-      <div class="status-modules" aria-label="运行证据链路">
-        <article
-          v-for="module in commandStatusModules"
-          :key="module.label"
-          :class="['twin-status-module', module.tone]"
-        >
-          <component :is="module.icon" :size="17" />
-          <span>{{ module.label }}</span>
-          <strong>{{ module.value }}</strong>
-        </article>
-      </div>
-      <nav class="command-evidence-actions" aria-label="总控快捷入口">
-        <button
-          v-for="action in commandQuickActions"
-          :key="action.label"
-          type="button"
-          @click="emit('navigate', action.view)"
-        >
-          {{ action.label }}
-        </button>
-      </nav>
-    </footer>
+    <TwinCommandFooter
+      :modules="footerStatusModules"
+      :actions="footerActions"
+      @navigate="emit('navigate', $event)"
+    />
   </section>
 </template>
 
@@ -532,7 +502,6 @@ const highlightedSensors = computed(() => {
 }
 
 .twin-header::before,
-.twin-command-bar::before,
 .side-panel::before {
   background: linear-gradient(90deg, transparent, rgba(0, 245, 178, 0.9), transparent);
 }
@@ -626,8 +595,7 @@ const highlightedSensors = computed(() => {
 }
 
 .side-panel,
-.center-stage,
-.twin-command-bar {
+.center-stage {
   border: 1px solid var(--twin-border);
   border-radius: 10px;
   background: linear-gradient(180deg, rgba(5, 38, 30, 0.82), rgba(2, 17, 14, 0.96));
@@ -1055,117 +1023,6 @@ const highlightedSensors = computed(() => {
   text-shadow: 0 0 12px rgba(255, 178, 46, 0.46);
 }
 
-.twin-command-bar {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: minmax(560px, 1fr) auto;
-  align-items: center;
-  gap: 14px;
-  min-height: 48px;
-  padding: 5px 14px;
-}
-
-.twin-status-module span {
-  color: var(--twin-muted);
-  font-size: 11px;
-  line-height: 1.2;
-  letter-spacing: 0.12em;
-}
-
-.status-modules {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 8px;
-}
-
-.twin-status-module {
-  display: grid;
-  grid-template-columns: auto auto auto;
-  justify-content: center;
-  align-items: center;
-  gap: 7px;
-  min-height: 36px;
-  padding: 0 10px;
-  border: 1px solid rgba(0, 245, 178, 0.12);
-  border-radius: 7px;
-  background: rgba(3, 31, 25, 0.52);
-  cursor: default;
-}
-
-.twin-status-module svg {
-  display: block;
-  flex: 0 0 auto;
-  align-self: center;
-  justify-self: center;
-  transform: none;
-}
-
-.twin-status-module strong {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 17px;
-  font-size: 14px;
-  line-height: 17px;
-  font-weight: 750;
-  font-variant-numeric: tabular-nums;
-  white-space: nowrap;
-}
-
-.twin-status-module span {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 17px;
-  line-height: 17px;
-}
-
-.twin-status-module.normal,
-.twin-status-module.online {
-  color: var(--twin-green);
-}
-
-.twin-status-module.warning {
-  color: var(--twin-amber);
-}
-
-.twin-status-module.alarm {
-  color: var(--twin-red);
-}
-
-.twin-status-module.offline {
-  color: rgba(166, 188, 180, 0.58);
-}
-
-.command-evidence-actions {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding-left: 2px;
-}
-
-.command-evidence-actions button {
-  min-height: 32px;
-  padding: 0 13px;
-  border: 1px solid rgba(0, 245, 178, 0.32);
-  border-radius: 7px;
-  background: rgba(2, 28, 22, 0.72);
-  color: var(--twin-green);
-  font-size: 12px;
-  font-weight: 650;
-  line-height: 1.2;
-  white-space: nowrap;
-  cursor: pointer;
-  box-shadow: inset 0 1px 0 rgba(147, 255, 214, 0.05);
-  transition: background 0.16s ease, border-color 0.16s ease;
-}
-
-.command-evidence-actions button:hover {
-  border-color: rgba(0, 245, 178, 0.58);
-  background: rgba(9, 67, 50, 0.86);
-}
-
 @media (max-width: 1380px) {
   .twin-header {
     grid-template-columns: 1fr;
@@ -1287,17 +1144,6 @@ const highlightedSensors = computed(() => {
     font-size: var(--twin-type-caption);
   }
 
-  .twin-status-module {
-    min-height: 46px;
-  }
-
-  .twin-status-module strong {
-    font-size: var(--twin-type-number-md-compact);
-  }
-
-  .twin-status-module span {
-    font-size: var(--twin-type-micro);
-  }
 }
 
 /* Overview readability layer: typography only, no layout or data changes. */
@@ -1620,19 +1466,6 @@ const highlightedSensors = computed(() => {
   font-size: 14px;
 }
 
-.digital-twin-home .twin-status-module span {
-  font-size: 11px;
-  font-weight: 400;
-  line-height: 1.2;
-  letter-spacing: 0.12em;
-}
-
-.digital-twin-home .twin-status-module strong {
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 1.2;
-}
-
 @media (max-width: 1100px) {
   .digital-twin-home {
     height: auto;
@@ -1693,8 +1526,7 @@ const highlightedSensors = computed(() => {
     text-align: left;
   }
 
-  .env-row,
-  .twin-status-module {
+  .env-row {
     grid-template-columns: 1fr;
   }
 
@@ -1704,8 +1536,7 @@ const highlightedSensors = computed(() => {
     gap: 4px;
   }
 
-  .selected-field-grid,
-  .status-modules {
+  .selected-field-grid {
     grid-template-columns: 1fr;
   }
 }

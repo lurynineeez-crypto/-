@@ -90,22 +90,22 @@ const pendingActionCount = computed(() => pendingOrders.value.length || 6);
 </script>
 
 <template>
-  <section class="ops-workbench-shell ops-page app-page grower-workbench daily-workbench">
-    <header class="ops-page-header app-page-header daily-page-header">
+  <section class="system-page ops-workbench-shell ops-page app-page grower-workbench daily-workbench">
+    <header class="system-page-header ops-page-header app-page-header daily-page-header">
       <div>
         <p class="eyebrow">种植员高频操作工作台</p>
         <h2>今日作业</h2>
         <p>当前批次 JE-202606-001 · 当前阶段 子实体生长期</p>
       </div>
       <div class="daily-header-stats">
-        <span class="app-status-chip"><b>今日任务</b>{{ taskCards.length }}</span>
-        <span class="app-status-chip app-tag-review"><b>待复核</b>{{ pendingReviewCount }}</span>
-        <span class="app-status-chip app-tag-warning"><b>待处理</b>{{ pendingActionCount }}</span>
-        <span class="app-status-chip app-tag-danger"><b>最大风险</b>下层湿度偏低 84.9%RH</span>
+        <span class="system-tag system-tag-normal app-status-chip"><b>今日任务</b>{{ taskCards.length }}</span>
+        <span class="system-tag system-tag-review app-status-chip app-tag-review"><b>待复核</b>{{ pendingReviewCount }}</span>
+        <span class="system-tag system-tag-warning app-status-chip app-tag-warning"><b>待处理</b>{{ pendingActionCount }}</span>
+        <span class="system-tag system-tag-danger app-status-chip app-tag-danger"><b>最大风险</b>下层湿度偏低 84.9%RH</span>
       </div>
     </header>
 
-    <div class="ops-workflow app-workflow daily-flow-strip" aria-label="今日作业流程">
+    <div class="system-panel ops-workflow app-workflow daily-flow-strip" aria-label="今日作业流程">
       <article v-for="(item, index) in growerFlow" :key="item.key" class="ops-workflow-step app-workflow-step" :class="{ active: index === 2, done: index < 2 }">
         <strong>{{ item.key }}</strong>
         <span>{{ item.title }}</span>
@@ -121,14 +121,14 @@ const pendingActionCount = computed(() => pendingOrders.value.length || 6);
         description="任务卡直接给出判断依据、标准动作、复核人和留档材料，种植员按按钮执行。"
       >
         <div class="grower-task-stack">
-          <article v-for="task in taskCards" :key="task.name" class="ops-task-card app-task-card grower-task-card" :class="`priority-${task.priority.toLowerCase()}`">
+          <article v-for="task in taskCards" :key="task.name" class="system-card ops-task-card app-task-card grower-task-card" :class="`priority-${task.priority.toLowerCase()}`">
             <header>
               <span class="task-priority">{{ task.priority }}</span>
               <div>
                 <strong>{{ task.name }}</strong>
                 <small>截止 {{ task.due }} · 关联 {{ task.target }}</small>
               </div>
-              <b class="app-status-chip" :class="task.status === '处理中' ? 'app-tag-processing' : task.status === '待复核' ? 'app-tag-review' : 'app-tag-warning'">
+              <b class="system-tag app-status-chip" :class="task.status === '处理中' ? 'system-tag-processing app-tag-processing' : task.status === '待复核' ? 'system-tag-review app-tag-review' : 'system-tag-warning app-tag-warning'">
                 {{ task.status }}
               </b>
             </header>
@@ -158,9 +158,9 @@ const pendingActionCount = computed(() => pendingOrders.value.length || 6);
             </div>
 
             <footer class="task-action-row">
-              <button type="button" class="app-button-primary">{{ task.primaryAction }}</button>
-              <button type="button" class="app-button-secondary">提交复核</button>
-              <button type="button" class="app-button-secondary" @click="navigateToView('sop')">查看详情</button>
+              <button type="button" class="system-button-primary app-button-primary">{{ task.primaryAction }}</button>
+              <button type="button" class="system-button-secondary app-button-secondary">提交复核</button>
+              <button type="button" class="system-button-secondary app-button-secondary" @click="navigateToView('sop')">查看详情</button>
             </footer>
           </article>
         </div>
@@ -171,15 +171,15 @@ const pendingActionCount = computed(() => pendingOrders.value.length || 6);
         title="当前风险摘要"
         description="只保留当班最需要处理的风险，避免抢任务队列主线。"
       >
-        <div class="ops-risk-card app-risk-card grower-risk-card">
-          <span class="app-tag-warning">预警</span>
+        <div class="system-card ops-risk-card app-risk-card grower-risk-card">
+          <span class="system-tag system-tag-warning app-tag-warning">预警</span>
           <strong>下层湿度偏低</strong>
           <div class="risk-value-line">
             <b>84.9%RH</b>
             <small>目标 >=85%RH</small>
           </div>
           <p>点位 TH-L2-002，下一步 17:30 前现场复核并记录。</p>
-          <button type="button" class="app-button-warning" @click="navigateToView('alarms')">进入报警处置</button>
+          <button type="button" class="system-button-warning app-button-warning" @click="navigateToView('alarms')">进入报警处置</button>
         </div>
       </PanelSection>
 
@@ -195,7 +195,7 @@ const pendingActionCount = computed(() => pendingOrders.value.length || 6);
             <small>{{ item.owner }} · {{ item.reviewer }}</small>
           </article>
         </div>
-        <button type="button" class="app-button-secondary grower-secondary-action" @click="navigateToView('point')">查看点位巡检</button>
+        <button type="button" class="system-button-secondary app-button-secondary grower-secondary-action" @click="navigateToView('point')">查看点位巡检</button>
       </PanelSection>
 
       <PanelSection

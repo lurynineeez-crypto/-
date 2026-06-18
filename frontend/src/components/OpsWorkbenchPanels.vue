@@ -154,26 +154,26 @@ const orderedEnvironmentCards = computed(() => [...props.environmentCards].sort(
 </script>
 
 <template>
-  <section :class="['app-page', 'ops-workbench-layout', 'focused-workbench', { 'ops-workbench-shell ops-page alarm-ops-page': activeView === 'alarms' }]">
+  <section :class="['system-page', 'app-page', 'ops-workbench-layout', 'focused-workbench', { 'ops-workbench-shell ops-page alarm-ops-page': activeView === 'alarms' }]">
     <template v-if="activeView === 'alarms'">
-      <header class="ops-page-header app-page-header alarm-page-header">
+      <header class="system-page-header ops-page-header app-page-header alarm-page-header">
         <div>
           <p class="eyebrow">事件闭环处理台</p>
           <h2>报警处置</h2>
           <p>首屏优先展示报警事件、闭环状态和可执行动作。</p>
         </div>
         <div class="daily-header-stats">
-          <span class="app-status-chip app-tag-warning"><b>待处理报警</b>{{ pendingAlarmCount }}</span>
-          <span class="app-status-chip app-tag-review"><b>待复核</b>{{ reviewAlarmCount }}</span>
-          <span class="app-status-chip app-tag-danger"><b>最大风险</b>下层湿度偏低 84.9%RH</span>
-          <span class="app-status-chip app-tag-processing"><b>当前步骤</b>处理</span>
+          <span class="system-tag system-tag-warning app-status-chip app-tag-warning"><b>待处理报警</b>{{ pendingAlarmCount }}</span>
+          <span class="system-tag system-tag-review app-status-chip app-tag-review"><b>待复核</b>{{ reviewAlarmCount }}</span>
+          <span class="system-tag system-tag-danger app-status-chip app-tag-danger"><b>最大风险</b>下层湿度偏低 84.9%RH</span>
+          <span class="system-tag system-tag-processing app-status-chip app-tag-processing"><b>当前步骤</b>处理</span>
         </div>
       </header>
 
       <div class="alarm-command-grid">
-        <article class="ops-risk-card app-risk-card alarm-priority-card">
+        <article class="system-card ops-risk-card app-risk-card alarm-priority-card">
           <div class="alarm-card-head">
-            <span class="app-tag-warning">{{ topAlarm.status }}</span>
+            <span class="system-tag system-tag-warning app-tag-warning">{{ topAlarm.status }}</span>
             <strong>{{ topAlarm.name }}</strong>
           </div>
           <div class="alarm-primary-value">
@@ -189,15 +189,15 @@ const orderedEnvironmentCards = computed(() => [...props.environmentCards].sort(
             <div><dt>建议操作</dt><dd>{{ topAlarm.suggestion }}</dd></div>
           </dl>
           <div class="alarm-action-buttons">
-            <button type="button" class="app-button-secondary">分派</button>
-            <button type="button" class="app-button-warning">开始处理</button>
-            <button type="button" class="app-button-primary">提交复核</button>
-            <button type="button" class="app-button-secondary">关闭</button>
+            <button type="button" class="system-button-secondary app-button-secondary">分派</button>
+            <button type="button" class="system-button-warning app-button-warning">开始处理</button>
+            <button type="button" class="system-button-primary app-button-primary">提交复核</button>
+            <button type="button" class="system-button-secondary app-button-secondary">关闭</button>
           </div>
         </article>
 
-        <section class="ops-panel app-panel alarm-workflow-panel">
-          <div class="app-panel-title">
+        <section class="system-panel ops-panel app-panel alarm-workflow-panel">
+          <div class="system-panel-header app-panel-title">
             <ShieldAlert :size="18" />
             <div>
               <h3>报警闭环流程</h3>
@@ -213,16 +213,16 @@ const orderedEnvironmentCards = computed(() => [...props.environmentCards].sort(
         </section>
       </div>
 
-      <section class="ops-panel ops-table app-data-panel alarm-queue-panel">
-        <div class="app-panel-title">
+      <section class="system-panel ops-panel ops-table app-data-panel alarm-queue-panel">
+        <div class="system-panel-header app-panel-title">
           <Activity :size="18" />
           <div>
             <h3>报警队列</h3>
             <p>每条报警保留点位、当前值、目标、责任人和处理入口。</p>
           </div>
         </div>
-        <div class="app-table alarm-queue-table">
-          <div class="app-table-head">
+        <div class="system-table app-table alarm-queue-table">
+          <div class="system-table-head app-table-head">
             <span>报警名称</span>
             <span>点位</span>
             <span>当前值</span>
@@ -236,14 +236,14 @@ const orderedEnvironmentCards = computed(() => [...props.environmentCards].sort(
             v-for="alarm in alarmRows"
             :key="alarm.id"
             type="button"
-            class="app-table-row alarm-queue-row"
+            class="system-table-row app-table-row alarm-queue-row"
             @click="openAlarm(alarm)"
           >
             <strong>{{ alarm.name }}</strong>
             <span>{{ alarm.point }}</span>
             <span>{{ alarm.currentValue }}</span>
             <span>{{ alarm.target }}</span>
-            <b class="app-status-chip" :class="alarm.status === '已关闭' ? 'app-tag-done' : alarm.status === '待复核' ? 'app-tag-review' : alarm.status === '处理中' ? 'app-tag-processing' : 'app-tag-warning'">
+            <b class="system-tag app-status-chip" :class="alarm.status === '已关闭' ? 'system-tag-done app-tag-done' : alarm.status === '待复核' ? 'system-tag-review app-tag-review' : alarm.status === '处理中' ? 'system-tag-processing app-tag-processing' : 'system-tag-warning app-tag-warning'">
               {{ alarm.status }}
             </b>
             <span>{{ alarm.owner }}</span>

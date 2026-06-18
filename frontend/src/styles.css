@@ -143,12 +143,254 @@ button {
   font: inherit;
 }
 
+/* System shell foundation. New pages should use these classes instead of legacy
+   panel-block/module-grid overrides. Keep this layer low-specificity so migrated
+   pages can opt in without fighting the historical CSS. */
+.system-shell-frame {
+  --system-shell-gap: 8px;
+  --system-shell-padding: 10px;
+  --system-panel-bg: linear-gradient(180deg, rgba(7, 36, 30, 0.86), rgba(3, 20, 17, 0.94));
+  --system-panel-bg-soft: linear-gradient(180deg, rgba(5, 38, 30, 0.46), rgba(2, 17, 14, 0.72));
+  --system-panel-border: rgba(110, 232, 186, 0.18);
+  --system-panel-border-strong: rgba(142, 246, 202, 0.42);
+  --system-panel-shadow: inset 0 1px 0 rgba(164, 255, 221, 0.05), 0 14px 30px rgba(2, 12, 10, 0.16);
+  --system-text: var(--twin-text, #effff7);
+  --system-text-muted: rgba(190, 226, 210, 0.74);
+  --system-text-subtle: rgba(172, 220, 202, 0.58);
+  --system-accent: var(--twin-normal, #8ef6ca);
+  --system-warning: var(--twin-warning, #ffbb63);
+  --system-danger: var(--twin-danger, #ff8375);
+  --system-radius: 10px;
+  --system-radius-sm: 8px;
+  --system-font-panel-title: var(--fs-panel-title, 16px);
+  --system-font-card-title: var(--fs-card-title, 15.5px);
+  --system-font-body: var(--fs-body, 12.5px);
+  --system-font-meta: var(--fs-meta, 12px);
+  color: var(--system-text);
+}
+
+.system-shell-frame-app,
+.system-shell-frame-ops {
+  background:
+    radial-gradient(circle at 14% 0%, rgba(94, 255, 197, 0.16), transparent 28%),
+    radial-gradient(circle at 86% 8%, rgba(255, 187, 99, 0.08), transparent 24%),
+    linear-gradient(180deg, #061c16 0%, #08261f 42%, #041511 100%);
+}
+
+.system-shell-content,
+.system-page {
+  min-width: 0;
+  min-height: 0;
+  color: var(--system-text);
+}
+
+.system-page {
+  display: grid;
+  gap: 12px;
+  width: 100%;
+}
+
+.system-page-header,
+.system-panel,
+.system-card,
+.system-data-panel,
+.system-table {
+  border: 1px solid var(--system-panel-border);
+  border-radius: var(--system-radius);
+  background: var(--system-panel-bg);
+  box-shadow: var(--system-panel-shadow);
+  color: var(--system-text);
+}
+
+.system-page-header {
+  display: grid;
+  gap: 6px;
+  padding: 14px 16px;
+}
+
+.system-page-header h1,
+.system-page-header h2,
+.system-panel-title,
+.system-card-title {
+  margin: 0;
+  color: var(--system-text);
+  font-weight: 700;
+  line-height: 1.22;
+}
+
+.system-page-header h1,
+.system-page-header h2 {
+  font-size: 20px;
+}
+
+.system-panel-title {
+  font-size: var(--system-font-panel-title);
+}
+
+.system-card-title {
+  font-size: var(--system-font-card-title);
+}
+
+.system-page-header p,
+.system-panel p,
+.system-card p,
+.system-meta {
+  margin: 0;
+  color: var(--system-text-muted);
+  font-size: var(--system-font-meta);
+  line-height: 1.42;
+}
+
+.system-panel,
+.system-data-panel {
+  padding: 14px;
+}
+
+.system-card {
+  padding: 12px;
+}
+
+.system-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(110, 232, 186, 0.12);
+}
+
+.system-panel-header svg {
+  color: var(--system-accent);
+}
+
+.system-table {
+  overflow: hidden;
+}
+
+.system-table-row,
+.system-table-head {
+  display: grid;
+  align-items: center;
+  gap: 10px;
+  min-height: 38px;
+  padding: 8px 12px;
+  border-bottom: 1px solid rgba(110, 232, 186, 0.1);
+}
+
+.system-table-row:last-child {
+  border-bottom: 0;
+}
+
+.system-table-head {
+  color: var(--system-text-subtle);
+  font-size: var(--system-font-meta);
+  font-weight: 700;
+  background: rgba(0, 245, 178, 0.06);
+}
+
+.system-button,
+.system-button-primary,
+.system-button-secondary,
+.system-button-warning {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 30px;
+  padding: 0 13px;
+  border: 1px solid rgba(110, 232, 186, 0.24);
+  border-radius: 7px;
+  background: rgba(4, 31, 25, 0.82);
+  color: #c9ffea;
+  font-size: var(--fs-button, 13.5px);
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.system-button-primary {
+  border-color: rgba(142, 246, 202, 0.5);
+  background: linear-gradient(180deg, #20e6aa, #0c9f78);
+  color: #021610;
+}
+
+.system-button-warning {
+  border-color: rgba(255, 187, 99, 0.58);
+  background: linear-gradient(180deg, #ffc56d, #e89524);
+  color: #1d1003;
+}
+
+.system-button:hover,
+.system-button-primary:hover,
+.system-button-secondary:hover,
+.system-button-warning:hover {
+  filter: brightness(1.05);
+}
+
+.system-tag,
+.system-tag-normal,
+.system-tag-warning,
+.system-tag-danger,
+.system-tag-review,
+.system-tag-processing,
+.system-tag-done {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  min-height: 22px;
+  padding: 0 8px;
+  border: 1px solid rgba(110, 232, 186, 0.18);
+  border-radius: 999px;
+  background: rgba(0, 245, 178, 0.08);
+  color: var(--system-accent);
+  font-size: 11.5px;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.system-tag-warning {
+  border-color: rgba(255, 187, 99, 0.34);
+  background: rgba(255, 187, 99, 0.1);
+  color: var(--system-warning);
+}
+
+.system-tag-danger {
+  border-color: rgba(255, 131, 117, 0.34);
+  background: rgba(255, 131, 117, 0.1);
+  color: var(--system-danger);
+}
+
+.system-tag-review,
+.system-tag-processing {
+  border-color: rgba(52, 215, 255, 0.28);
+  background: rgba(52, 215, 255, 0.08);
+  color: #8ee8ff;
+}
+
+.system-tag-done,
+.system-tag-normal {
+  color: var(--system-accent);
+}
+
 .app-shell {
   min-height: 100vh;
   padding: 20px;
   background:
     linear-gradient(140deg, rgba(255, 255, 255, 0.72), rgba(240, 253, 250, 0.58)),
     #eef5f2;
+}
+
+.app-host-shell {
+  min-height: 100vh;
+  padding: 0;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(0, 245, 178, 0.14), transparent 30%),
+    radial-gradient(circle at 12% 16%, rgba(47, 178, 130, 0.16), transparent 24%),
+    linear-gradient(180deg, #061f18 0%, #03120f 100%);
 }
 
 .topbar,
@@ -3113,9 +3355,10 @@ button.asset-row:hover,
   color: #1d1003;
 }
 
-/* Final deep-green system skin.
-   This intentionally lives last: legacy page CSS and async component scoped CSS still
-   contain many white `var(--surface)` cards, so the system shell must win globally. */
+/* Legacy bridge, temporary.
+   These selectors keep old un-migrated pages from returning to white cards.
+   New work should prefer system-page/system-panel/system-card/system-table and
+   remove page-specific entries from this bridge as pages migrate. */
 .system-shell:not(.overview-mode) {
   min-height: 100vh;
   color: var(--twin-text, #effff7);
@@ -7131,8 +7374,8 @@ button.asset-row:hover,
   color: #1d1003;
 }
 
-/* FINAL OVERRIDE: deep-green skin for every non-home page.
-   Must remain at EOF because earlier legacy blocks repeatedly reset cards to white. */
+/* Legacy bridge lock, temporary. Keep near EOF until the old page components have
+   moved off panel-block/module-grid/report-section naming. */
 .system-shell:not(.overview-mode).shell-app,
 .system-shell:not(.overview-mode).shell-ops {
   background:
